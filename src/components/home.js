@@ -147,7 +147,7 @@ const HomePage=()=>{
 
             <div><button >Check Availability</button></div>
          </div>
-
+         <h1>________________________________________Check out our rooms_____________________________________________</h1>
 
 
     </div>
