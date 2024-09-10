@@ -1,0 +1,155 @@
+.row3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-color: black;
+    padding: 3%;
+    margin: 3%;
+    width: 80%;
+    height: 35%;
+    margin-top: 5%;
+    
+    margin-bottom: 8%;
+    gap: -5rem;
+    border: black;
+
+   
+    box-shadow: 0 4px 8px 8px rgba(0,0,0,0.2);
+    background-color: #ffffff;
+    border-radius: 1%;
+  }
+
+  .topNavBar{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .logo1{
+    height: 60%;
+    margin-top:-5% ;
+
+  }
+
+  .img-container{
+    display: flex;
+    
+    
+    
+  }
+
+  .Img{
+    height: 45%;
+    margin-top: 15%;
+  }
+  .column3{
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 300px; 
+  }
+  .column2 {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 300px; 
+  }
+  
+  
+  .img-container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .Img1{
+    height: 35%;
+  }
+
+  .Facilities{
+   padding-left:9% ;
+   padding-right: 9%;
+  }
+
+  .facilities-space{
+    justify-content: center;
+  }
+
+  .row4{
+   
+ 
+  }
+
+  .column1{
+    display: flex;
+  }
+  .pool-Img{
+    width: 95%;
+    
+  }
+
+  .experience{
+    justify-content: center;
+    float: left;
+    font-size: x-large;
+    width: 150%;
+  }
+
+  .column0{
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .lobby-Img{
+    height: 75%;
+    width: 75%;
+  }
+
+  .experience0{
+    justify-content: center;
+    float: left;
+    font-size: x-large;
+    width: 50%;
+  }
+
+  .row0 {
+    display: flex;
+    flex-direction: row;
+    border-color: black;
+    padding: 3%;
+    margin: 3%;
+    
+    height: 25%;
+    
+    
+    
+    gap: 3rem;
+    border: black;
+
+   
+    box-shadow: 0 3px  rgba(0,0,0,0.2);
+    background-color: #ffffff;
+    border-radius: 1%;
+  }
+  
+  .row7 {
+    display: flex;
+    flex-direction: row;
+    border-color: black;
+    padding: 3%;
+    
+    width: 95%;
+    height: 25%;
+    margin-top: -5%;
+    
+   
+    margin-bottom: 8%;
+    gap: -5rem;
+    border: black;
+
+   
+    box-shadow: 0 4px 8px 8px rgba(0,0,0,0.2);
+    background-color: #dafbfd;
+    border-radius: 1%;
+  }
+  
