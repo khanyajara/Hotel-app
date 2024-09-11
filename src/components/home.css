@@ -1,3 +1,7 @@
+body{
+  width: 100%;
+}
+
 .row3 {
     display: flex;
     flex-direction: column;
@@ -33,56 +37,99 @@
 
   .img-container{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    gap:2rem ;
+    
     
     
     
   }
 
   .Img{
-    height: 45%;
-    margin-top: 15%;
+    height: 30.2rem;
+    width: 100%;
+    border-radius: 1rem;
+    
   }
-  .column3{
+
+  .Img0{
+    height: 30.2rem;
+    width: 100%;
+    border-radius: 1rem;
+  }
+
+  .Img1{
+    height: 15rem;
+    width: 100%;
+    border-radius: 1rem;
+  }
+
+  .columns3{
     float: left;
-    width: 33.33%;
-    padding: 10px;
-    height: 300px; 
+    height: 50%;
+    width: 100%;
+    
+    
+    
+    
   }
-  .column2 {
+
+  .columns2 {
     float: left;
-    width: 33.33%;
-    padding: 10px;
-    height: 300px; 
+    height: 50%;
+    width: 100%;
+    gap: 1rem;
+   
+   
   }
-  
-  
+   
   .img-container:after {
     content: "";
     display: table;
     clear: both;
   }
 
-  .Img1{
-    height: 35%;
+  .Home-btn{
+    color: white;
+    background-color:#01BEA0 ;
+    width: 10%;
+    height: 3rem;
+    font-size: large;
+    border-radius: 10.33px;
+    margin-top: 1%;
+    border: none;
+    box-shadow: 0 13px 8px 0 rgba(0,0.5,0,0.2);
   }
 
   .Facilities{
    padding-left:9% ;
    padding-right: 9%;
+   
+  }
+
+  .heading-for-facilities{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .heading-color{
+    color: #01BEA0;
+    padding: 0;
   }
 
   .facilities-space{
     justify-content: center;
   }
 
-  .row4{
-   
- 
-  }
-
   .column1{
     display: flex;
   }
+
   .pool-Img{
     width: 95%;
     
@@ -124,7 +171,7 @@
     
     
     gap: -6rem;
-    border: black;
+    border: none;
 
    
     box-shadow: 0 3px  rgba(0,0,0,0.2);
@@ -135,6 +182,7 @@
   .row7 {
     display: flex;
     flex-direction: row;
+    align-items: center;
     border-color: black;
     padding: 3%;
     
@@ -142,9 +190,9 @@
     height: 25%;
     margin-top: -12%;
     
-   
+    
     margin-bottom: 8%;
-    gap: -5rem;
+    gap: -1rem;
     border: black;
 
    
@@ -152,4 +200,127 @@
     background-color: #dafbfd;
     border-radius: 1%;
   }
+
+  .check-btn{
+    color: white;
+    background-color:#01BEA0 ;
+    width: 100%;
+    height: 3rem;
+    font-size: large;
+    border-radius: 10.33px;
+    
+    border: none;
+    box-shadow: 0 13px 8px 0 rgba(0,0.5,0,0.2);
+  }
+
+  .Room-Imgdiv{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    
+  }
+
+   .roomImg{
+    
+    width: 90%;
+    height: 80%;
+    display: flex;
+    justify-content: end;
+    border-radius: 2%;
+    
+    
+    
+
+   }
+
+   .row8 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+   
+    border-color: black;
+    
+    width: 100%;
+    height: 35%;
+    margin-top: 5%;
+    
+    margin-bottom: 8%;
+    gap: -5rem;
+    border: black;
+
+   
+    
+    background-color: #ffffff;
+    border-radius: 1%;
+  } 
+
+  ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+
+  .first-row{
+    float: left;
+    width: 30%;
+    padding: 10px;
+    height: 300px; 
+    
+    display:flex;
+    flex-direction:column;
+    gap:2rem;
+    align-items:center;
+    
+  }
+.list{
   
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  font-size: large;
+}  
+
+  .facilities-container:after {
+    content: "";
+    display: table;
+    clear: both;
+    
+  }
+  .Footer{
+     width: 100%;
+     height: 50%;
+     background-color: black;
+     color: #ffffff;
+     display: flex;
+     justify-content: space-between;
+     text-align: start;
+     border-radius: 1em;
+  }
+ 
+  .footer-info{
+   
+    
+    
+  }
+
+  .footer-nav{
+    display: flex;
+    flex-direction: column;
+    
+    
+  }
+
+  a{
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  a:hover{
+    color: #01BEA0;
+  }
+
+  .footer-subscribe{
+
+  }

@@ -10,6 +10,9 @@ import Movie from "./Short Film.png"
 import Reading from "./Reading.png"
 import PoolImage from "./Pool-area.png"
 import Lobby from "./Lobby3.jpg"
+import HomeRoomImage from "./homePage1.jpg"
+import HotelOutside from "./image-asset.jpeg"
+import RoomImg from "./hotel room.jpg"
 
 
 
@@ -42,17 +45,17 @@ const HomePage=()=>{
          </div>
          <div className="img-container">
 
-         <div className="columns3"><img src={logo}  className="Img"/></div>
+         <div className="columns3"><img src={HotelOutside}  className="Img0"/></div>
          <div className="columns2">
-         <img src={logo}  className="Img1"/>
-         <img src={logo}  className="Img1"/>
+         <img src={HomeRoomImage}  className="Img1"/>
+         <img src={PoolImage}  className="Img1"/>
         </div>
-         <div className="columns3"><img src={logo}  className="Img"/></div>
+         <div className="columns3"><img src={Lobby}  className="Img"/></div>
          
          </div>
          <div className="intro">
             <div>
-                <h2>Welcome to <h2>Forrest Hills Hotel</h2>,a piece of paradise set in the heart of Kimberley </h2>
+                <h2>Welcome to <h2 className="heading-color">Forrest Hills Hotel</h2>,a piece of paradise set in the heart of Kimberley </h2>
             </div>
             <p>Nestled amid a lush, verdant landscape, the Forrest Hills Hotel offers an unparalleled five-star retreat where 
                nature and luxury converge The hotel features elegantly appointed suites with private balconies overlooking 
@@ -61,11 +64,13 @@ const HomePage=()=>{
                With personalized service, a stunning infinity pool, and exclusive access to pristine 
                forest trails, the Forrest Hills Hotel ensures an unforgettable 
                escape into nature’s grandeur.</p>
-               <button>Book Now</button>
+               <button className="Home-btn">Book Now</button>
          </div>
 
          <div className="Facilities-Activities">
-            <h1>________________________________________Facility   Activities____________________________________________</h1>
+            <div >
+                <h1 className="heading-for-facilities">________________________________________<h2 className="heading-color">Facility   Activities</h2>____________________________________________</h1>
+            </div>
             <div className="Facilities-space">
                 <img src={Massage}  className="Facilities"/>
                 <img src={Reading}  className="Facilities"/>
@@ -77,7 +82,9 @@ const HomePage=()=>{
                 
             </div>
          </div>
-         <h1>________________________________________An Experience_____________________________________________</h1>
+         <div >
+                <h1 className="heading-for-facilities">________________________________________<h2 className="heading-color">An Exerience</h2>____________________________________________</h1>
+            </div>
          <div className="row4">
             <div className="column1" >
                 <div><img src={PoolImage} className="pool-Img"/></div>
@@ -145,10 +152,91 @@ const HomePage=()=>{
                 </select>
             </div>
 
-            <div><button >Check Availability</button></div>
+            <div><button className="check-btn">Check Availability</button></div>
          </div>
-         <h1>________________________________________Check out our rooms_____________________________________________</h1>
+         <div >
+                <h1 className="heading-for-facilities">________________________________________<h2 className="heading-color">See Rooms Types</h2>____________________________________________</h1>
+            </div>
+            <div className="row8">
+                <div >
+                  <h2>Deluxe</h2>
+                  <p>____________________________________________</p>
+                  <h2 className="heading-color">Deluxe</h2>
+                  <p className="heading-color">____________________________________________</p>
+                  <ul>
+                    <li>comfort</li>
+                    <li>comfort</li>
+                    <li>comfort</li>
+                    <li>comfort</li>
+                  </ul>
+                  <p className="heading-color">____________________________________________</p>
+                  <h2>Single</h2>
+                 
+                </div>
+                <div className="Room-Imgdiv" >
+                   <img src={RoomImg} className="roomImg" />
+                </div>
+            </div>
+            <div >
+                <h1 className="heading-for-facilities">________________________________________<h2 className="heading-color">Our Facilities Include</h2>____________________________________________</h1>
+            </div>
+            <div className="facilities-container">
+                <div className="first-row">
+                    <h3>Leisure and Relaxation</h3>
+                    <ul className="list">
+                        <li>Swimming</li>
+                        <li>Spa and Wellness Center</li>
+                        <li>Fitness</li>
+                        
+                        
+                    </ul>
+                </div>
+                <div className="first-row">
+                    <h3>Entertainment</h3>
+                    <ul className="list">
+                        <li>Game Rooms</li>
+                        <li>In-house movie screening</li>
+                        <li>Kid's play area </li>
+                        <li>Business Center</li>
+                        <li>Library</li>
+                        </ul>
+                </div>
+                <div className="first-row">
+                    <h3>Dining and Socializing</h3>
+                    <ul className="list">
+                        <li>Restuarants and Bars</li>
+                        <li>Rooftop Lounges</li>
+                        <li>Room Service</li>
+                        <li>Event Spaces</li> 
+                    </ul>
+                </div>
+          </div>
+          <div className="Footer">
+          <div className="footer-info">
+                    <h2>Contact Info</h2>
+                    <p>Call: +27 76 490 2903</p>
+                    <p>Email: Info@foresthills.com</p>
+                    <h2>Address</h2>
+                    <p>7835</p>
+                    <p>Moshe Kantani Ave</p>
+                    <p>Redirile, Galesshewe</p>
+                    <p>8345</p>
+                </div>
+                <div className="footer-nav">
+                    <a href=""> Home</a>
+                    <a href=""> About</a>
+                    <a href=""> Blog</a>
+                    <a href=""> Gallery</a>
+                    <a href=""> How To Get There</a>
+                   
+                </div>
+                <div className="footer-subscribe">
+                    
+                </div>
+                
+            
 
+          </div>
 
     </div>
   )
