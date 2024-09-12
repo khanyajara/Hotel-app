@@ -85,8 +85,8 @@ const RoomContent=()=>{
                             <li>Mini-Bar</li>
                         </ul>
                     </div>
-                    <div>
-                        <button>BOOK NOW</button>
+                    <div className="booking-div">
+                        <button className="booking-btn">BOOK NOW</button>
                     </div>
                 </div>
                 <img src={line2}  />

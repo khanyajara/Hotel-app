@@ -66,6 +66,30 @@
     
 }
 
+.booking-div{
+width: 100%;
+display: flex;
+background-color: aquamarine;
+justify-content: end;
+height: 5vh;
+}
+
+.booking-btn{
+width: 25%;
+height: 90%;
+display: flex;
+justify-content: center;
+align-self: center;
+background-color: #3BCBBF;
+border-radius: 15px;
+border: none;
+box-shadow: 0 4px 6px 1px rgba(0,0,0,0.2);
+color: #ffffff;
+font-size: large;
+
+
+}
+
 .info-deck-right{
     display: flex;
     flex-direction: column;
@@ -89,6 +113,7 @@
   height: 100%;
   gap: 1rem;
   justify-content: center;
+  align-items: center;
 
 
 }
