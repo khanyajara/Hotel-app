@@ -18,3 +18,84 @@
     background-color: #ffffff;
     border-radius: 15px;
 }
+
+.card-1{
+    box-shadow: 0 4px 8px 8px rgba(0,0,0,0.2);
+    width: 100%;
+    height: auto;
+    background-color: #c9c9c9;
+    border-radius: 15px;
+    
+}
+
+.card-btn{
+ width: 100%;
+ 
+ display: flex;
+ justify-content: end;
+}
+
+.card-1-0{
+    border-radius: 100%;
+    display: flex;
+    align-items: end;
+    width: 45px;
+    height: 45px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.Info-deck{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.Info-deck-1{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 50%;
+    
+}
+
+.info-deck-right{
+    display: flex;
+    flex-direction: column;
+    
+    height: 45vh;
+}
+
+
+.Price{
+    display: flex;
+    width: 100%;
+    
+    justify-content: baseline;
+  
+}
+.icons-section{
+ 
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  height: 100%;
+  gap: 1rem;
+  justify-content: center;
+
+
+}
+
+.Icons{
+     width: 15%;
+     height: 15%;
+    
+
+}
