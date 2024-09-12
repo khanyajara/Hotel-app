@@ -5,6 +5,7 @@ body{
 .row3 {
     display: flex;
     flex-direction: column;
+    
     justify-content: center;
     border-color: black;
     padding: 3%;
@@ -25,10 +26,15 @@ body{
 
   .topNavBar{
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
   }
 
+
+  .NavBar{
+    color: black;
+  }
   .logo1{
     height: 60%;
     margin-top:-5% ;
@@ -37,6 +43,7 @@ body{
 
   .img-container{
     display: flex;
+         
     justify-content: center;
     align-items: center;
     
@@ -294,20 +301,26 @@ body{
      background-color: black;
      color: #ffffff;
      display: flex;
-     justify-content: space-between;
+     justify-content: space-around;
+     align-items: center;
      text-align: start;
      border-radius: 1em;
   }
  
   .footer-info{
    
-    
+    width: 35%;
     
   }
 
   .footer-nav{
     display: flex;
-    flex-direction: column;
+    flex-flow: row wrap;
+    justify-content: baseline;
+    
+    height: 25vh;
+    gap: 3rem;
+    width: 25%;
     
     
   }
@@ -322,5 +335,60 @@ body{
   }
 
   .footer-subscribe{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+  }
 
+ .Subscribe-form {
+    
+    font-family: Arial;
+    display:flex;
+    width: 100%;
+    align-items: center;
+    justify-content:start;
+    
+  }
+  
+  .container {
+    padding: 20px;
+    
+    display:flex;
+    flex-direction:column;
+  }
+  
+  input[type=text]  {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+  
+    
+    box-sizing: border-box;
+  }
+
+  
+  input[type=submit]{ 
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+   
+    border-radius:10px;
+  }
+  
+  input[type=checkbox] {
+    margin-top: 16px;
+    cursor: pointer;
+  }
+  
+  input[type=submit] {
+    background-color: #01BEA0;
+    width: 100%;
+    color: white;
+    border: none;
+  }
+  
+  input[type=submit]:hover {
+    opacity: 0.8;
+    cursor: pointer;
   }

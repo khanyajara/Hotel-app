@@ -3,6 +3,7 @@ import Register from "./components/Register";
 import Login from './components/login';
 import ForgetPassword from './components/forgotpassword';
 import HomePage from './components/home';
+import RoomsPage from './components/RoomsPage';
 
 
 
@@ -14,6 +15,7 @@ function App() {
         <Login/>
         <ForgetPassword/>
         <HomePage/>
+        <RoomsPage/>
       </header>
     </div>
   );

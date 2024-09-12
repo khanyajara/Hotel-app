@@ -34,13 +34,13 @@ const HomePage=()=>{
     <div className="row3">
         <div className="topNavBar">
 
-            <h2>Home</h2>
-            <h2>Rooms</h2>
-            <h2>Booking</h2>
+            <h2><a href="" className="NavBar">Home</a></h2>
+            <h2><a href="" className="NavBar">Rooms</a></h2>
+            <h2><a href="" className="NavBar">Booking</a></h2>
             <img src={logo}  className="logo1"/>
-            <h2>Facilities</h2>
-            <h2>Gallery</h2>
-            <h2>How To Get There</h2>
+            <h2><a href="" className="NavBar">Facilities</a></h2>
+            <h2><a href="" className="NavBar">Gallery</a></h2>
+            <h2><a href="" className="NavBar">How To Get There</a></h2>
            
          </div>
          <div className="img-container">
@@ -231,6 +231,22 @@ const HomePage=()=>{
                    
                 </div>
                 <div className="footer-subscribe">
+                <form className="Subscribe-form">
+  
+
+  <div class="container" ><h3>Get Our NewsLetter</h3>
+    
+    <input type="text" placeholder="Email address" name="mail" required/>
+    <label>
+      <input type="checkbox"  name="subscribe"/> Daily Newsletter
+    </label>
+  </div>
+
+  <div class="container">
+    <input type="submit" value="Subscribe" />
+  </div>
+</form>
+
                     
                 </div>
                 
