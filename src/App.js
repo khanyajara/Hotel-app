@@ -6,6 +6,7 @@ import HomePage from './components/home';
 import RoomsPage from './components/RoomsPage';
 import ViewRoom from './components/ViewRoomsContent'
 import BookingPage from './components/bookingsPage';
+import Checkout from './components/checkout';
 
 
 
@@ -20,6 +21,7 @@ function App() {
         <RoomsPage/>
         <ViewRoom/>
         <BookingPage/>
+        <Checkout/>
       </header>
     </div>
   );

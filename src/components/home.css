@@ -1,3 +1,10 @@
+
+@media  only screen and (max-width: 600px) {
+  
+}
+
+
+
 body{
   width: 100%;
 }
@@ -10,7 +17,7 @@ body{
     border-color: black;
     padding: 3%;
     margin: 3%;
-    width: 80%;
+    width: 85%;
     height: 35%;
     margin-top: 5%;
     
@@ -21,7 +28,7 @@ body{
    
     box-shadow: 0 4px 8px 8px rgba(0,0,0,0.2);
     background-color: #ffffff;
-    border-radius: 1%;
+    border-radius: 15px;
   }
 
   .topNavBar{
@@ -36,8 +43,9 @@ body{
     color: black;
   }
   .logo1{
-    height: 60%;
-    margin-top:-5% ;
+    height: 30vh;
+    width: 20%;
+    margin-top:-7% ;
 
   }
 
@@ -392,3 +400,4 @@ body{
     opacity: 0.8;
     cursor: pointer;
   }
+

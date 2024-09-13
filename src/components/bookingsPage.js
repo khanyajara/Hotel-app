@@ -3,7 +3,7 @@ import Css from "./BookingsPage.css"
 import logo from "../h-removebg-preview.png"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWifi, faPlay, faStar, fa } from '@fortawesome/free-solid-svg-icons';
+import { faWifi, faPlay, faStar, faPerson } from '@fortawesome/free-solid-svg-icons';
 import image1 from "./room-images.png"
 import image2 from "./room-images1.png"
 import image3 from "./room-images2.png"
@@ -55,11 +55,11 @@ const BookingPage=()=>{
               </div>
 
               <div className="Info-deck">
-                <div className="left-deck">
+                <div className="Info-deck-1">
                     <h2>HoneyMoons Suite</h2>
-                    <img  src={line}/>
+                    <img  src={line} className="lining"/><br/>
                     <h4>R3,750/night</h4>
-                    <img  src={line}/>
+                    <img  src={line} className="lining"/><br/>
                     <p><FontAwesomeIcon icon={faStar} /> 4.98(110 reviews)</p>
                 </div>
                 <div className="right-deck">
@@ -84,20 +84,22 @@ const BookingPage=()=>{
                                     </div>
                     </div>
             <div className="guest-div">
-                <label for="Guests">No. Guests</label>
+                <label for="Guests" className="guest">No. Guests</label>
                 <select id="Guests" name="Guests" className="input-row">
                   
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
+                    
+                    <option value="2">2 GUESTS</option>
+                    <option value="3">3 GUESTS</option>
+                    <option value="4">4 GUESTS</option>
+                    <option value="5">5 GUESTS</option>
+                    <option value="6">6 GUESTS</option>
+                    <option value="7">7 GUESTS</option>
+                    <option value="8">8 GUESTS</option>
+                    <option value="9">9 GUESTS</option>
                 </select>
             </div>
             <img  src={line}/>
-            <div className="Price">
+            <div className="price">
 
                 <h4>R3,750 /night </h4>
             </div>
@@ -107,7 +109,7 @@ const BookingPage=()=>{
                 <h4>R31,850</h4>
             </div>
             <div className="reserve-div">
-                <button className="reserve-btn"><h4>RESERVE SPACE</h4></button>
+                <button className="reserve-btn">RESERVE SPACE</button>
             </div>
             <h4></h4>
                     </div>
