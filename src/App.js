@@ -5,6 +5,7 @@ import ForgetPassword from './components/forgotpassword';
 import HomePage from './components/home';
 import RoomsPage from './components/RoomsPage';
 import ViewRoom from './components/ViewRoomsContent'
+import BookingPage from './components/bookingsPage';
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <HomePage/>
         <RoomsPage/>
         <ViewRoom/>
+        <BookingPage/>
       </header>
     </div>
   );

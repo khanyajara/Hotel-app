@@ -22,9 +22,7 @@ const RoomsPage=()=>{
             <h2><a href="" className="NavBar">Gallery</a></h2>
             <h2><a href="" className="NavBar">How To Get There</a></h2>
           </div>
-
-
-
+        
           <div className="Search-DivContents">
             <div className="Search-Container">
                 <div className="Search-Input">
@@ -44,6 +42,7 @@ const RoomsPage=()=>{
             </div>
 
           </div>
+        
           <div>
             <h1>Rooms</h1>
             <div className="Rooms-Sections">

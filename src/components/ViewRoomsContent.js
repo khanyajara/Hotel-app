@@ -1,6 +1,9 @@
 import React from "react";
-import logo from "../h-removebg-preview.png"
 import Css from "./ViewRooms.css"
+import logo from "../h-removebg-preview.png"
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWifi, faPlay, faStar, fa } from '@fortawesome/free-solid-svg-icons';
 import image1 from "./room-images.png"
 import image2 from "./room-images1.png"
 import image3 from "./room-images2.png"
@@ -8,18 +11,16 @@ import image4 from "./room-images3.png"
 import cancel from "./Cancel.png"
 import line from "./Line 20.png"
 import line2 from "./Line 19.png"
-import wifi from "./Wi-Fi.png"
-import espn from "./Espn.png"
+
 import Netflix from "./Netflix.png"
 import disney from "./Animation.png"
 import HBO from "./Hbo Max.png"
-import waiter from "./Waiter.png"
+
 import satTv from "./Satellite Signal.png"
 import DVD from "./Blu-ray.png"
 import appleTv from "./Apple TV.png"
 import Anime from "./Crunchyroll.png"
-import Music from "./Spotify.png"
-import Youtube from "./YouTube Logo.png"
+
 
 
 const RoomContent=()=>{
@@ -92,27 +93,28 @@ const RoomContent=()=>{
                 <img src={line2}  />
                 <div className="info-deck-right">
                     <div className="Price"> 
-                        <h2>R3,750</h2>
+                        <h2>R3,750/night</h2>
                     </div>
                     <img  src={line}/>
 
                     <div>
                         <p className="Room-descriptions">Price includes</p>
                     </div>
-                    <div className="icons-section">
-                         <img src={wifi} className="Icons"/>
-                         <img src={waiter} className="Icons"/>
-                         <img src={Music} className="Icons"/>
-                         <img src={Youtube} className="Icons"/>
-                         <img src={espn} className="Icons"/>
-                         <img src={disney} className="Icons"/>
-                         <img src={Netflix} className="Icons"/>
-                         <img src={HBO} className="Icons"/>
-                         <img src={DVD} className="Icons"/>
-                         <img src={satTv} className="Icons"/>
-                         <img src={appleTv} className="Icons"/>
-                         <img src={Anime} className="Icons"/>
-                         
+                    <div className="icons-div">
+                        <div className="icons-section">
+                             <FontAwesomeIcon icon={faWifi}  className="Icons"/>
+                             <FontAwesomeIcon icon={faPlay}  className="Icons"/>
+                             <FontAwesomeIcon icon={faStar}  className="Icons"/>
+                            
+                             <img src={disney} className="Icons"/>
+                             <img src={Netflix} className="Icons"/>
+                             <img src={HBO} className="Icons"/>
+                             <img src={DVD} className="Icons"/>
+                             <img src={satTv} className="Icons"/>
+                             <img src={appleTv} className="Icons"/>
+                             <img src={Anime} className="Icons"/>
+                        
+                        </div>
                     </div>
                 </div>
 

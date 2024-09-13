@@ -69,23 +69,24 @@
 .booking-div{
 width: 100%;
 display: flex;
-background-color: aquamarine;
+
 justify-content: end;
 height: 5vh;
 }
 
 .booking-btn{
 width: 25%;
-height: 90%;
+height: 5vh;
 display: flex;
 justify-content: center;
-align-self: center;
+align-items: center;
 background-color: #3BCBBF;
 border-radius: 15px;
 border: none;
-box-shadow: 0 4px 6px 1px rgba(0,0,0,0.2);
+box-shadow: 0 6px 8px 6px rgba(0,5,0,0.2);
 color: #ffffff;
 font-size: large;
+cursor: pointer;
 
 
 }
@@ -105,21 +106,30 @@ font-size: large;
     justify-content: baseline;
   
 }
+
+.icons-div{
+   
+   width: 90%;
+   display: flex;
+   justify-content: center;
+}
+
 .icons-section{
  
   display: flex;
   flex-wrap: wrap;
-  width: 60%;
+  width: 70%;
   height: 100%;
-  gap: 1rem;
-  justify-content: center;
+  gap: 3rem;
+  
+  justify-content: end;
   align-items: center;
 
 
 }
 
 .Icons{
-     width: 15%;
+     width: 13%;
      height: 15%;
     
 
