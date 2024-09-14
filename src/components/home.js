@@ -13,12 +13,34 @@ import Lobby from "./Lobby3.jpg"
 import HomeRoomImage from "./homePage1.jpg"
 import HotelOutside from "./image-asset.jpeg"
 import RoomImg from "./hotel room.jpg"
-
+import { useNavigate } from "react-router";
 
 
 const HomePage=()=>{
    
+    const navigate= useNavigate();
+
+
+
+    const home =()=>{
+        navigate("/Home")
+
+    }
+    const room =()=>{
+        navigate("/Rooms")
+    }
+    const Booking=()=>{
+        navigate("/Booking")
+    }
+
+    const viewroom=()=>{
+        navigate("/view")
+    }
+
     
+        
+
+
 
 
 
@@ -34,11 +56,11 @@ const HomePage=()=>{
     <div className="row3">
         <div className="topNavBar">
 
-            <h2><a href="" className="NavBar">Home</a></h2>
-            <h2><a href="" className="NavBar">Rooms</a></h2>
-            <h2><a href="" className="NavBar">Booking</a></h2>
+            <h2><a onClick={home} className="NavBar">Home</a></h2>
+            <h2><a onClick={room} className="NavBar">Rooms</a></h2>
+            <h2><a onClick={Booking} className="NavBar">Booking</a></h2>
             <img src={logo}  className="logo1"/>
-            <h2><a href="" className="NavBar">Facilities</a></h2>
+            <h2><a href="./Facilities.js" className="NavBar">Facilities</a></h2>
             <h2><a href="" className="NavBar">Gallery</a></h2>
             <h2><a href="" className="NavBar">How To Get There</a></h2>
            
@@ -64,7 +86,7 @@ const HomePage=()=>{
                With personalized service, a stunning infinity pool, and exclusive access to pristine 
                forest trails, the Forrest Hills Hotel ensures an unforgettable 
                escape into nature’s grandeur.</p>
-               <button className="Home-btn">Book Now</button>
+               <button className="Home-btn" onClick={room}>Book Now</button>
          </div>
 
          <div className="Facilities-Activities">

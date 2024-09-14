@@ -8,15 +8,38 @@ import Room2 from "./Room2.png"
 import Room3 from "./Room3.png"
 import Room4 from "./Room4.png"
 import Room5 from "./Room5.jpg"
+import { useNavigate } from "react-router";
+
 
 const RoomsPage=()=>{
+
+    const navigate= useNavigate();
+
+
+
+    const home =()=>{
+        navigate("/Home")
+
+    }
+    const room =()=>{
+        navigate("/Rooms")
+    }
+    const Booking=()=>{
+        navigate("/Booking")
+    }
+
+    const viewroom=()=>{
+        navigate("/view")
+    }
+
+
     return(
         <div className="rooms-page">
             <div className="topNavBar">
 
-            <h2><a href="" className="NavBar">Home</a></h2>
-            <h2><a href="" className="NavBar">Rooms</a></h2>
-            <h2><a href="" className="NavBar">Booking</a></h2>
+            <h2><a onClick={home} className="NavBar">Home</a></h2>
+            <h2><a onClick={room} className="NavBar">Rooms</a></h2>
+            <h2><a onClick={Booking} className="NavBar">Booking</a></h2>
             <img src={logo}  className="logo1"/>
             <h2><a href="" className="NavBar">Facilities</a></h2>
             <h2><a href="" className="NavBar">Gallery</a></h2>
@@ -69,7 +92,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -107,7 +130,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -145,7 +168,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -183,7 +206,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -221,7 +244,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -259,7 +282,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -297,7 +320,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -335,7 +358,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -373,7 +396,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -411,7 +434,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -449,7 +472,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 
@@ -487,7 +510,7 @@ const RoomsPage=()=>{
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
-                            <button className="Room-Btn">View Room</button>
+                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
 
                         </div>
 

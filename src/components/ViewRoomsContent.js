@@ -1,7 +1,7 @@
 import React from "react";
 import Css from "./ViewRooms.css"
 import logo from "../h-removebg-preview.png"
-
+import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWifi, faPlay, faStar, fa } from '@fortawesome/free-solid-svg-icons';
 import image1 from "./room-images.png"
@@ -24,15 +24,39 @@ import Anime from "./Crunchyroll.png"
 
 
 const RoomContent=()=>{
+
+    const navigate= useNavigate();
+
+
+
+    const home =()=>{
+        navigate("/Home")
+
+    }
+    const room =()=>{
+        navigate("/Rooms")
+    }
+    const Booking=()=>{
+        navigate("/Booking")
+    }
+
+    const viewroom=()=>{
+        navigate("/view")
+    }
+
+    const checkOut=()=>{
+        navigate("/pay")
+    }
+    
     return(
 
         <div className="card-0">
             <div className="topNavBar">
             
 
-                <h2><a href="" className="NavBar">Home</a></h2>
-                <h2><a href="" className="NavBar">Rooms</a></h2>
-                <h2><a href="" className="NavBar">Booking</a></h2>
+                <h2><a onClick={home} className="NavBar">Home</a></h2>
+                <h2><a onClick={room} className="NavBar">Rooms</a></h2>
+                <h2><a onClick={Booking} className="NavBar">Booking</a></h2>
                 <img src={logo}  className="logo1"/>
                 <h2><a href="" className="NavBar">Facilities</a></h2>
                 <h2><a href="" className="NavBar">Gallery</a></h2>
@@ -41,7 +65,7 @@ const RoomContent=()=>{
             <div className="card-1">
 
                 <div className="card-btn">
-                    <button className="card-1-0"><img  src={cancel}/></button>
+                    <button className="card-1-0" onClick={room}><img  src={cancel}/></button>
                 </div>
             <div className="img-container">
 
@@ -87,7 +111,7 @@ const RoomContent=()=>{
                         </ul>
                     </div>
                     <div className="booking-div">
-                        <button className="booking-btn">BOOK NOW</button>
+                        <button className="booking-btn" onClick={Booking}>BOOK NOW</button>
                     </div>
                 </div>
                 <img src={line2}  />

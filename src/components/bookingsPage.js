@@ -1,7 +1,7 @@
 import React from "react";
 import Css from "./BookingsPage.css"
 import logo from "../h-removebg-preview.png"
-
+import { Link , useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWifi, faPlay, faStar, faPerson } from '@fortawesome/free-solid-svg-icons';
 import image1 from "./room-images.png"
@@ -20,19 +20,47 @@ import satTv from "./Satellite Signal.png"
 import DVD from "./Blu-ray.png"
 import appleTv from "./Apple TV.png"
 import Anime from "./Crunchyroll.png"
+;
 
 
 
 const BookingPage=()=>{
+
+
+
+
+    const navigate= useNavigate();
+
+
+
+    const home =()=>{
+        navigate("/Home")
+
+    }
+    const room =()=>{
+        navigate("/Rooms")
+    }
+    const Booking=()=>{
+        navigate("/Booking")
+    }
+
+    const viewroom=()=>{
+        navigate("/view")
+    }
+
+    const checkOut=()=>{
+        navigate("/pay")
+    }
+    
     return(
 
         <div className="card-0">
             <div className="topNavBar">
             
 
-                <h2><a href="" className="NavBar">Home</a></h2>
-                <h2><a href="" className="NavBar">Rooms</a></h2>
-                <h2><a href="" className="NavBar">Booking</a></h2>
+            <h2><a onClick={home} className="NavBar">Home</a></h2>
+            <h2><a onClick={room} className="NavBar">Rooms</a></h2>
+            <h2><a onClick={Booking} className="NavBar">Booking</a></h2>
                 <img src={logo}  className="logo1"/>
                 <h2><a href="" className="NavBar">Facilities</a></h2>
                 <h2><a href="" className="NavBar">Gallery</a></h2>
@@ -41,7 +69,7 @@ const BookingPage=()=>{
             <div className="card-1">
 
                 <div className="card-btn">
-                    <button className="card-1-0"><img  src={cancel}/></button>
+                    <button className="card-1-0" onClick={viewroom}><img  src={cancel}/></button>
                 </div>
             <div className="img-container">
 
@@ -109,7 +137,7 @@ const BookingPage=()=>{
                 <h4>R31,850</h4>
             </div>
             <div className="reserve-div">
-                <button className="reserve-btn">RESERVE SPACE</button>
+                <button className="reserve-btn" onClick={checkOut}>RESERVE SPACE</button>
             </div>
             <h4></h4>
                     </div>

@@ -1,7 +1,9 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import logo from "../h-removebg-preview.png"
+import { Link } from "react-router-dom";
 import image1 from '../lobby 1.jpg'
 import Css from './register.css'
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -11,11 +13,18 @@ const Register= ()=>{
     const [username,setUsername]=useState("")
     const [password,setPassword]=useState("")
 
-
-    const registerGuest =  async (e)=>{
-        e.preventDefault();
-        
+    
+    
+    const navigate=useNavigate();
+    const login=()=> {
+        navigate("/home");
     }
+    
+        
+
+        
+        
+    
     
     
     
@@ -44,27 +53,27 @@ const Register= ()=>{
                             type="text"
                             className="input"
                             placeholder="Full Name"
-                            value={fullname}
+                            
                             />
                             <input
                             type="text"
                             className="input"
                             placeholder="Username"
-                            value={username}
+                           
                             />
                             <input
                             type="password"
                             className="input"
                             placeholder="Password"
-                            value={password}
+                            
                             />
                             <div>
-                                <button className="submit">
+                                <button className="submit" onClick={login}>
                                     Create Account
                                 </button>
                             </div>
                         </form>
-                        <p>If you already have an Account? Log-in</p>
+                        <p>If you already have an Account?<Link to="./login.js" > Log-in</Link></p>
                     </div>
                 </div>
 </div>

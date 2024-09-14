@@ -6,10 +6,35 @@ import line from "./Line 20.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft , faBridge ,faStar, faMoneyBill, faAppleAlt, faBank , faGift} from "@fortawesome/free-solid-svg-icons";
 import image from "./hotel room.jpg"
-
+import { useNavigate } from "react-router-dom";
 
 
 const Checkout=()=> {
+
+
+
+    const navigate= useNavigate();
+
+
+
+    const home =()=>{
+        navigate("/Home")
+
+    }
+    const room =()=>{
+        navigate("/Rooms")
+    }
+    const Booking=()=>{
+        navigate("/Booking")
+    }
+
+    const viewroom=()=>{
+        navigate("/view")
+    }
+
+    const checkOut=()=>{
+        navigate("/pay")
+    }
     return (
         <div className="checkout">
              <div className="topNavBar">
@@ -32,7 +57,7 @@ const Checkout=()=> {
         <div className="Columns-2">
             <div className="column-left">
                 <div className="first-section">
-                    <button className="icon-btn">
+                    <button className="icon-btn" onClick={viewroom}>
                         <FontAwesomeIcon icon={faArrowAltCircleLeft} className="Icons" />
                     </button><h4>Confirm and pay</h4>
                 </div>
@@ -40,7 +65,7 @@ const Checkout=()=> {
                 <div className="Text-0">
 
                    <h5> This is one of our highly recommended Suites</h5>
-                   <FontAwesomeIcon icon={faBridge} />
+                   <FontAwesomeIcon icon={faBridge} className="bridge" />
                 </div>
 
 
@@ -53,8 +78,8 @@ const Checkout=()=> {
                     <div className="text-2">
                         <h6>Guests <br/>2 guests</h6>
                         <a href="" className="edit"> Edit</a>
-                    </div><img src={line} className="pay-line" /> 
-                </div>
+                    </div>
+                </div><img src={line} className="pay-line" /> 
                 
                   <div>
                     <h5>Choose How To Pay</h5>
@@ -74,6 +99,7 @@ const Checkout=()=> {
                                
                     </div>
                   </div>
+                  <img src={line} className="pay-line" /> 
 
                   
                   <div className="checkout-1">
@@ -94,11 +120,11 @@ const Checkout=()=> {
             <label>Save My Card Details</label>
              <input type="checkbox" className="checkbox" /> 
             </div>
-          </div>
+          
           
                  
 
-                  <div  className="checkout-1">
+                  
 
                   <div class="col-50">
             <h3>Booking Under</h3>
@@ -115,7 +141,8 @@ const Checkout=()=> {
                     <button className="payment-btn">Confirm Payment</button>
                     </div>
           </div>
-                  </div> 
+                  
+                  </div>
                   </div>
                   
 
@@ -147,7 +174,7 @@ const Checkout=()=> {
                 </div>
                 <div className="checkout-0">
                     <h4>Choose a different Payment Method</h4>
-                    <div>
+                    <div className="methods-div">
                         <div>
                             
                                 <FontAwesomeIcon icon={faMoneyBill} /> Cash

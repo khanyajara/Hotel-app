@@ -1,4 +1,5 @@
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from "./components/Register";
 import Login from './components/login';
 import ForgetPassword from './components/forgotpassword';
@@ -12,18 +13,21 @@ import Checkout from './components/checkout';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Register/>
-        <Login/>
-        <ForgetPassword/>
-        <HomePage/>
-        <RoomsPage/>
-        <ViewRoom/>
-        <BookingPage/>
-        <Checkout/>
-      </header>
-    </div>
+    
+    <BrowserRouter> 
+<Routes>
+
+
+<Route path="/" element={<Register/>}/>
+<Route path="*" element={<Login/>}/>
+<Route path="^" element={<ForgetPassword/>}/>
+<Route path="Home" element={<HomePage/>}/>
+<Route path="Rooms" element={<RoomsPage/>}/>
+<Route path="view" element={<ViewRoom/>}/>
+<Route path="Booking" element={<BookingPage/>}/>
+<Route path="pay" element={<Checkout/>}/>
+</Routes>
+</BrowserRouter>
   );
 }
 
