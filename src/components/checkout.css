@@ -43,13 +43,170 @@
     width: 100%;
   }
 
+
+  .icon-btn{
+   
+    
+    
+    font-size: large;
+    border-radius: 100%;
+    background-color: transparent;
+    border: none;
+    
+  }
+
+  .Icons{
+    height: 50px;
+    width: 50px;
+  }
+
+  .first-section{
+    display: flex;
+  }
+
+  .Text-0{
+    border: 2px solid #3BCBBF;
+    border-radius: 15px;
+    width: 65%;
+    height: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .text-2{
+    display: flex;
+    justify-content: space-between;
+    width: 600%;
+    align-items: center;
+  }
   .line-0{
      font-size: x-large;
      width: 100%;
      box-shadow: 3px 8px 6px ;
   }
+  .pay-line{
+    width: 100%;
+  }
+
+  .Columns-2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+.column-left{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 50%;
+  
+}
+
+  .column-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 50%;
+  }
 
 
   .edit{
     color: black;
+  }
+
+  .checkout-0{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    border-color: black;
+    padding: 3%;
+    margin: 3%;
+    width: 80%;
+    height: 35%;
+    margin-top: 5%;
+    
+    margin-bottom: 8%;
+    gap: -5rem;
+    border: black;
+
+   
+    box-shadow: 0 4px 8px 8px rgba(0,0,0,0.2);
+    background-color: #ffffff;
+    border-radius: 15px;
+  }    
+  .checkout-1{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    border-color: black;
+    padding: 3%;
+    margin: 3%;
+    width: 80%;
+    height: 35%;
+    
+    margin-bottom: 8%;
+    gap: -5rem;
+    border: black;
+
+   
+    
+    background-color: #ffffff;
+    border-radius: 15px;
+  }    
+
+  .checkout-11{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: start;
+    align-items: start;
+    border-color: black;
+    
+    width: 50%;
+    height: auto;
+    
+    margin-bottom: 8%;
+   
+    border: black;
+
+   
+    border: 2px solid;
+    background-color: #ffffff;
+    border-radius: 15px;
+  }    
+  .rad{
+    width: 100%;
+    height: auto;
+    
+  }
+
+.radio{
+  display: flex;
+  flex-direction:row-reverse ;
+  height: 5vh;
+  width: 100%;
+  justify-content: space-between;
+}
+
+  .payment-btn{
+    color: white;
+    background-color:#01BEA0 ;
+    width: 25%;
+    height: 3rem;
+    font-size: large;
+    border-radius: 10.33px;
+    margin-top: 1%;
+    border: none;
+    box-shadow: 0 13px 8px 0 rgba(0,0.5,0,0.2);
+  }
+
+  .re-img{
+    width: 20%;
   }
