@@ -36,6 +36,12 @@ const HomePage=()=>{
     const viewroom=()=>{
         navigate("/view")
     }
+    const Gallery=()=>{
+        navigate("/gallery")
+    }
+    const Facilities=()=>{
+        navigate("/facilities")
+}
 
     
         
@@ -60,8 +66,8 @@ const HomePage=()=>{
             <h2><a onClick={room} className="NavBar">Rooms</a></h2>
             <h2><a onClick={Booking} className="NavBar">Booking</a></h2>
             <img src={logo}  className="logo1"/>
-            <h2><a href="./Facilities.js" className="NavBar">Facilities</a></h2>
-            <h2><a href="" className="NavBar">Gallery</a></h2>
+            <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
+            <h2><a onClick={Gallery}  className="NavBar">Gallery</a></h2>
             <h2><a href="" className="NavBar">How To Get There</a></h2>
            
          </div>

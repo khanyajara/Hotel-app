@@ -8,6 +8,8 @@ import RoomsPage from './components/RoomsPage';
 import ViewRoom from './components/ViewRoomsContent'
 import BookingPage from './components/bookingsPage';
 import Checkout from './components/checkout';
+import Gallery from './components/gallery';
+import Facilities from './components/Facilities';
 
 
 
@@ -26,6 +28,8 @@ function App() {
 <Route path="view" element={<ViewRoom/>}/>
 <Route path="Booking" element={<BookingPage/>}/>
 <Route path="pay" element={<Checkout/>}/>
+<Route path="gallery" element={<Gallery/>}/>
+<Route path="facilities" element={<Facilities/>}/>
 </Routes>
 </BrowserRouter>
   );
