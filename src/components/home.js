@@ -14,6 +14,8 @@ import HomeRoomImage from "./homePage1.jpg"
 import HotelOutside from "./image-asset.jpeg"
 import RoomImg from "./hotel room.jpg"
 import { useNavigate } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWifi, faPlay, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 const HomePage=()=>{
@@ -69,6 +71,7 @@ const HomePage=()=>{
             <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
             <h2><a onClick={Gallery}  className="NavBar">Gallery</a></h2>
             <h2><a href="" className="NavBar">How To Get There</a></h2>
+            <h2><button className="iconss-btn"><FontAwesomeIcon icon={faUserCircle} className="iconss"/></button></h2>
            
          </div>
          <div className="img-container">
@@ -97,7 +100,7 @@ const HomePage=()=>{
 
          <div className="Facilities-Activities">
             <div >
-                <h1 className="heading-for-facilities">________________________________________<h2 className="heading-color">Facility   Activities</h2>____________________________________________</h1>
+                <h1 className="heading-for-facilities">___________________<h2 className="heading-color">Facility   Activities</h2>__________________</h1>
             </div>
             <div className="Facilities-space">
                 <img src={Massage}  className="Facilities"/>
@@ -111,7 +114,7 @@ const HomePage=()=>{
             </div>
          </div>
          <div >
-                <h1 className="heading-for-facilities">________________________________________<h2 className="heading-color">An Exerience</h2>____________________________________________</h1>
+                <h1 className="heading-for-facilities">_______________________<h2 className="heading-color">An Exerience</h2>__________________</h1>
             </div>
          <div className="row4">
             <div className="column1" >
@@ -183,7 +186,7 @@ const HomePage=()=>{
             <div><button className="check-btn">Check Availability</button></div>
          </div>
          <div >
-                <h1 className="heading-for-facilities">________________________________________<h2 className="heading-color">See Rooms Types</h2>____________________________________________</h1>
+                <h1 className="heading-for-facilities">_____________________<h2 className="heading-color">See Rooms Types</h2>_____________________________</h1>
             </div>
             <div className="row8">
                 <div >

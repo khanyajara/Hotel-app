@@ -36,6 +36,11 @@ body {
   .container {
     position: relative;
   }
+
+  .slides-imgs{
+    width: 50%;
+    height: 50%;
+  }
   
   .mySlides {
     display: none;
@@ -84,6 +89,10 @@ body {
     background-color: #222;
     padding: 2px 16px;
     color: white;
+    width:100% ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .row:after {

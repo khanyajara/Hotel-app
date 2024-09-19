@@ -3,7 +3,7 @@ import Css from "./BookingsPage.css"
 import logo from "../h-removebg-preview.png"
 import { Link , useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWifi, faPlay, faStar, faPerson } from '@fortawesome/free-solid-svg-icons';
+import { faWifi, faPlay, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import image1 from "./room-images.png"
 import image2 from "./room-images1.png"
 import image3 from "./room-images2.png"
@@ -26,7 +26,7 @@ import Anime from "./Crunchyroll.png"
 
 const BookingPage=()=>{
 
-
+  
 
 
     const navigate= useNavigate();
@@ -68,6 +68,8 @@ const BookingPage=()=>{
                 <h2><a href="" className="NavBar">Facilities</a></h2>
                 <h2><a onClick={Gallery}  className="NavBar">Gallery</a></h2>
                 <h2><a href="" className="NavBar">How To Get There</a></h2>
+               
+                    <div><button className="card-1-0" >< FontAwesomeIcon icon={faUserCircle} className="icons"/></button></div>
             </div>
             <div className="card-1">
 

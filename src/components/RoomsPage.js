@@ -9,9 +9,11 @@ import Room3 from "./Room3.png"
 import Room4 from "./Room4.png"
 import Room5 from "./Room5.jpg"
 import { useNavigate } from "react-router";
-
+import { UseDispatch, useSelector } from "react-redux";
+import { FetchData } from "../redux/dbSlice";
 
 const RoomsPage=()=>{
+    
 
     const navigate= useNavigate();
 

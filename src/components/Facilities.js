@@ -80,7 +80,7 @@ const Facilities = () => {
         <div className="container">
           <div className="mySlides" style={{ display: 'block' }}>
             <div className="numbertext">{slideIndex + 1} / {slides.length}</div>
-            <img src={slides[slideIndex]} style={{ width: '100%' }} alt={`Slide ${slideIndex + 1}`} />
+            <img src={slides[slideIndex]} className="slides-imgs" alt={`Slide ${slideIndex + 1}`} />
           </div>
           <a className="prev" onClick={() => plusSlides(-1)}>❮</a>
           <a className="next" onClick={() => plusSlides(1)}>❯</a>

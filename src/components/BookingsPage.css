@@ -102,6 +102,9 @@
       width: 100%;
       height: 5vh;
   }
+  .icons{
+    width: 500px;
+  }
 
   .reserve-btn{
       display: flex;
