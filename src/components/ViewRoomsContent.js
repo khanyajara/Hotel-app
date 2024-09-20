@@ -46,10 +46,10 @@ const RoomContent = ({room}) => {
                 <h2><a onClick={booking} className="NavBar">Booking</a></h2>
                 <img src={logo} className="logo1" alt="Logo" />
                 <h2><a href="" className="NavBar">Facilities</a></h2>
-                <h2><a onClick={gallery}>Gallery</a></h2>
+                <h2><a onClick={gallery} className="NavBar">Gallery</a></h2>
                 <h2><a href="" className="NavBar">How To Get There</a></h2>
             </div>        
-            <div className="card-1">
+            <div className="card-1" >
                 <div className="card-btn">
                     <button className="card-1-0" onClick={roomPage}><img src={cancel} alt="Cancel" /></button>
                 </div>
@@ -64,8 +64,8 @@ const RoomContent = ({room}) => {
                 <div className="Info-deck">
                     <div className="Info-deck-1">
                         <div className="Room-descriptions">
-                            <h2 className="Info">{data?.title}</h2>
-                            <p className="Room-descriptions"> {data.roomType}</p>
+                            <h2 className="Info"></h2>
+                            <p className="Room-descriptions"> </p>
                         </div>
                         <img src={line} alt="Line" />
                         <ul>

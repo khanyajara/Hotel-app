@@ -24,9 +24,10 @@ const BookingPage = () => {
     const home = () => navigate("/Home");
     const room = () => navigate("/Rooms");
     const Booking = () => navigate("/Booking");
-    const viewroom = () => navigate("/view");
+   
     const checkOut = () => navigate("/pay");
     const Gallery = () => navigate("/gallery");
+    const viewroom = () => navigate("/view");
 
     const calculateTotalPrice = () => {
         const arrival = new Date(arrivalDate);
@@ -122,6 +123,7 @@ const BookingPage = () => {
                         <div className="reserve-div">
                             
                             <button className="reserve-btn" onClick={calculateTotalPrice}>calculate price</button>
+                            <br/>
                             <button className="reserve-btn" onClick={checkOut}>RESERVE</button>
                         </div>
                     </div>

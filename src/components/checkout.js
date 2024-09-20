@@ -32,6 +32,7 @@ const Checkout=()=> {
     const viewroom=()=>{
         navigate("/view")
     }
+    const gallery = () => navigate("/gallery");
 
     const checkOut=()=>{
         navigate("/pay")
@@ -41,13 +42,13 @@ const Checkout=()=> {
              <div className="topNavBar">
             
 
-            <h2><a href="" className="NavBar">Home</a></h2>
-            <h2><a href="" className="NavBar">Rooms</a></h2>
-            <h2><a href="" className="NavBar">Booking</a></h2>
+            <h2><a onClick={home} className="NavBar">Home</a></h2>
+            <h2><a onClick={room} className="NavBar">Rooms</a></h2>
+            <h2><a onClick={Booking} className="NavBar">Booking</a></h2>
             <img src={logo}  className="logo1"/>
-            <h2><a href="" className="NavBar">Facilities</a></h2>
-            <h2><a href="" className="NavBar">Gallery</a></h2>
-            <h2><a href="" className="NavBar">How To Get There</a></h2>
+            <h2><a onClick={home} className="NavBar">Facilities</a></h2>
+            <h2><a onClick={gallery} className="NavBar">Gallery</a></h2>
+            <h2><a onClick={home} className="NavBar">How To Get There</a></h2>
         </div>
 
 
@@ -58,7 +59,7 @@ const Checkout=()=> {
         <div className="Columns-2">
             <div className="column-left">
                 <div className="first-section">
-                    <button className="icon-btn" onClick={viewroom}>
+                    <button className="icon-btn" onClick={Booking}>
                         <FontAwesomeIcon icon={faArrowAltCircleLeft} className="Icons" />
                     </button><h4>Confirm and pay</h4>
                 </div>
@@ -140,7 +141,7 @@ const Checkout=()=> {
 
             <div>
                     <button className="payment-btn">Confirm Payment</button>
-                    <TotalPrice/>
+                   
                     </div>
           </div>
                   
@@ -179,17 +180,25 @@ const Checkout=()=> {
                     <div className="methods-div">
                         <div>
                             
-                                <FontAwesomeIcon icon={faMoneyBill} /> Cash
+                                <button className="iconic-btns">
+                                    <FontAwesomeIcon icon={faMoneyBill} /> Cash
+                                </button>
                             
                         </div>
                         <div>
-                            <FontAwesomeIcon icon={faAppleAlt} /> Apple Pay
+                            <button className="iconic-btns">
+                                <FontAwesomeIcon icon={faAppleAlt} /> Apple Pay
+                            </button>
                         </div>
                         <div>
-                            <FontAwesomeIcon icon={faBank} /> Bank Tranfers
+                            <button className="iconic-btns">
+                                <FontAwesomeIcon icon={faBank} /> Bank Tranfers
+                            </button>
                         </div>
                         <div>
-                            <FontAwesomeIcon icon={faGift} /> Gift Cards 
+                            <button className="iconic-btns">
+                                <FontAwesomeIcon icon={faGift} /> Gift Cards 
+                            </button>
                         </div>
                     </div>
                 </div>

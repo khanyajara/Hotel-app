@@ -91,6 +91,7 @@
    display: flex;
    justify-content: space-around;
    width: 100%;
+   height: auto;
    
    
   }
@@ -98,8 +99,9 @@
   .reserve-div{
      
       display: flex;
-      justify-content: center;
-      width: 100%;
+      justify-content: space-between;
+      width: 90%;
+      margin-left: 5%;
       height: 5vh;
   }
   .icons{
@@ -110,8 +112,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 35%;
-      height: 6vh;
+      width: 30%;
+      height: 5vh;
       background-color: #3BCBBF;
       font-size: larger;
       font: bolder;

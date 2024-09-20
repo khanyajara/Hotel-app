@@ -22,7 +22,9 @@ useEffect(()=>{
     dispatch(FetchData());
 },[dispatch]);
 
-
+console.log(data)
+console.log(loading)
+console.log(error)
 
 
     const home =()=>{
