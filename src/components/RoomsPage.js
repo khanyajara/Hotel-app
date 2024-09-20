@@ -8,14 +8,20 @@ import Room2 from "./Room2.png"
 import Room3 from "./Room3.png"
 import Room4 from "./Room4.png"
 import Room5 from "./Room5.jpg"
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { UseDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FetchData } from "../redux/dbSlice";
 
 const RoomsPage=()=>{
-    
+    const { data, error, loading } = useSelector((state) => state.data || {});  
+    const dispatch = useDispatch();
 
     const navigate= useNavigate();
+useEffect(()=>{
+    dispatch(FetchData());
+},[dispatch]);
+
 
 
 
@@ -30,10 +36,12 @@ const RoomsPage=()=>{
         navigate("/Booking")
     }
 
-    const viewroom=()=>{
-        navigate("/view")
-    }
-
+   const viewroom =(room)=>{
+    console.log(room)
+    navigate("/view", {state: data  
+    })
+   }
+  
 
     return(
         <div className="rooms-page">
@@ -71,26 +79,34 @@ const RoomsPage=()=>{
           <div>
             <h1>Rooms</h1>
             <div className="Rooms-Sections">
-                <div className="Rooms-info">
+                {data.map((data, index)=>(
+                    <div className="Rooms-info"key={index} >
                     <div className="Img-div">
-                        <img  src={RoomPicture}  className="Room-Img"/>
+                        <img src={data.roomImage} 
+                         className="Room-Img"/>
                     </div>
                     <div className="Rooms-contents">
                         <div className="Room-descriptions">
                             <div className="Room-name">
-                                <h4>Harmony Suites</h4>
+                                <h4>{data.title}</h4>
                             </div>
                             <div className="Room-name">
-                                <p>Double/Twin</p>
+                                <p>{data.roomType}</p>
                             </div>
                             <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
+                                <p>descriptions:{data.desriptions}</p>
                             </div>
                             <div className="Room-name">
-                                <p>(1219 Visitors)</p>
+                                <p>Price:{data.price}</p>
                             </div>
                             <div className="Room-name">
-                                <p>Price: R2,560/night</p>
+                                <p>visitors:{data.visitors}</p>
+                            </div>
+                            <div className="Room-name">
+                                <p> Beds:{data.beds}</p>
+                            </div>
+                            <div className="Room-name">
+                                <p>Guests:{data.guests}</p>
                             </div>
                         </div>
                         <div className="Room-BtnOutside">
@@ -109,424 +125,9 @@ const RoomsPage=()=>{
                             <p>(1110 reviews)</p>
                         </div>
                 </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={Room1}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={Room2}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={Room3}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={Room4}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={Room5}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={RoomPicture}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={Room1}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={Room2}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={Room3}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={Room4}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
-                <div className="Rooms-info">
-                    <div className="Img-div">
-                        <img  src={Room5}  className="Room-Img"/>
-                    </div>
-                    <div className="Rooms-contents">
-                        <div className="Room-descriptions">
-                            <div className="Room-name">
-                                <h4>Harmony Suites</h4>
-                            </div>
-                            <div className="Room-name">
-                                <p>Double/Twin</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Blissful, Calm, Spectacular view</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>(1219 Visitors)</p>
-                            </div>
-                            <div className="Room-name">
-                                <p>Price: R2,560/night</p>
-                            </div>
-                        </div>
-                        <div className="Room-BtnOutside">
-                            <button className="Room-Btn" onClick={viewroom}>View Room</button>
-
-                        </div>
-
-
-                    </div>
-                        <div className="ratings">
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars"/>
-                            <img  src={Star} className="Stars" />
-                            <img  src={Star} className="Stars"/>
-                            <p>(1110 reviews)</p>
-                        </div>
-                </div>
+                ))}
+                
+               
             </div>
             
 

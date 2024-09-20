@@ -28,7 +28,7 @@ export const dataSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
+
 export const { setLoading, setData, setError} = dataSlice.actions
 
 export default dataSlice.reducer;

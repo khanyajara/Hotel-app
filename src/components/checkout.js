@@ -6,6 +6,7 @@ import line from "./Line 20.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft , faBridge ,faStar, faMoneyBill, faAppleAlt, faBank , faGift} from "@fortawesome/free-solid-svg-icons";
 import image from "./hotel room.jpg"
+import TotalPrice from "./checkout"
 import { useNavigate } from "react-router-dom";
 
 
@@ -139,6 +140,7 @@ const Checkout=()=> {
 
             <div>
                     <button className="payment-btn">Confirm Payment</button>
+                    <TotalPrice/>
                     </div>
           </div>
                   
