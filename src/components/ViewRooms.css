@@ -62,7 +62,7 @@
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    width: 50%;
+   width: 50%; 
     
 }
 
@@ -94,7 +94,7 @@ cursor: pointer;
 .info-deck-right{
     display: flex;
     flex-direction: column;
-    
+    width: 50%;
     height: 45vh;
 }
 

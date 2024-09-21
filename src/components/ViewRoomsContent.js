@@ -19,24 +19,16 @@ import appleTv from "./Apple TV.png";
 import Anime from "./Crunchyroll.png";
 import './ViewRooms.css'; // Ensure CSS is imported
 
-const RoomContent = ({room}) => {
+const RoomContent = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const data = location.state;
-    console.log(data)
-  
-   
-
-    
-  
-    
+    const room = location.state;
 
     const home = () => navigate("/Home");
     const roomPage = () => navigate("/Rooms");
-    const booking = () => navigate("/Booking");
+    const booking = (booking) => {
+        navigate("/Booking", {state: booking});}
     const gallery = () => navigate("/gallery");
-
-    
 
     return (
         <div className="card-0">
@@ -48,8 +40,8 @@ const RoomContent = ({room}) => {
                 <h2><a href="" className="NavBar">Facilities</a></h2>
                 <h2><a onClick={gallery} className="NavBar">Gallery</a></h2>
                 <h2><a href="" className="NavBar">How To Get There</a></h2>
-            </div>        
-            <div className="card-1" >
+            </div>
+            <div className="card-1">
                 <div className="card-btn">
                     <button className="card-1-0" onClick={roomPage}><img src={cancel} alt="Cancel" /></button>
                 </div>
@@ -64,28 +56,28 @@ const RoomContent = ({room}) => {
                 <div className="Info-deck">
                     <div className="Info-deck-1">
                         <div className="Room-descriptions">
-                            <h2 className="Info"></h2>
-                            <p className="Room-descriptions"> </p>
+                            <h2 className="Info">{room.title}</h2>
+                            <h3 className="Room-descriptions">
+                                {room.roomType}
+                            </h3>
                         </div>
-                        <img src={line} alt="Line" />
-                        <ul>
-                            <li>King-Sized bed</li>
-                            <li>Private Balcony</li>
-                            <li>Cozy Seating Area</li>
-                            <li>Whirlpool Tub for two</li>
-                            <li>Rainfall Shower</li>
-                            <li>High-End Toiletries</li>
-                            <li>State-of-the-art TV</li>
-                            <li>Mini-Bar</li>
-                        </ul>
+                        <div>
+                           <h5>{room.descriptions}</h5>
+                           <br/>
+                          <h5>Guests: {room.guests}</h5>
+                          <br/>
+                          <h5>Beds: {room.beds}</h5>
+                          <br/>
+
+                        </div>
                         <div className="booking-div">
-                            <button className="booking-btn" onClick={booking}>BOOK NOW</button>
+                            <button className="booking-btn" onClick={()=>booking(room)}>BOOK NOW</button>
                         </div>
                     </div>
                     <img src={line2} alt="Line" />
                     <div className="info-deck-right">
                         <div className="Price">
-                            <h2>R3,750/night</h2>
+                            <h2>R.{room.price}</h2>
                         </div>
                         <img src={line} alt="Line" />
                         <p className="Room-descriptions">Price includes</p>
@@ -93,7 +85,7 @@ const RoomContent = ({room}) => {
                             <div className="icons-section">
                                 <FontAwesomeIcon icon={faWifi} className="Icons" />
                                 <FontAwesomeIcon icon={faPlay} className="Icons" />
-                               <FontAwesomeIcon icon={faCoffee} className="Icons" />
+                                <FontAwesomeIcon icon={faCoffee} className="Icons" />
                                 <img src={disney} className="Icons" alt="Disney+" />
                                 <img src={Netflix} className="Icons" alt="Netflix" />
                                 <img src={HBO} className="Icons" alt="HBO Max" />
@@ -108,6 +100,6 @@ const RoomContent = ({room}) => {
             </div>
         </div>
     );
-}
+};
 
 export default RoomContent;

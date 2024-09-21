@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState}from "react";
 import { Link } from "react-router-dom";
 import css from "./checkout.css"
 import logo from "../h-removebg-preview.png"
@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft , faBridge ,faStar, faMoneyBill, faAppleAlt, faBank , faGift} from "@fortawesome/free-solid-svg-icons";
 import image from "./hotel room.jpg"
 import TotalPrice from "./checkout"
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 
 const Checkout=()=> {
@@ -15,7 +15,30 @@ const Checkout=()=> {
 
 
     const navigate= useNavigate();
+    const location = useLocation();
+    const {arrivalDate, departureDate, guests, totalPrice,  pricePerNight, RoomName} = location.state || {};
 
+    const [editedArrivalDate, setEditedArrivalDate] = useState(arrivalDate);
+    const [editedDepartureDate, setEditedDepartureDate] = useState(departureDate);
+    const [editedGuests, setEditedGuests] = useState(guests);
+    
+    const confirmPayment = () => {
+        
+        alert("Payment confirmed!");
+        navigate("/confirmation"); 
+    };
+
+    const EditDates = () => {
+        const newArrivalDate = prompt("Enter new arrival date:", editedArrivalDate);
+        const newDepartureDate = prompt("Enter new departure date:", editedDepartureDate);
+        if (newArrivalDate) setEditedArrivalDate(newArrivalDate);
+        if (newDepartureDate) setEditedDepartureDate(newDepartureDate);
+    };
+
+    const EditGuests = () => {
+        const newGuests = prompt("Enter number of guests:", editedGuests);
+        if (newGuests) setEditedGuests(newGuests);
+    };
 
 
     const home =()=>{
@@ -74,12 +97,12 @@ const Checkout=()=> {
                 <div>
                     <h5>Your Trip:</h5>
                     <div className="text-2">
-                        <h6>Date: <br/> Oct 6-19</h6>
-                        <a href="" className="edit"> Edit</a>
+                        <h6>Date: </h6>
+                        <a onClick={EditDates} className="edit"> Edit</a>
                     </div>
                     <div className="text-2">
-                        <h6>Guests <br/>2 guests</h6>
-                        <a href="" className="edit"> Edit</a>
+                        <h6>Guests: </h6>
+                        <a onClick={EditGuests} className="edit"> Edit</a>
                     </div>
                 </div><img src={line} className="pay-line" /> 
                 
@@ -159,7 +182,7 @@ const Checkout=()=> {
                 <div className="checkout-0">
                        <div>
                         <img src={image} className="re-img" />
-                        <h4>HoneyMoons Suite</h4>
+                        <h4>{RoomName}</h4>
                         <h5 className="words">Romantic getAway</h5>
                         <p>
                             <FontAwesomeIcon icon={faStar} />
@@ -167,11 +190,13 @@ const Checkout=()=> {
                         </p>
                        </div>
                        <div>
-                        <h4>Price Details</h4>
-                        <p>Romantic Suite: R3,750</p>
-                        <p>Special Offer: -R1,250</p>
-                        <p>Cleaning Fee: R0</p>
-                        <p>Subtotal: R2,500</p>
+                        <h4> Details</h4>
+                        <p>R.{pricePerNight} /night</p>
+                        <p>Free cancellation</p>
+                        <p>Guests: {guests}</p>
+                        <p>DATE OF ARRIVAL:  {arrivalDate}</p>
+                        <p>DATE OF DEPARTURE: {departureDate}</p>
+                        <p>Total: R.{totalPrice}</p>
                        </div>
                        
                 </div>

@@ -91,7 +91,7 @@
     
 }
 
-.Rooms-Sections :hover{
+.Room-Img :hover{
     transform: scale(1.04);
 }
 
@@ -120,6 +120,8 @@
 
 .Rooms-contents{
     display: flex;
+    height: auto;
+
 
 }
 
@@ -129,6 +131,7 @@
     align-items: flex-start;
     justify-content: baseline;
     width: 100%;
+   height: auto;
     
 
 }
@@ -155,6 +158,8 @@
 
 .ratings{
     display: flex;
+    flex-direction: row;
+    margin-left: 3.5%;
 }
 
 .Stars{

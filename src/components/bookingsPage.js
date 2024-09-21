@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Css from "./BookingsPage.css";
 import logo from "../h-removebg-preview.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import image1 from "./room-images.png";
@@ -17,22 +17,47 @@ const BookingPage = () => {
     const [departureDate, setDepartureDate] = useState("");
     const [guests, setGuests] = useState(2);
     const [totalPrice, setTotalPrice] = useState(0);
-    const pricePerNight = 3750;
+
+   
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const booking = location.state
+    console.log(booking);
+    const pricePerNight = parseFloat(booking.price);
+    const RoomName = parseFloat(booking.title)
+
+    
+
+
+
 
     const home = () => navigate("/Home");
-    const room = () => navigate("/Rooms");
+    const roomPage = () => navigate("/Rooms");
     const Booking = () => navigate("/Booking");
    
-    const checkOut = () => navigate("/pay");
+    const checkOut = () =>{ 
+        navigate("/pay", {
+            state: {
+                arrivalDate,
+                departureDate,
+                guests,
+                totalPrice,
+                pricePerNight,
+                RoomName
+            }
+        });
+    }
     const Gallery = () => navigate("/gallery");
     const viewroom = () => navigate("/view");
 
     const calculateTotalPrice = () => {
         const arrival = new Date(arrivalDate);
         const departure = new Date(departureDate);
-        if (arrival && departure && departure > arrival) {
+        
+       
+        if (arrivalDate && departureDate  && !isNaN(arrival.getTime()) && !isNaN(departure.getTime()) && departure > arrival) {
             const nights = (departure - arrival) / (1000 * 3600 * 24);
             const total = nights * pricePerNight;
             setTotalPrice(total);
@@ -40,12 +65,12 @@ const BookingPage = () => {
             alert("Please select valid arrival and departure dates.");
         }
     };
-
+    
     return (
         <div className="card-0">
             <div className="topNavBar">
                 <h2><a onClick={home} className="NavBar">Home</a></h2>
-                <h2><a onClick={room} className="NavBar">Rooms</a></h2>
+                <h2><a onClick={roomPage} className="NavBar">Rooms</a></h2>
                 <h2><a onClick={Booking} className="NavBar">Booking</a></h2>
                 <img src={logo} className="logo1" alt="Logo" />
                 <h2><a href="#" className="NavBar">Facilities</a></h2>
@@ -67,9 +92,10 @@ const BookingPage = () => {
                 </div>
                 <div className="Info-deck">
                     <div className="Info-deck-1">
-                        <h2>HoneyMoons Suite</h2>
+                        <h2>{booking.title}</h2>
+                        <h4>{booking.roomType}</h4>
                         <img src={line} className="lining" alt="Line" /><br />
-                        <h4>R3,750/night</h4>
+                        <h4>{booking.price}</h4>
                         <img src={line} className="lining" alt="Line" /><br />
                         <p><FontAwesomeIcon icon={faStar} /> 4.98 (110 reviews)</p>
                     </div>
@@ -113,12 +139,13 @@ const BookingPage = () => {
                         </div>
                         <img src={line} alt="Line" />
                         <div className="price">
-                            <h4>R{pricePerNight} /night </h4>
+                            <h4>R{booking.price}  </h4>
                         </div>
                         <img src={line} alt="Line" />
                         <div className="total">
                             <h4>Total </h4>
-                            <h4>R{totalPrice}</h4>
+                            <h4>Total: R{totalPrice.toFixed(2)}</h4>
+
                         </div>
                         <div className="reserve-div">
                             

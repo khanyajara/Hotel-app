@@ -81,6 +81,7 @@
 
   .NavBar{
     color: black;
+    cursor: pointer;
   }
   .logo1{
     height: 30vh;
