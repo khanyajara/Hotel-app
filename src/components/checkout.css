@@ -233,7 +233,8 @@
   }
 
   .paypal-container{
-    background-color: whitesmoke;
-    width: 60%;
+    
+    width: 80%;
+    border-radius: 2%;
   }
   

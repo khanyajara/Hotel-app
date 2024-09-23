@@ -44,7 +44,11 @@ const HomePage=()=>{
     const Facilities=()=>{
         navigate("/facilities")
 }
+const [isHovered, setIsHovered] = useState(false);
 
+const toggleProfile = () => {
+  setIsHovered(!isHovered);
+};
     
         
 
@@ -71,7 +75,17 @@ const HomePage=()=>{
             <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
             <h2><a onClick={Gallery}  className="NavBar">Gallery</a></h2>
             <h2><a href="" className="NavBar">How To Get There</a></h2>
-            <h2><button className="iconss-btn"><FontAwesomeIcon icon={faUserCircle} className="iconss"/></button></h2>
+            <h2>
+        <button className="iconss-btn" aria-label="User Profile" onMouseEnter={toggleProfile} onMouseLeave={toggleProfile}>
+          <FontAwesomeIcon icon={faUserCircle} className="iconss" />
+        </button>
+      </h2>
+      {isHovered && (
+        <div className="profile-tooltip">
+          <p>User Name</p>
+          <p>user@example.com</p>
+        </div>
+      )}
            
          </div>
          <div className="img-container">
@@ -209,7 +223,7 @@ const HomePage=()=>{
                 </div>
             </div>
             <div >
-                <h1 className="heading-for-facilities">________________________________________<h2 className="heading-color">Our Facilities Include</h2>____________________________________________</h1>
+                <h1 className="heading-for-facilities">_______________<h2 className="heading-color">Our Facilities Include</h2>_________________________</h1>
             </div>
             <div className="facilities-container">
                 <div className="first-row">

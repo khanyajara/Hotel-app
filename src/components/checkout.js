@@ -102,7 +102,12 @@ const Checkout = () => {
                         </select>
                         {isPending ? <p>LOADING...</p> : (
                             <PayPalButtons
-                                style={{ layout: "vertical" }}
+                            style={{
+                                shape: "rect",
+                                layout: "vertical",
+                                color: "gold",
+                                label: "paypal",
+                            }} 
                                 createOrder={onCreateOrder}
                                 onApprove={onApproveOrder}
                             />

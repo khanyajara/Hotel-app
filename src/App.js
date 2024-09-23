@@ -16,11 +16,10 @@ import Facilities from './components/Facilities';
 
 function App() {
   const initialOptions = {
-    "client-id":
-        "AfIAqx5qwADS2y3HBA3G9jY9LTQxgY71yk1o5OT6ca0OwgiOfGQ2hUnNVYNRVYUDF3MgjtvljjF2m_iN",
+    "client-id": "test",
     "enable-funding": "venmo",
     "disable-funding": "",
-   
+    "buyer-country": "US",
     currency: "USD",
     "data-page-type": "product-details",
     components: "buttons",

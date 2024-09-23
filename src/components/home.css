@@ -320,7 +320,7 @@
 
   .first-row{
     float: left;
-    width: 30%;
+    width: 50%;
     padding: 10px;
     height: 300px; 
     
@@ -358,7 +358,10 @@
  
   .footer-info{
    
-    width: 35%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+     justify-content: space-around;
     
   }
 
