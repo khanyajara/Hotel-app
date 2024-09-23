@@ -231,4 +231,9 @@
     border-radius: 15px;
 
   }
+
+  .paypal-container{
+    background-color: whitesmoke;
+    width: 60%;
+  }
   

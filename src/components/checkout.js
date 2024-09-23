@@ -94,11 +94,11 @@ const Checkout = () => {
                     <p>Date: {arrivalDate} - {departureDate}</p>
                     <p>Guests: {guests}</p>
 
-                    <div>
+                    <div className='paypal-container'>
                         <h5>Choose How To Pay</h5>
                         <select value={currency} onChange={onCurrencyChange}>
                             <option value="USD">💵 USD</option>
-                            <option value="Zar">💶 Zar</option>
+                            <option value="EUR">💶 EUR</option>
                         </select>
                         {isPending ? <p>LOADING...</p> : (
                             <PayPalButtons
