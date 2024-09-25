@@ -1,4 +1,5 @@
 import './App.css';
+import { useSelector } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Register from "./components/Register";
@@ -11,6 +12,8 @@ import BookingPage from './components/bookingsPage';
 import Checkout from './components/checkout';
 import Gallery from './components/gallery';
 import Facilities from './components/Facilities';
+import Clients from "./components/clientsBookings"
+import AddRoom from './components/AddRoom';
 
 
 
@@ -25,26 +28,38 @@ function App() {
     components: "buttons",
     "data-sdk-integration-source": "developer-studio",
 };
+
+const user = useSelector(state => state.auth.user);
+
+
 return (
-    <BrowserRouter>
-    <PayPalScriptProvider options={initialOptions}>
+  <BrowserRouter>
+  <PayPalScriptProvider options={initialOptions}>
     <Routes>
-
-
-<Route path="/" element={<Register/>}/>
-<Route path="*" element={<Login/>}/>
-<Route path="^" element={<ForgetPassword/>}/>
-<Route path="/home" element={<HomePage/>}/>
-<Route path="Rooms" element={<RoomsPage/>}/>
-<Route path="/view" element={<ViewRoom/>}/>
-<Route path="Booking" element={<BookingPage/>}/>
-<Route path="pay" element={<Checkout/>}/>
-<Route path="gallery" element={<Gallery/>}/>
-<Route path="facilities" element={<Facilities/>}/>
-</Routes>
+      {user && user.role === "admin" ? (
+        <>
+          <Route path="/home" element={<AddRoom />} />
+          <Route path="/clients" element={<Clients />} />
+        
+        </>
+      ) : (
+        <>
+          <Route path="/" element={<Register />} />
+          <Route path="*" element={<Login />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/rooms" element={<RoomsPage />} />
+          <Route path="/view" element={<ViewRoom />} />
+          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/pay" element={<Checkout />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/facilities" element={<Facilities />} />
+          
+        </>
+      )}
+    </Routes>
   </PayPalScriptProvider>
-  </BrowserRouter>
-
+</BrowserRouter>
 
   );
 }

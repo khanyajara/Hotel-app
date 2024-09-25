@@ -7,6 +7,7 @@ const initialState = {
     loading: false,
     error: null,
     reservedRoom: null,
+    bookings: [], 
 };
 
 const roomSlice = createSlice({
@@ -32,11 +33,15 @@ const roomSlice = createSlice({
             state.reservedRoom = null;
         },
         addBookingSuccess(state, action) {
-            state.data.push(action.payload);
+            state.bookings.push(action.payload); // Push to bookings array
             state.loading = false;
         },
         addRoomSuccess(state, action) {
             state.data.push(action.payload);
+            state.loading = false;
+        },
+        setBookingData(state, action) { // Add this reducer
+            state.bookings = action.payload; // Update bookings state
             state.loading = false;
         },
     },
@@ -49,17 +54,18 @@ export const {
     reserveRoom, 
     clearReservation, 
     addBookingSuccess, 
-    addRoomSuccess 
+    addRoomSuccess,
+    setBookingData // Export the new action
 } = roomSlice.actions;
 
 export const selectReservedRoom = (state) => state.room.reservedRoom;
 export const selectLoading = (state) => state.room.loading;
 export const selectError = (state) => state.room.error;
 export const selectRoomsData = (state) => state.room.data;
+export const selectBookingsData = (state) => state.room.bookings; // Selector for bookings
 
 export default roomSlice.reducer;
 
-// Fetching data from Firestore
 export const fetchData = () => async (dispatch) => {
     dispatch(setLoading());
     try {
@@ -68,13 +74,26 @@ export const fetchData = () => async (dispatch) => {
             id: doc.id,
             ...doc.data(),
         }));
-        dispatch(setData(data));
+        dispatch(selectBookingsData(data));
     } catch (error) {
         dispatch(setError(error.message));
     }
 };
 
-// Adding bookings to Firestore
+export const fetchBookings = () => async (dispatch) => {
+    dispatch(setLoading());
+    try {
+        const querySnapshot = await getDocs(collection(db, "Bookings"));
+        const data = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        dispatch(setBookingData(data)); 
+    } catch (error) {
+        dispatch(setError(error.message));
+    }
+};
+
 export const addBookings = (bookingData) => async (dispatch) => {
     dispatch(setLoading());
     try {

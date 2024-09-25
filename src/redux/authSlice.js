@@ -3,7 +3,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/config';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc , getDoc, doc } from "firebase/firestore";
 import { db } from '../firebase/config';
 
 
@@ -68,14 +68,20 @@ export const signUp = ({ email, password, firstName, lastName }) => async (dispa
 
 
 export const signIn = ({ email, password }) => async (dispatch) => {
-    dispatch(setLoading());
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      dispatch(setUser(userCredential.user));
-    } catch (error) {
-      dispatch(setError(error.message));
-    }
-  };
+  dispatch(setLoading());
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    
+    // Fetch user role from Firestore
+    const userRef = collection(db, "users");
+    const userDoc = await getDoc(doc(userRef, userCredential.user.uid));
+    const userData = userDoc.data();
+
+    dispatch(setUser({ ...userCredential.user, role: userData.role }));
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};
 
  
  

@@ -14,17 +14,17 @@ const RoomsPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    console.log(data)
-    console.log(loading) 
-    console.log(error)
-    console.log(reservedRoom)
-    
+   
 
 
 
     useEffect(() => {
         dispatch(fetchData());
     }, [dispatch]);
+
+   
+    
+    
 
     const home = () => {
         navigate("/Home");

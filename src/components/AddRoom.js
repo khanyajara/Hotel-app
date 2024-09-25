@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addRoom } from './path/to/your/roomSlice';
+import { useNavigate } from 'react-router-dom';
+import { addRoomSuccess } from '../redux/dbSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboardList, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 
 const AddRoom = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    
     const [title, setTitle] = useState('');
     const [descriptions, setDescriptions] = useState('');
     const [roomImage, setRoomImage] = useState('');
@@ -29,10 +32,9 @@ const AddRoom = () => {
             visitors,
         };
 
-        
-        dispatch(addRoom(newRoom));
+        dispatch(addRoomSuccess(newRoom));
 
-     
+        // Reset form fields
         setTitle('');
         setDescriptions('');
         setRoomImage('');
@@ -43,52 +45,80 @@ const AddRoom = () => {
         setVisitors(1);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    };
+
+    const goToClients = () => {
+        navigate('/clients');
+    };
+
+    const goToHome = () => {
+        navigate('/home');
+    };
+
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Add New Room</h2>
+        <div className="container">
+            <div className="container-1">
+                <div className="NavBar">
+                    <div onClick={goToClients}>
+                        <FontAwesomeIcon icon={faClipboardList} size="3x" />
+                        <h2>Client Booking List</h2>
+                    </div>
+                    <div onClick={goToHome}>
+                        <FontAwesomeIcon icon={faBookOpen} size="3x" />
+                        <h2>Add Room</h2>
+                    </div>
+                </div>
 
-            <label>
-                Title:
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-            </label>
+                <form onSubmit={handleSubmit}>
+                    <h2>Add New Room</h2>
 
-            <label>
-                Descriptions:
-                <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)} required />
-            </label>
+                    <label>
+                        Title:
+                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                    </label>
 
-            <label>
-                Room Image URL:
-                <input type="text" value={roomImage} onChange={(e) => setRoomImage(e.target.value)} required />
-            </label>
+                    <label>
+                        Descriptions:
+                        <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)} required />
+                    </label>
 
-            <label>
-                Beds:
-                <input type="number" value={beds} onChange={(e) => setBeds(Number(e.target.value))} min="1" required />
-            </label>
+                    <label>
+                        Room Image URL:
+                        <input type="text" value={roomImage} onChange={(e) => setRoomImage(e.target.value)} required />
+                    </label>
 
-            <label>
-                Guests:
-                <input type="number" value={guests} onChange={(e) => setGuests(Number(e.target.value))} min="1" required />
-            </label>
+                    <label>
+                        Beds:
+                        <input type="number" value={beds} onChange={(e) => setBeds(Number(e.target.value))} min="1" required />
+                    </label>
 
-            <label>
-                Price:
-                <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))} min="0" required />
-            </label>
+                    <label>
+                        Guests:
+                        <input type="number" value={guests} onChange={(e) => setGuests(Number(e.target.value))} min="1" required />
+                    </label>
 
-            <label>
-                Room Type:
-                <input type="text" value={roomType} onChange={(e) => setRoomType(e.target.value)} required />
-            </label>
+                    <label>
+                        Price:
+                        <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))} min="0" required />
+                    </label>
 
-            <label>
-                Visitors:
-                <input type="number" value={visitors} onChange={(e) => setVisitors(Number(e.target.value))} min="1" required />
-            </label>
+                    <label>
+                        Room Type:
+                        <input type="text" value={roomType} onChange={(e) => setRoomType(e.target.value)} required />
+                    </label>
 
-            <button type="submit">Add Room</button>
-        </form>
+                    <label>
+                        Visitors:
+                        <input type="number" value={visitors} onChange={(e) => setVisitors(Number(e.target.value))} min="1" required />
+                    </label>
+
+                    <button type="submit">Add Room</button>
+                </form>
+            </div>
+        </div>
     );
 };
 
