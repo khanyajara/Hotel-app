@@ -3,7 +3,7 @@ import "./RoomsPage.css";
 import logo from "../h-removebg-preview.png";
 import Star from "./Star.png";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchData, ReservedRoom } from "../redux/dbSlice";
+import { fetchData, ReservedRoom } from "../redux/dbSlice";
 import { useNavigate } from "react-router";
 
 const RoomsPage = () => {
@@ -23,7 +23,7 @@ const RoomsPage = () => {
 
 
     useEffect(() => {
-        dispatch(FetchData());
+        dispatch(fetchData());
     }, [dispatch]);
 
     const home = () => {
@@ -100,18 +100,7 @@ const RoomsPage = () => {
                     ))}
                 </div>
             </div>
-            {reservedRoom && (
-                <div className="reserved-room">
-                    <h2>Your Reserved Room</h2>
-                    
-                    <h4>{reservedRoom.roomName}</h4>
-                    <p>Arrival: {reservedRoom.arrivalDate}</p>
-                    <p>Departure: {reservedRoom.departureDate}</p>
-                    <p>Guests: {reservedRoom.guests}</p>
-                    <p>Price/night: {reservedRoom.pricePerNight}</p>
-                    <p>Trip cost: {reservedRoom.totalPrice}</p>
-                </div>
-            )}
+           
         </div>
     );
 };

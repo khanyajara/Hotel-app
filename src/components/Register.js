@@ -12,7 +12,8 @@ import { async } from "@firebase/util";
 
 const Register= ()=>{
 
-    
+    const [firstName, setFirstName]= useState("")
+    const [lastName, setLastName]= useState("")
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const { user, error, loading } = useSelector((state) => state.auth || {});
@@ -23,8 +24,8 @@ const Register= ()=>{
     
     const create =  ()=>{
         
-          dispatch(signUp({ email, password }))
-          alert("Yeah");
+          dispatch(signUp({ email, password, firstName, lastName }))
+          alert("Registration Successful");
             navigate("home"); 
     }
     useEffect(() => {
@@ -56,7 +57,19 @@ const Register= ()=>{
                         <div><img src={logo}  className="logo"/></div>
                         <h2 className="auth-title">Create an Account</h2>
                         <form className="inputform" onSubmit={create}>
-                            
+                             
+                        <input
+                            type="text"
+                            className="input"
+                            placeholder="firstName"
+                           onChange={(e)=> setFirstName(e.target.value)}
+                            />
+                             <input
+                            type="text"
+                            className="input"
+                            placeholder="lastName"
+                           onChange={(e)=> setLastName(e.target.value)}
+                            />
                             <input
                             type="text"
                             className="input"

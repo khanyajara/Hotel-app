@@ -16,17 +16,18 @@ import Facilities from './components/Facilities';
 
 function App() {
   const initialOptions = {
-    "client-id": "test",
+    "client-id": "AfIAqx5qwADS2y3HBA3G9jY9LTQxgY71yk1o5OT6ca0OwgiOfGQ2hUnNVYNRVYUDF3MgjtvljjF2m_iN",
     "enable-funding": "venmo",
-    "disable-funding": "",
-    "buyer-country": "US",
+    
+    "buyer-country": "",
     currency: "USD",
     "data-page-type": "product-details",
     components: "buttons",
     "data-sdk-integration-source": "developer-studio",
 };
 return (
-    <BrowserRouter><PayPalScriptProvider options={initialOptions}>
+    <BrowserRouter>
+    <PayPalScriptProvider options={initialOptions}>
     <Routes>
 
 
@@ -37,9 +38,7 @@ return (
 <Route path="Rooms" element={<RoomsPage/>}/>
 <Route path="/view" element={<ViewRoom/>}/>
 <Route path="Booking" element={<BookingPage/>}/>
-
 <Route path="pay" element={<Checkout/>}/>
-
 <Route path="gallery" element={<Gallery/>}/>
 <Route path="facilities" element={<Facilities/>}/>
 </Routes>

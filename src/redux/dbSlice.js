@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
 const initialState = {
@@ -31,10 +31,26 @@ const roomSlice = createSlice({
         clearReservation(state) {
             state.reservedRoom = null;
         },
+        addBookingSuccess(state, action) {
+            state.data.push(action.payload);
+            state.loading = false;
+        },
+        addRoomSuccess(state, action) {
+            state.data.push(action.payload);
+            state.loading = false;
+        },
     },
 });
 
-export const { setLoading, setData, setError, reserveRoom, clearReservation } = roomSlice.actions;
+export const { 
+    setLoading, 
+    setData, 
+    setError, 
+    reserveRoom, 
+    clearReservation, 
+    addBookingSuccess, 
+    addRoomSuccess 
+} = roomSlice.actions;
 
 export const selectReservedRoom = (state) => state.room.reservedRoom;
 export const selectLoading = (state) => state.room.loading;
@@ -43,7 +59,8 @@ export const selectRoomsData = (state) => state.room.data;
 
 export default roomSlice.reducer;
 
-export const FetchData = () => async (dispatch) => {
+// Fetching data from Firestore
+export const fetchData = () => async (dispatch) => {
     dispatch(setLoading());
     try {
         const querySnapshot = await getDocs(collection(db, "Rooms"));
@@ -52,6 +69,20 @@ export const FetchData = () => async (dispatch) => {
             ...doc.data(),
         }));
         dispatch(setData(data));
+    } catch (error) {
+        dispatch(setError(error.message));
+    }
+};
+
+// Adding bookings to Firestore
+export const addBookings = (bookingData) => async (dispatch) => {
+    dispatch(setLoading());
+    try {
+        const docRef = await addDoc(collection(db, "Bookings"), bookingData);
+        console.log("Document written with ID: ", docRef.id);
+        
+        // Update the state locally with the new booking
+        dispatch(addBookingSuccess({ id: docRef.id, ...bookingData }));
     } catch (error) {
         dispatch(setError(error.message));
     }
