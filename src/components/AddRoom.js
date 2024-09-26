@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import "./clientsbooking.css"
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addRoomSuccess } from '../redux/dbSlice';
+import { addRooms } from '../redux/dbSlice'; // Import the addRooms action
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboardList, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,7 +19,7 @@ const AddRoom = () => {
     const [roomType, setRoomType] = useState('');
     const [visitors, setVisitors] = useState(1);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const newRoom = {
@@ -32,7 +33,7 @@ const AddRoom = () => {
             visitors,
         };
 
-        dispatch(addRoomSuccess(newRoom));
+        await dispatch(addRooms(newRoom)); // Dispatch the addRooms action
 
         // Reset form fields
         setTitle('');
@@ -61,18 +62,18 @@ const AddRoom = () => {
     return (
         <div className="container">
             <div className="container-1">
-                <div className="NavBar">
-                    <div onClick={goToClients}>
+                <div className="navvy">
+                    <div onClick={goToClients}className="navvy">
                         <FontAwesomeIcon icon={faClipboardList} size="3x" />
                         <h2>Client Booking List</h2>
                     </div>
-                    <div onClick={goToHome}>
+                    <div onClick={goToHome}className="navvy">
                         <FontAwesomeIcon icon={faBookOpen} size="3x" />
                         <h2>Add Room</h2>
                     </div>
                 </div>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="add-container">
                     <h2>Add New Room</h2>
 
                     <label>
@@ -84,7 +85,9 @@ const AddRoom = () => {
                         Descriptions:
                         <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)} required />
                     </label>
-
+                      <br/>
+                      <br/>
+                      <br/>
                     <label>
                         Room Image URL:
                         <input type="text" value={roomImage} onChange={(e) => setRoomImage(e.target.value)} required />

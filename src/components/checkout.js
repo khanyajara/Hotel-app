@@ -108,7 +108,7 @@ const Checkout = () => {
 
             dispatch(addBookings(bookingData));
             dispatch(addBookingSuccess());
-            navigate("/confirmation");
+            navigate("/home");
         } catch (error) {
             console.error("Payment approval failed:", error);
             alert("There was an error processing your payment. Please try again.");

@@ -3,13 +3,13 @@ import "./RoomsPage.css";
 import logo from "../h-removebg-preview.png";
 import Star from "./Star.png";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData, ReservedRoom } from "../redux/dbSlice";
+import { fetchData } from "../redux/dbSlice";
 import { useNavigate } from "react-router";
 
 const RoomsPage = () => {
     const { data, error, loading } = useSelector((state) => state.data || {});
    
-    const reservedRoom = useSelector((state) => state.data.reservedRoom);
+    
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,7 +23,9 @@ const RoomsPage = () => {
     }, [dispatch]);
 
    
-    
+    console.log(data)
+    console.log(error)
+    console.log(loading)
     
 
     const home = () => {

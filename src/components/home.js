@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {useHistory} from 'react-router-dom'
 import css from "./home.css"
 import logo from "../h-removebg-preview.png"
 import Massage from './Massage.png'
@@ -14,6 +15,7 @@ import HomeRoomImage from "./homePage1.jpg"
 import HotelOutside from "./image-asset.jpeg"
 import RoomImg from "./hotel room.jpg"
 import { useNavigate } from "react-router";
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWifi, faPlay, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,6 +23,9 @@ import { faWifi, faPlay, faStar, faUserCircle } from '@fortawesome/free-solid-sv
 const HomePage=()=>{
    
     const navigate= useNavigate();
+    const [isProfileVisible, setIsProfileVisible] = useState(false);
+
+    const user = useSelector((state) => state.user);
 
 
 
@@ -44,12 +49,14 @@ const HomePage=()=>{
     const Facilities=()=>{
         navigate("/facilities")
 }
-const [isHovered, setIsHovered] = useState(false);
-
-const toggleProfile = () => {
-  setIsHovered(!isHovered);
+const showProfile = () => {
+    setIsProfileVisible(true);
 };
-    
+
+const exitToHome = () => {
+    setIsProfileVisible(false);
+    navigate("/home"); 
+};
         
 
 
@@ -76,17 +83,17 @@ const toggleProfile = () => {
             <h2><a onClick={Gallery}  className="NavBar">Gallery</a></h2>
             <h2><a href="" className="NavBar">How To Get There</a></h2>
             <h2>
-        <button className="iconss-btn" aria-label="User Profile" onMouseEnter={toggleProfile} onMouseLeave={toggleProfile}>
-          <FontAwesomeIcon icon={faUserCircle} className="iconss" />
-        </button>
-      </h2>
-      {isHovered && (
-        <div className="profile-tooltip">
-          <p>User Name</p>
-          <p>user@example.com</p>
-        </div>
-      )}
-           
+                    <button className="iconss-btn" aria-label="User Profile" onClick={showProfile}>
+                        <FontAwesomeIcon icon={faUserCircle} className="iconss" />
+                    </button>
+                </h2>
+                {isProfileVisible && (
+                    <div className="profile-dropdown">
+                        <p>{user?.firstName} {user?.lastName}</p>
+                        <p>{user?.email}</p>
+                        <button onClick={exitToHome}>Exit</button>
+                    </div>
+                )} 
          </div>
          <div className="img-container">
 
@@ -256,6 +263,14 @@ const toggleProfile = () => {
                     </ul>
                 </div>
           </div>
+
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <div className="Footer">
           <div className="footer-info">
                     <h2>Contact Info</h2>
@@ -279,7 +294,7 @@ const toggleProfile = () => {
                 <form className="Subscribe-form">
   
 
-  <div class="container" ><h3>Get Our NewsLetter</h3>
+  <div class="container-apl" ><h3>Get Our NewsLetter</h3>
     
     <input type="text" placeholder="Email address" name="mail" required/>
     <label>
@@ -287,7 +302,7 @@ const toggleProfile = () => {
     </label>
   </div>
 
-  <div class="container">
+  <div class="container-apl">
     <input type="submit" value="Subscribe" />
   </div>
 </form>

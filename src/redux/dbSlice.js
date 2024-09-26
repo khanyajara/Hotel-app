@@ -1,3 +1,4 @@
+import { async } from '@firebase/util';
 import { createSlice } from '@reduxjs/toolkit';
 import { getDocs, collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
@@ -33,7 +34,7 @@ const roomSlice = createSlice({
             state.reservedRoom = null;
         },
         addBookingSuccess(state, action) {
-            state.bookings.push(action.payload); // Push to bookings array
+            state.bookings.push(action.payload); 
             state.loading = false;
         },
         addRoomSuccess(state, action) {
@@ -55,14 +56,14 @@ export const {
     clearReservation, 
     addBookingSuccess, 
     addRoomSuccess,
-    setBookingData // Export the new action
+    setBookingData 
 } = roomSlice.actions;
 
 export const selectReservedRoom = (state) => state.room.reservedRoom;
 export const selectLoading = (state) => state.room.loading;
 export const selectError = (state) => state.room.error;
-export const selectRoomsData = (state) => state.room.data;
-export const selectBookingsData = (state) => state.room.bookings; // Selector for bookings
+export const selectData = (state) => state.room.data;
+export const selectBookingsData = (state) => state.room.bookings; 
 
 export default roomSlice.reducer;
 
@@ -74,7 +75,7 @@ export const fetchData = () => async (dispatch) => {
             id: doc.id,
             ...doc.data(),
         }));
-        dispatch(selectBookingsData(data));
+        dispatch(setData(data));
     } catch (error) {
         dispatch(setError(error.message));
     }
@@ -106,3 +107,15 @@ export const addBookings = (bookingData) => async (dispatch) => {
         dispatch(setError(error.message));
     }
 };
+export const addRooms = (Roomsdata) => async (dispatch)=>{
+    dispatch(setLoading());
+    try {
+        const docRef = await addDoc(collection(db, "Rooms"), Roomsdata);
+        console.log("Document written with ID: ", docRef.id);
+        // Update the state locally with the new room
+        dispatch(addRoomSuccess({ id: docRef.id, ...Roomsdata }));
+        } catch (error) {
+            dispatch(setError(error.message));
+            
+    }
+}

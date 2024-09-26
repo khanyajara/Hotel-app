@@ -37,12 +37,12 @@ const BookingList = () => {
     return (
         <div className="container">
             <div className="container-1">
-                <div className="NavBar">
-                    <div onClick={handleClientList}>
+                <div className="navvy">
+                    <div onClick={handleClientList}className="navvy">
                         <FontAwesomeIcon icon={faClipboardList} size="3x" />
                         <h2>Client Booking List</h2>
                     </div>
-                    <div onClick={handleAddRoom}>
+                    <div onClick={handleAddRoom}className="navvy">
                         <FontAwesomeIcon icon={faBookOpen} size="3x" />
                         <h2>Add Room</h2>
                     </div>
@@ -53,35 +53,40 @@ const BookingList = () => {
 {loading && <p>Loading...</p>}
 {error && <p>Error fetching bookings: {error}</p>}
 {Array.isArray(bookings) && bookings.length > 0 ? (
-    <div className="table">
-        <div className="table-head">
-            <span>Arrival Date</span>
-            <span>Departure Date</span>
-            <span>Email</span>
-            <span>Guests</span>
-            <span>Paid</span>
-            <span>Client</span>
-            <span>Price/Night</span>
-            <span>Transaction ID</span>
-        </div>
-        <div className="table-body">
+    <table className="table">
+        <thead className="table-head">
+            <tr>
+                <th>Arrival Date</th>
+                <th>Departure Date</th>
+                <th>Email</th>
+                <th>Guests</th>
+                <th>Paid</th>
+                <th>Client</th>
+                <th>Price/Night</th>
+                <th>Transaction ID</th>
+                <th>Trip cost</th>
+            </tr>
+        </thead>
+        <tbody className="table-body">
             {bookings.map(booking => (
-                <div key={booking.id} className="table-row">
-                    <span>{booking.arrivalDate}</span>
-                    <span>{booking.departureDate}</span>
-                    <span>{booking.email}</span>
-                    <span>{booking.guests}</span>
-                    <span>{booking.paid}</span>
-                    <span>{booking.payerName}</span>
-                    <span>{booking.pricePerNight}</span>
-                    <span>{booking.transactionId}</span>
-                </div>
+                <tr key={booking.id} className="table-row">
+                    <td>{booking.arrivalDate}</td>
+                    <td>{booking.departureDate}</td>
+                    <td>{booking.email}</td>
+                    <td>{booking.guests}</td>
+                    <td>{booking.paid}✔</td>
+                    <td>{booking.payerName}</td>
+                    <td>R.{booking.pricePerNight}</td>
+                    <td>{booking.transactionId}</td>
+                    <td>R.{booking.totalPrice}</td>
+                </tr>
             ))}
-        </div>
-    </div>
+        </tbody>
+    </table>
 ) : (
     <p>No bookings available.</p>
 )}
+
 
             </div>
         </div>

@@ -46,42 +46,46 @@ export const signUp = ({ email, password, firstName, lastName }) => async (dispa
   dispatch(setLoading());
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    try {
-      const docRef = await addDoc(collection(db, "users"), {
-       firstName: firstName,
-        lastName: lastName,
-        email: email,
-      });
-      console.log("Document written with ID: ", docRef.id);
-      dispatch(setUser(userCredential.user));
-    } catch (error) {
-      
+    
+    
+    const docRef = await addDoc(collection(db, "users"), {
+      uid: userCredential.user.uid, 
+      firstName,
+      lastName,
+      email,
+    });
+    console.log("Document written with ID: ", docRef.id);
+
+    
+    const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+    if (userDoc.exists()) {
+      dispatch(setUser({ ...userCredential.user, ...userDoc.data() }));
+    } else {
+      dispatch(setError("User data not found"));
     }
-   
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
     dispatch(setError(error.message));
   }
 };
-
-
-
 
 export const signIn = ({ email, password }) => async (dispatch) => {
   dispatch(setLoading());
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     
-    // Fetch user role from Firestore
-    const userRef = collection(db, "users");
-    const userDoc = await getDoc(doc(userRef, userCredential.user.uid));
-    const userData = userDoc.data();
-
-    dispatch(setUser({ ...userCredential.user, role: userData.role }));
+   
+    const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+    if (userDoc.exists()) {
+      dispatch(setUser({ ...userCredential.user, ...userDoc.data() }));
+    } else {
+      dispatch(setError("User data not found"));
+    }
   } catch (error) {
     dispatch(setError(error.message));
   }
 };
+
 
  
  
