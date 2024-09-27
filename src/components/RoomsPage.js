@@ -8,40 +8,32 @@ import { useNavigate } from "react-router";
 
 const RoomsPage = () => {
     const { data, error, loading } = useSelector((state) => state.data || {});
-   
-    
-
+    const [likedRooms, setLikedRooms] = useState([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-   
-
-
 
     useEffect(() => {
         dispatch(fetchData());
     }, [dispatch]);
 
-   
-    console.log(data)
-    console.log(error)
-    console.log(loading)
-    
+    const home = () => navigate("/Home");
+    const room = () => navigate("/Rooms");
+    const Booking = () => navigate("/Booking");
+    const viewroom = (room) => navigate("/view", { state: room });
 
-    const home = () => {
-        navigate("/Home");
+    const toggleLike = (room) => {
+        setLikedRooms((prevLikedRooms) => {
+            if (prevLikedRooms.includes(room)) {
+                return prevLikedRooms.filter((r) => r !== room);
+            } else {
+                return [...prevLikedRooms, room];
+            }
+        });
     };
 
-    const room = () => {
-        navigate("/Rooms");
-    };
-
-    const Booking = () => {
-        navigate("/Booking");
-    };
-
-    const viewroom = (room) => {
-        navigate("/view", { state: room });
+    const shareRoom = (room) => {
+       
+        alert(`Sharing room: ${room.title}`);
     };
 
     return (
@@ -82,7 +74,7 @@ const RoomsPage = () => {
                                 <div className="Room-descriptions">
                                     <div className="Room-name"><h4>{roomData.title}</h4></div>
                                     <div className="Room-name"><p>{roomData.roomType}</p></div>
-                                    <div className="Room-name"><p>Descriptions: {roomData.descriptions}</p></div><br/>
+                                    <div className="Room-name"><p>Descriptions: {roomData.descriptions}</p></div><br />
                                     <div className="Room-name"><p>Price: {roomData.price}</p></div>
                                     <div className="Room-name"><p>Visitors: {roomData.visitors}</p></div>
                                     <div className="Room-name"><p>Beds: {roomData.beds}</p></div>
@@ -90,6 +82,11 @@ const RoomsPage = () => {
                                 </div>
                                 <div className="Room-BtnOutside">
                                     <button className="Room-Btn" onClick={() => viewroom(roomData)}>View Room</button>
+                                    <br/>
+                                    <button className="Room-Btn" onClick={() => toggleLike(roomData)}>
+                                        {likedRooms.includes(roomData) ? "❌" : "❤"}
+                                    </button>
+                                    <button className="Room-Btn" onClick={() => shareRoom(roomData)}>Share</button>
                                 </div>
                             </div>
                             <div className="ratings">
@@ -102,7 +99,29 @@ const RoomsPage = () => {
                     ))}
                 </div>
             </div>
-           
+
+            <div>
+                <h2>Liked Rooms</h2>
+                <div className="Rooms-Sections">
+                    {likedRooms.map((roomData, index) => (
+                        <div className="Rooms-info" key={index}>
+                            <div className="Img-div">
+                                <img src={roomData.roomImage} className="Room-Img" alt={roomData.title} />
+                            </div>
+                            <div className="Rooms-contents">
+                                <div className="Room-descriptions">
+                                    <div className="Room-name"><h4>{roomData.title}</h4></div>
+                                    <div className="Room-name"><p>{roomData.roomType}</p></div>
+                                    <div className="Room-name"><p>Price: {roomData.price}</p></div>
+                                </div>
+                                <div className="Room-BtnOutside">
+                                    <button className="Room-Btn" onClick={() => viewroom(roomData)}>View Room</button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };

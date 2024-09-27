@@ -20,8 +20,8 @@
 }
 .Search-DivContents{
     box-shadow: 0 8px 9px 8px rgba(0,0,0,0.2) ;
-    width: 107%;
-    margin-left: -3.5%;
+    width: 106%;
+    margin-left: -3%;
 
     display: flex;
     justify-content: space-between;
@@ -141,7 +141,9 @@
     width: 40%;
     height: 25vh;
     display: flex;
+    flex-wrap: wrap;
     align-items: end;
+    gap:1rem ;
 
 }
 

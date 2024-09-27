@@ -86,13 +86,13 @@ const RoomContent = () => {
                                 <FontAwesomeIcon icon={faWifi} className="Icons" />
                                 <FontAwesomeIcon icon={faPlay} className="Icons" />
                                 <FontAwesomeIcon icon={faCoffee} className="Icons" />
-                                <img src={disney} className="Icons" alt="Disney+" />
-                                <img src={Netflix} className="Icons" alt="Netflix" />
-                                <img src={HBO} className="Icons" alt="HBO Max" />
-                                <img src={DVD} className="Icons" alt="DVD" />
-                                <img src={satTv} className="Icons" alt="Satellite TV" />
-                                <img src={appleTv} className="Icons" alt="Apple TV" />
-                                <img src={Anime} className="Icons" alt="Crunchyroll" />
+                                <img src={disney} className="Icons"  />
+                                <img src={Netflix} className="Icons"  />
+                                <img src={HBO} className="Icons"  />
+                                
+                              
+                                <img src={appleTv} className="Icons"  />
+                                <img src={Anime} className="Icons"  />
                             </div>
                         </div>
                     </div>

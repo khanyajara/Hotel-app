@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./clientsbooking.css"
+import "./addroom.css";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addRooms } from '../redux/dbSlice'; // Import the addRooms action
@@ -62,7 +62,7 @@ const AddRoom = () => {
     return (
         <div className="container">
             <div className="container-1">
-                <div className="navvy">
+                <div className="navBar">
                     <div onClick={goToClients}className="navvy">
                         <FontAwesomeIcon icon={faClipboardList} size="3x" />
                         <h2>Client Booking List</h2>

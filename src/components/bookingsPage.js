@@ -76,7 +76,7 @@ const BookingPage = () => {
                 <h2><a href="#" className="NavBar">Facilities</a></h2>
                 <h2><a onClick={Gallery} className="NavBar">Gallery</a></h2>
                 <h2><a href="#" className="NavBar">How To Get There</a></h2>
-                <div><button className="card-1-0"><FontAwesomeIcon icon={faUserCircle} className="icons" /></button></div>
+                
             </div>
             <div className="card-1">
                 <div className="card-btn">
