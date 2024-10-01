@@ -40,12 +40,12 @@ const BookingList = () => {
                 <div className="container-12">
                     <div className="navvy-0">
                         <div onClick={handleClientList}className="navvy-1">
-                            <FontAwesomeIcon icon={faClipboardList} size="3x" />
-                            <h2>Client Booking List</h2>
+                            <FontAwesomeIcon icon={faClipboardList} size="2x" />
+                            Client Booking List
                         </div>
                         <div onClick={handleAddRoom}className="navvy-1">
-                            <FontAwesomeIcon icon={faBookOpen} size="3x" />
-                            <h2>Add Room</h2>
+                            <FontAwesomeIcon icon={faBookOpen} size="2x" />
+                            Add Room
                         </div>
                     </div>
                 </div>
@@ -66,6 +66,7 @@ const BookingList = () => {
                     <th>Price/Night</th>
                     <th>Transaction ID</th>
                     <th>Trip cost</th>
+                    <th>Cancel trip</th>
                 </tr>
             </thead>
             <tbody className="table-body">
@@ -80,6 +81,7 @@ const BookingList = () => {
                         <td>R.{booking.pricePerNight}</td>
                         <td>{booking.transactionId}</td>
                         <td>R.{booking.totalPrice}</td>
+                        <td><button>Cancel Booking</button></td>
                     </tr>
                 ))}
             </tbody>

@@ -1,6 +1,6 @@
 *{
     padding: 10px;
-   
+    color: #0e0d0d;
   
    
     
@@ -8,8 +8,9 @@
 
 
 .Whole-body{
-  background-color: #130101;
+  background-color: #000000;
   height: 100%;
+  color: #000000;
 }
 .container{
   display: flex;
@@ -17,8 +18,8 @@
   justify-content: center;
   align-items: center;
   width: 100%; 
-  background-color: rgb(23, 66, 206);
-  color: #f5f5f5;
+ 
+  color: #0e0d0d;
 
     
 }
@@ -26,14 +27,19 @@
 .container-12{
   
     display: flex;
-    width: 20%;
+    width: 30%;
     background-color: rgb(17, 19, 26);
-    color: #f5f5f5;
+    color: #000000;
     border: 2px solid;
+    height: auto;
     
 }
 .navvy-0{
-  width: 50%;
+  width: 100%;
+  background-color: #52abdf;
+  height: 25%;
+  row-gap: 3rem;
+
  
   
 }
@@ -44,12 +50,17 @@
 
 .navvy-1{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  font-size: large;
   text-align: left;
-  color: rgb(255, 253, 253);
+  color: rgb(0, 0, 0);
   cursor: pointer;
-  width:50%;
+  width:70%;
+  
+  background-color: #0aedf5;
+  border: 2px solid;
+ 
+ 
   
 }
 
@@ -69,20 +80,21 @@ table {
     font-family: Arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    color: black;
   }
   
   td, th {
-    border: 1px solid #ffffff;
+    border: 1px solid #01040a;
     text-align: left;
     padding: 8px;
   }
   
   tr:nth-child(even) {
-    background-color: #130101;
+    background-color: #11d9e0;
   }
 
   .add-container{
-    border: 2px solid snow;
+    border: 2px solid rgb(39, 34, 34);
     background-color: #f5f5f5;
     color: black;
     border-radius: 15px;

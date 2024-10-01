@@ -62,14 +62,18 @@ const AddRoom = () => {
     return (
         <div className="container">
             <div className="container-1">
-                <div className="navBar">
-                    <div onClick={goToClients}className="navvy">
-                        <FontAwesomeIcon icon={faClipboardList} size="3x" />
-                        <h2>Client Booking List</h2>
-                    </div>
-                    <div onClick={goToHome}className="navvy">
-                        <FontAwesomeIcon icon={faBookOpen} size="3x" />
-                        <h2>Add Room</h2>
+                <div className="container-123">
+                    <div className="navBar">
+                        <div  className="navvy-">
+                            <div onClick={goToClients}className="navvy-1">
+                                <FontAwesomeIcon icon={faClipboardList} size="2x" />
+                                Client Booking List
+                            </div>
+                            <div onClick={goToHome}className="navvy-1">
+                                <FontAwesomeIcon icon={faBookOpen} size="2x" />
+                                Add Room
+                            </div>
+                        </div>
                     </div>
                 </div>
 
