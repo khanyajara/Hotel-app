@@ -82,44 +82,86 @@ const AddRoom = () => {
 
                     <label>
                         Title:
-                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                        <input type="text"
+                         value={title}
+                          onChange={(e) => setTitle(e.target.value)} 
+                          required
+                          className='input-tag'
+                           />
                     </label>
 
                     <label>
                         Descriptions:
-                        <textarea value={descriptions} onChange={(e) => setDescriptions(e.target.value)} required />
+                        <textarea value={descriptions}
+                         onChange={(e) => setDescriptions(e.target.value)} 
+                         required 
+                         className='input-tag'
+                         />
                     </label>
                       <br/>
                       <br/>
                       <br/>
                     <label>
                         Room Image URL:
-                        <input type="text" value={roomImage} onChange={(e) => setRoomImage(e.target.value)} required />
+                        <input type="text"
+                         value={roomImage} 
+                         onChange={(e) => setRoomImage(e.target.value)} 
+                         required 
+                         className='input-tag'
+                         />
                     </label>
 
                     <label>
                         Beds:
-                        <input type="number" value={beds} onChange={(e) => setBeds(Number(e.target.value))} min="1" required />
+                        <input type="number" 
+                        value={beds} 
+                        onChange={(e) => setBeds(Number(e.target.value))} 
+                        min="1" required
+                        className='input-tag'
+                         />
                     </label>
 
                     <label>
                         Guests:
-                        <input type="number" value={guests} onChange={(e) => setGuests(Number(e.target.value))} min="1" required />
+                        <input type="number"
+                         value={guests} 
+                         onChange={(e) => setGuests(Number(e.target.value))}
+                          min="1"
+                           required
+                           className='input-tag'
+                           />
                     </label>
 
                     <label>
                         Price:
-                        <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))} min="0" required />
+                        <input type="number"
+                         value={price} 
+                         onChange={(e) => setPrice(Number(e.target.value))} 
+                         min="0"
+                          required 
+                          className='input-tag'
+                          />
                     </label>
 
                     <label>
                         Room Type:
-                        <input type="text" value={roomType} onChange={(e) => setRoomType(e.target.value)} required />
+                        <input type="text" 
+                         value={roomType}
+                          onChange={(e) => setRoomType(e.target.value)}
+                           required 
+                           className='input-tag'
+                           />
                     </label>
 
                     <label>
                         Visitors:
-                        <input type="number" value={visitors} onChange={(e) => setVisitors(Number(e.target.value))} min="1" required />
+                        <input type="number"
+                        value={visitors}
+                         onChange={(e) => setVisitors(Number(e.target.value))} 
+                         min="1" 
+                         required 
+                         className='input-tag'
+                         />
                     </label>
 
                     <button type="submit">Add Room</button>

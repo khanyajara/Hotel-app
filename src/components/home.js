@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {useHistory} from 'react-router-dom'
 import css from "./home.css"
 import logo from "../h-removebg-preview.png"
@@ -16,6 +17,7 @@ import HotelOutside from "./image-asset.jpeg"
 import RoomImg from "./hotel room.jpg"
 import { useNavigate } from "react-router";
 import { useSelector } from 'react-redux';
+import { getProfile, logout } from "../redux/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWifi, faPlay, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -23,9 +25,11 @@ import { faWifi, faPlay, faStar, faUserCircle } from '@fortawesome/free-solid-sv
 const HomePage=()=>{
    
     const navigate= useNavigate();
+    const dispatch = useDispatch();
     const [isProfileVisible, setIsProfileVisible] = useState(false);
 
-    const user = useSelector((state) => state.user);
+    
+   
 
 
 
@@ -62,10 +66,18 @@ const exitToHome = () => {
 
 
 
+const user = useSelector((state) => state.auth.user); 
 
+  useEffect(() => {
+    if (user) {
+      dispatch(getProfile(user.uid)); 
+    }
+  }, [user, dispatch]);
 
-
-
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/'); 
+  };
 
    
  
@@ -83,17 +95,18 @@ const exitToHome = () => {
             <h2><a onClick={Gallery}  className="NavBar">Gallery</a></h2>
             <h2><a href="" className="NavBar">How To Get There</a></h2>
             <h2>
-                    <button className="iconss-btn" aria-label="User Profile" onClick={showProfile}>
-                        <FontAwesomeIcon icon={faUserCircle} className="iconss" />
-                    </button>
-                </h2>
-                {isProfileVisible && (
-                    <div className="profile-dropdown">
-                        <p>{user?.firstName} {user?.lastName}</p>
-                        <p>{user?.email}</p>
-                        <button onClick={exitToHome}>Exit</button>
-                    </div>
-                )} 
+          <button className="iconss-btn" aria-label="User Profile" onClick={() => setIsProfileVisible(!isProfileVisible)}>
+           <FontAwesomeIcon icon={faUserCircle} className="iconss" />
+          </button>
+        </h2>
+        {isProfileVisible && (
+          <div className="profile-dropdown">
+            <p>{user?.firstName} {user?.lastName}</p>
+            <p>{user?.email}</p>
+            <button onClick={handleLogout}>Logout</button>
+            <button onClick={() => setIsProfileVisible(false)}>Exit</button>
+          </div>
+        )} 
          </div>
          <div className="img-container">
 

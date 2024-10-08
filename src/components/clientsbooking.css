@@ -28,17 +28,18 @@
   
     display: flex;
     width: 30%;
-    background-color: rgb(17, 19, 26);
+    
     color: #000000;
-    border: 2px solid;
+  
     height: auto;
     
 }
 .navvy-0{
   width: 100%;
-  background-color: #52abdf;
+  display: flex;
+  flex-direction: column;
   height: 25%;
-  row-gap: 3rem;
+  gap: 3rem;
 
  
   
