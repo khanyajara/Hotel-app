@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { signIn } from "../redux/authSlice";
 import logo from "../h-removebg-preview.png";
 import image1 from '../hotel lobby.jpg';
+import { fetchUser } from "../redux/dbSlice";
 import Css from './login.css';
 
 const LoginGuest = () => {
@@ -22,10 +23,11 @@ const LoginGuest = () => {
     };
 
     useEffect(()=>{
-        if(user){
-            navigate("/home");
-            }
-    })
+        if(user) {
+           dispatch(fetchUser(user.uid));
+           navigate("/home");
+      }
+   }, [user, dispatch]);
 
    
 
@@ -52,7 +54,7 @@ const LoginGuest = () => {
                                 placeholder="Password"
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            <p className="pii"><Link to="/forgotpassword">Forgot Password?</Link></p>
+                            <p className="pii"><Link to="/forget-password" className="a">Forgot Password?</Link></p>
                             <div>
                                 <button className="submit" type="submit" disabled={loading}>
                                     {loading ? "Loading..." : "Sign-in"}
@@ -62,7 +64,7 @@ const LoginGuest = () => {
                                 {error && <h1>Error: {error}</h1>}
                             </div>
                         </form>
-                        <p>If you don't have an account? <Link to="/">Sign-up</Link></p>
+                        <p>If you don't have an account? <Link to="/" className="a" >Sign-up</Link></p>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth';
 import { auth, db } from '../firebase/config';
 import { collection, addDoc, getDoc, doc } from 'firebase/firestore';
+import { async } from '@firebase/util';
 
 const initialState = {
   user: null,
@@ -30,10 +31,14 @@ const authSlice = createSlice({
       state.data.push(action.payload);
       state.loading = false;
     },
+    setSuccess(state,action){
+      state.success = action.payload;
+      
+    }
   },
 });
-
-export const { setLoading, setUser, setError, addBookingSuccess } = authSlice.actions;
+ 
+export const { setLoading, setUser, setError, addBookingSuccess, setSuccess } = authSlice.actions;
 
 // Sign Up Action
 export const signUp = ({ email, password, firstName, lastName }) => async (dispatch) => {
@@ -68,7 +73,7 @@ export const signIn = ({ email, password }) => async (dispatch) => {
   }
 };
 
-// Get Profile Action
+
 export const getProfile = (uid) => async (dispatch) => {
   dispatch(setLoading());
   try {
@@ -83,15 +88,24 @@ export const getProfile = (uid) => async (dispatch) => {
   }
 };
 
-// Logout Action
+
 export const logout = () => async (dispatch) => {
   dispatch(setLoading());
   try {
     await signOut(auth);
-    dispatch(setUser(null)); // Reset user state
+    dispatch(setUser(null)); 
   } catch (error) {
     dispatch(setError(error.message));
   }
 };
 
+export const resetPassword = ({ email }) => async (dispatch) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("jjjjjj")
+    dispatch(setUser());
+  } catch (error) {
+    console.error("Error sending password reset email:", error.message);
+  }
+};
 export default authSlice.reducer;

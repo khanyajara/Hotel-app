@@ -91,7 +91,7 @@ const Register= ()=>{
                                 {error && <h1> Error: {error}</h1> }
                             </div>
                         </form>
-                        <p>If you already have an Account?<Link to="./login.js" > Log-in</Link></p>
+                        <p>If you already have an Account?<Link to="./login.js" className="a" > Log-in</Link></p>
                     </div>
                 </div>
 </div>

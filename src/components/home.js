@@ -17,6 +17,7 @@ import HotelOutside from "./image-asset.jpeg"
 import RoomImg from "./hotel room.jpg"
 import { useNavigate } from "react-router";
 import { useSelector } from 'react-redux';
+import { fetchUser } from "../redux/dbSlice";
 import { getProfile, logout } from "../redux/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWifi, faPlay, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -68,15 +69,17 @@ const exitToHome = () => {
 
 const user = useSelector((state) => state.auth.user); 
 
-  useEffect(() => {
+useEffect(() => {
     if (user) {
-      dispatch(getProfile(user.uid)); 
+        dispatch(fetchUser(user.uid));
     }
-  }, [user, dispatch]);
+}, [user, dispatch]);
+
+
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/'); 
+    navigate('*'); 
   };
 
    
@@ -96,7 +99,7 @@ const user = useSelector((state) => state.auth.user);
             <h2><a href="" className="NavBar">How To Get There</a></h2>
             <h2>
           <button className="iconss-btn" aria-label="User Profile" onClick={() => setIsProfileVisible(!isProfileVisible)}>
-           <FontAwesomeIcon icon={faUserCircle} className="iconss" />
+           <FontAwesomeIcon icon={faUserCircle} size="3x" />
           </button>
         </h2>
         {isProfileVisible && (

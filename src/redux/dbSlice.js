@@ -1,6 +1,6 @@
 import { async } from '@firebase/util';
 import { createSlice } from '@reduxjs/toolkit';
-import { getDocs, collection, addDoc } from 'firebase/firestore';
+import { getDocs, collection, addDoc, getDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
 const initialState = {
@@ -112,10 +112,25 @@ export const addRooms = (Roomsdata) => async (dispatch)=>{
     try {
         const docRef = await addDoc(collection(db, "Rooms"), Roomsdata);
         console.log("Document written with ID: ", docRef.id);
-        // Update the state locally with the new room
+        
         dispatch(addRoomSuccess({ id: docRef.id, ...Roomsdata }));
         } catch (error) {
             dispatch(setError(error.message));
             
     }
-}
+};
+export const fetchUser = (uid) => async (dispatch) => {
+    dispatch(setLoading());
+    try {
+        const userDoc = doc(db, "users", uid);
+        const userSnapshot = await getDoc(userDoc);
+        if (userSnapshot.exists()) {
+            const data = { id: userSnapshot.id, ...userSnapshot.data() };
+            dispatch(setData([data]));
+        } else {
+            dispatch(setError("User not found"));
+        }
+    } catch (error) {
+        dispatch(setError(error.message));
+    }
+};
