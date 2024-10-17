@@ -30,7 +30,7 @@ const Direction = () => {
     };
 
     return () => {
-      // Cleanup: remove the script when component unmounts
+      
       const script = document.querySelector(`script[src^="https://maps.googleapis.com/maps/api/js"]`);
       if (script) {
         script.remove();

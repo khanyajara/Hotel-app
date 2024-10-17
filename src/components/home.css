@@ -252,9 +252,9 @@
     border: black;
 
    
-    box-shadow: 0 4px 8px 8px rgba(0,0,0,0.2);
+    border: 2px solid;
     background-color: #dafbfd;
-    border-radius: 1%;
+    border-radius: 10px;
   }
 
   .check-btn{

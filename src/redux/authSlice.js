@@ -63,15 +63,16 @@ export const signIn = ({ email, password,}) => async (dispatch) => {
   dispatch(setLoading());
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const userData = await getDoc(userCredential.user.uid);
+    const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
     
     
     
-    if (userData) {
-      dispatch(setUser({ ...userCredential.user, ...userData }));
+    if (userDoc.exists()) {
+      dispatch(setUser({ ...userCredential.user, ...userDoc.data() }));
     } else {
       dispatch(setError('User data not found.'));
     }
+    
   } catch (error) {
     dispatch(setError(error.message));
   }

@@ -18,10 +18,11 @@ import RoomImg from "./hotel room.jpg"
 import { fetchBookings } from "../redux/dbSlice"; 
 import { useNavigate } from "react-router";
 import { useSelector } from 'react-redux';
-import { fetchUser } from "../redux/authSlice";
+import { fetchUser, signIn } from "../redux/authSlice";
 import { getProfile, logout } from "../redux/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWifi, faPlay, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { async } from "@firebase/util";
 
 
 const HomePage=()=>{
@@ -71,12 +72,6 @@ const exitToHome = () => {
 const user = useSelector((state) => state.auth.user); 
 
 
-useEffect(() => {
-    if (user && user.uid) {
-        dispatch(fetchUser(user?.uid));
-        dispatch(fetchBookings(user?.uid)); 
-    }
-}, [user, dispatch]);
 
 
 
@@ -84,7 +79,8 @@ useEffect(() => {
 
 
 
-  const handleLogout = () => {
+  const handleLogout = async  () => {
+     await dispatch(logout)
     navigate('*'); 
   };
 
@@ -207,14 +203,14 @@ useEffect(() => {
             <div className="row0">
                 <label for="DOA" >Date Of Arrival</label>
                 <input
-                type="date"
+                type="datetime-local"
                 id="DOA" 
                 className="DOA"/>
             </div>
             <div className="row0">
                 <label for="DOA">Date Of Departure</label>
                 <input
-                type="date"
+                type="datetime-local"
                 id="DOA"
                 className="DOA" />
             </div>

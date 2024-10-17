@@ -17,19 +17,19 @@ const LoginGuest = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
-    const Login = () => {
-         dispatch(signIn({ email, password }));
-         alert("logged in ")
-         navigate("/home")
+    const Login = (e) => {
+        e.preventDefault();
+        dispatch(signIn({ email, password }))
+            .then(() => {
+                navigate("/home");
+            })
+            .catch((err) => {
+                
+            });
     };
+    
+    
 
-    useEffect(() => {
-        if (user) {
-            dispatch(fetchUser(user.uid)); 
-        }
-    }, [user, dispatch]);
-
-console.log(user)
    
 
     return (

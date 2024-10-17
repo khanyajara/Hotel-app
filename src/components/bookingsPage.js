@@ -104,7 +104,7 @@ const BookingPage = () => {
                             <div className="row10">
                                 <label htmlFor="DOA">Date Of Arrival</label>
                                 <input
-                                    type="date"
+                                    type="datetime-local"
                                     id="DOA"
                                     className="input-box"
                                     value={arrivalDate}
@@ -115,7 +115,7 @@ const BookingPage = () => {
                             <div className="row10">
                                 <label htmlFor="DOD">Date Of Departure</label>
                                 <input
-                                    type="date"
+                                    type="datetime-local"
                                     id="DOD"
                                     className="input-box"
                                     value={departureDate}
