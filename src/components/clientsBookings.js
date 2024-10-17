@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
+import { logout } from "../redux/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookOpen, faClipboardList } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen, faClipboardList, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookings } from "../redux/dbSlice"; 
@@ -34,6 +35,11 @@ const BookingList = () => {
         navigate("/home");
     };
 
+    const Logout = () => {
+        dispatch(logout());
+        navigate('*'); 
+      };
+
     return (
         <div className="Whole-body">
             <div className="container">
@@ -47,6 +53,10 @@ const BookingList = () => {
                             <FontAwesomeIcon icon={faBookOpen} size="2x" />
                             Add Room
                         </div>
+                        <div onClick={Logout}className="navvy-1">
+                                <FontAwesomeIcon icon={faSignOut} size="2x" />
+                                Admin logout
+                            </div>
                     </div>
                 </div>
                 <div className="container-2">

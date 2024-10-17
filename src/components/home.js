@@ -15,9 +15,10 @@ import Lobby from "./Lobby3.jpg"
 import HomeRoomImage from "./homePage1.jpg"
 import HotelOutside from "./image-asset.jpeg"
 import RoomImg from "./hotel room.jpg"
+import { fetchBookings } from "../redux/dbSlice"; 
 import { useNavigate } from "react-router";
 import { useSelector } from 'react-redux';
-import { fetchUser } from "../redux/dbSlice";
+import { fetchUser } from "../redux/authSlice";
 import { getProfile, logout } from "../redux/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWifi, faPlay, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -69,20 +70,27 @@ const exitToHome = () => {
 
 const user = useSelector((state) => state.auth.user); 
 
+
 useEffect(() => {
-    if (user) {
-        dispatch(fetchUser(user.uid));
+    if (user && user.uid) {
+        dispatch(fetchUser(user?.uid));
+        dispatch(fetchBookings(user?.uid)); 
     }
 }, [user, dispatch]);
 
 
 
+
+
+
+
   const handleLogout = () => {
-    dispatch(logout());
     navigate('*'); 
   };
 
-   
+  const goToHowToGetThere = () => {
+    navigate("/how-to-get-there");
+};
  
 
  
@@ -92,24 +100,26 @@ useEffect(() => {
 
             <h2><a onClick={home} className="NavBar">Home</a></h2>
             <h2><a onClick={room} className="NavBar">Rooms</a></h2>
-            <h2><a onClick={Booking} className="NavBar">Booking</a></h2>
+           <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
             <img src={logo}  className="logo1"/>
-            <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
+            
             <h2><a onClick={Gallery}  className="NavBar">Gallery</a></h2>
-            <h2><a href="" className="NavBar">How To Get There</a></h2>
-            <h2>
-          <button className="iconss-btn" aria-label="User Profile" onClick={() => setIsProfileVisible(!isProfileVisible)}>
-           <FontAwesomeIcon icon={faUserCircle} size="3x" />
-          </button>
-        </h2>
-        {isProfileVisible && (
-          <div className="profile-dropdown">
-            <p>{user?.firstName} {user?.lastName}</p>
-            <p>{user?.email}</p>
-            <button onClick={handleLogout}>Logout</button>
-            <button onClick={() => setIsProfileVisible(false)}>Exit</button>
-          </div>
-        )} 
+            <h2><a onClick={goToHowToGetThere} className="NavBar">How To Get There</a></h2> 
+            <div className="Profile">
+                <h2 >
+                          <button className="iconss-btn" aria-label="User Profile" onClick={() => setIsProfileVisible(!isProfileVisible)}>
+                           <FontAwesomeIcon icon={faUserCircle} size="3x" />
+                          </button>
+                        </h2>
+                        {isProfileVisible && (
+                          <div className="profile-dropdown">
+                <h2>Welcome, {user?.firstName} {user?.lastName}</h2>
+                <p>{user?.email}   </p>
+                <button onClick={handleLogout}>Logout</button>
+                <button onClick={() => setIsProfileVisible(false)}>Exit</button>
+                          </div>
+                        )}
+            </div> 
          </div>
          <div className="img-container">
 
@@ -122,10 +132,10 @@ useEffect(() => {
          
          </div>
          <div className="intro">
-            <div>
+            <div className="HEADING">
                 <h2>Welcome to <h2 className="heading-color">Forrest Hills Hotel</h2>,a piece of paradise set in the heart of Kimberley </h2>
             </div>
-            <p>Nestled amid a lush, verdant landscape, the Forrest Hills Hotel offers an unparalleled five-star retreat where 
+            <p className="HEAD_FONT">Nestled amid a lush, verdant landscape, the Forrest Hills Hotel offers an unparalleled five-star retreat where 
                nature and luxury converge The hotel features elegantly appointed suites with private balconies overlooking 
                serene, rolling hills. Guests can indulge in world-class dining at the Forest Grill, unwind at the tranquil spa 
                with treatments inspired by natural elements, and explore extensive gardens and hiking trails.
@@ -158,7 +168,7 @@ useEffect(() => {
                 <div><img src={PoolImage} className="pool-Img"/></div>
                 
                 <div className="experience">
-                    <p>Guests booking a stay at the Forrest Hills Hotel can expect an immersive, luxury 
+                    <p className="HEAD_FONT">Guests booking a stay at the Forrest Hills Hotel can expect an immersive, luxury 
                     experience that blends natural beauty with unparalleled comfort. From the moment you
                     arrive, you’ll be greeted by our attentive staff and welcomed with a refreshing herbal 
                     infusion derived from the surrounding forests. Each suite offers a harmonious blend of
@@ -175,7 +185,7 @@ useEffect(() => {
                 <div><img src={Lobby} className="lobby-Img"/></div>
                 
                 <div className="experience0">
-                    <p>Enjoy gourmet dining with locally-sourced ingredients    at  the  Forest Grill, where every meal is an artistic     experience. Unwind at our serene spa, where 
+                    <p className="HEAD_FONT">Enjoy gourmet dining with locally-sourced ingredients    at  the  Forest Grill, where every meal is an artistic     experience. Unwind at our serene spa, where 
                        treatments use organic elements to rejuvenate
                        both body and mind. Explore the expansive gardens, 
                        take a guided nature hike, or
@@ -195,20 +205,22 @@ useEffect(() => {
          </div>
          <div className="row7">
             <div className="row0">
-                <label for="DOA">Date Of Arrival</label>
+                <label for="DOA" >Date Of Arrival</label>
                 <input
                 type="date"
-                id="DOA" />
+                id="DOA" 
+                className="DOA"/>
             </div>
             <div className="row0">
                 <label for="DOA">Date Of Departure</label>
                 <input
                 type="date"
-                id="DOA" />
+                id="DOA"
+                className="DOA" />
             </div>
             <div className="row0">
                 <label for="Guests">No. Guests</label>
-                <select id="Guests" name="Guests">
+                <select id="Guests" name="Guests" className="DOA">
                     <option value="0"></option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -245,40 +257,42 @@ useEffect(() => {
                    <img src={RoomImg} className="roomImg" />
                 </div>
             </div>
-            <div >
-                <h1 className="heading-for-facilities">_______________<h2 className="heading-color">Our Facilities Include</h2>_________________________</h1>
-            </div>
-            <div className="facilities-container">
-                <div className="first-row">
-                    <h3>Leisure and Relaxation</h3>
-                    <ul className="list">
-                        <li>Swimming</li>
-                        <li>Spa and Wellness Center</li>
-                        <li>Fitness</li>
-                        
-                        
-                    </ul>
+            <div className="Facilities-container-0">
+                <div >
+                    <h1 className="heading-for-facilities">_______________<h2 className="heading-color">Our Facilities Include</h2>_________________________</h1>
                 </div>
-                <div className="first-row">
-                    <h3>Entertainment</h3>
-                    <ul className="list">
-                        <li>Game Rooms</li>
-                        <li>In-house movie screening</li>
-                        <li>Kid's play area </li>
-                        <li>Business Center</li>
-                        <li>Library</li>
+                <div className="facilities-container">
+                    <div className="first-row">
+                        <h3>Leisure and Relaxation</h3>
+                        <ul className="list">
+                            <li>Swimming</li>
+                            <li>Spa and Wellness Center</li>
+                            <li>Fitness</li>
+                
+                
                         </ul>
-                </div>
-                <div className="first-row">
-                    <h3>Dining and Socializing</h3>
-                    <ul className="list">
-                        <li>Restuarants and Bars</li>
-                        <li>Rooftop Lounges</li>
-                        <li>Room Service</li>
-                        <li>Event Spaces</li> 
-                    </ul>
-                </div>
-          </div>
+                    </div>
+                    <div className="first-row">
+                        <h3>Entertainment</h3>
+                        <ul className="list">
+                            <li>Game Rooms</li>
+                            <li>In-house movie screening</li>
+                            <li>Kid's play area </li>
+                            <li>Business Center</li>
+                            <li>Library</li>
+                            </ul>
+                    </div>
+                    <div className="first-row">
+                        <h3>Dining and Socializing</h3>
+                        <ul className="list">
+                            <li>Restuarants and Bars</li>
+                            <li>Rooftop Lounges</li>
+                            <li>Room Service</li>
+                            <li>Event Spaces</li>
+                        </ul>
+                    </div>
+                          </div>
+            </div>
 
           <br/>
           <br/>
@@ -289,32 +303,39 @@ useEffect(() => {
           <br/>
           <div className="Footer">
           <div className="footer-info">
-                    <h2>Contact Info</h2>
-                    <p>Call: +27 76 490 2903</p>
-                    <p>Email: Info@foresthills.com</p>
-                    <h2>Address</h2>
-                    <p>7835</p>
-                    <p>Moshe Kantani Ave</p>
-                    <p>Redirile, Galesshewe</p>
-                    <p>8345</p>
+                    <div  className="footer-left">
+
+                        <div >
+                            <h2 className="INFO_FOOTER" >Contact Info</h2>
+                            <p className="INFO_FOOTER">Call: +27 76 490 2903</p>
+                            <p className="INFO_FOOTER">Email: Info@foresthills.com</p>
+                        </div>
+                        <div>
+                            <h2 className="INFO_FOOTER">Address</h2>
+                            <p className="INFO_FOOTER">7835</p>
+                            <p className="INFO_FOOTER">Moshe Kantani Ave</p>
+                            <p className="INFO_FOOTER">Redirile, Galesshewe</p>
+                            <p className="INFO_FOOTER">8345</p>
+                        </div>
+                    </div>
                 </div>
                 <div className="footer-nav">
                     <a href=""> Home</a>
                     <a href=""> About</a>
                     <a href=""> Blog</a>
                     <a href=""> Gallery</a>
-                    <a href=""> How To Get There</a>
+                    <a onClick={goToHowToGetThere}> How To Get There</a>
                    
                 </div>
                 <div className="footer-subscribe">
                 <form className="Subscribe-form">
   
 
-  <div class="container-apl" ><h3>Get Our NewsLetter</h3>
+  <div class="container-apl" ><h3 className="INFO_FOOTER">Get Our NewsLetter</h3>
     
     <input type="text" placeholder="Email address" name="mail" required/>
-    <label>
-      <input type="checkbox"  name="subscribe"/> Daily Newsletter
+    <label className="INFO_FOOTER">
+      <input type="checkbox"  name="subscribe" className="INFO_FOOTER"/> Daily Newsletter
     </label>
   </div>
 

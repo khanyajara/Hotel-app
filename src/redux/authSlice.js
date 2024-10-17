@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth';
 import { auth, db } from '../firebase/config';
-import { collection, addDoc, getDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, getDoc, doc , getDocs} from 'firebase/firestore';
 import { async } from '@firebase/util';
 
 const initialState = {
@@ -40,7 +40,7 @@ const authSlice = createSlice({
  
 export const { setLoading, setUser, setError, addBookingSuccess, setSuccess } = authSlice.actions;
 
-// Sign Up Action
+
 export const signUp = ({ email, password, firstName, lastName }) => async (dispatch) => {
   dispatch(setLoading());
   try {
@@ -50,6 +50,7 @@ export const signUp = ({ email, password, firstName, lastName }) => async (dispa
       firstName,
       lastName,
       email,
+      password
     });
     dispatch(setUser({ ...userCredential.user, firstName, lastName, email }));
   } catch (error) {
@@ -57,14 +58,17 @@ export const signUp = ({ email, password, firstName, lastName }) => async (dispa
   }
 };
 
-// Sign In Action
-export const signIn = ({ email, password }) => async (dispatch) => {
+
+export const signIn = ({ email, password,}) => async (dispatch) => {
   dispatch(setLoading());
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
-    if (userDoc.exists()) {
-      dispatch(setUser({ ...userCredential.user, ...userDoc.data() }));
+    const userData = await getDoc(userCredential.user.uid);
+    
+    
+    
+    if (userData) {
+      dispatch(setUser({ ...userCredential.user, ...userData }));
     } else {
       dispatch(setError('User data not found.'));
     }
@@ -74,10 +78,11 @@ export const signIn = ({ email, password }) => async (dispatch) => {
 };
 
 
+
 export const getProfile = (uid) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const userDoc = await getDoc(doc(db, 'users', uid));
+    const userDoc = await getDoc(doc(db, 'users', uid ));
     if (userDoc.exists()) {
       dispatch(setUser({ id: userDoc.id, ...userDoc.data() }));
     } else {
@@ -108,4 +113,19 @@ export const resetPassword = ({ email }) => async (dispatch) => {
     console.error("Error sending password reset email:", error.message);
   }
 };
+
+export const fetchUser = (uid) => async (dispatch) => {
+  dispatch(setLoading());
+  try {
+    const querySnapshot = await getDocs(collection(db, "users", uid, ));
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    dispatch(setUser(data));
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};
+
 export default authSlice.reducer;

@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { signIn } from "../redux/authSlice";
 import logo from "../h-removebg-preview.png";
 import image1 from '../hotel lobby.jpg';
-import { fetchUser } from "../redux/dbSlice";
+import { fetchUser } from "../redux/authSlice";
+import { getProfile } from "../redux/authSlice";
 import Css from './login.css';
 
 const LoginGuest = () => {
@@ -22,13 +23,13 @@ const LoginGuest = () => {
          navigate("/home")
     };
 
-    useEffect(()=>{
-        if(user) {
-           dispatch(fetchUser(user.uid));
-           navigate("/home");
-      }
-   }, [user, dispatch]);
+    useEffect(() => {
+        if (user) {
+            dispatch(fetchUser(user.uid)); 
+        }
+    }, [user, dispatch]);
 
+console.log(user)
    
 
     return (

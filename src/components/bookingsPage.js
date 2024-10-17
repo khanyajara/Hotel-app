@@ -23,10 +23,10 @@ const BookingPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const booking = location.state
+    const booking = location.state || {}
     console.log(booking);
-    const pricePerNight = parseFloat(booking.price);
-    const RoomName = parseFloat(booking.title)
+    const pricePerNight = parseFloat(booking.price) || 0;
+    const RoomName = parseFloat(booking.title) || "Room Name Unavailable"
 
     
 

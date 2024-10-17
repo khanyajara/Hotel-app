@@ -16,8 +16,9 @@ import Facilities from './components/Facilities';
 import Clients from "./components/clientsBookings";
 import AddRoom from './components/AddRoom';
 import { Audio } from 'react-loader-spinner'
+import Direction from './components/direction';
 
-// Loader component
+
 const LoaderComponent = () => {
   return (
     <div className="loader">
@@ -48,12 +49,12 @@ function App() {
   const user = useSelector(state => state.auth.user);
   const [loader, setLoader] = useState(true);
 
-  // Simulate loading (for example, fetching user data)
+ 
   useEffect(() => {
     const fetchData = async () => {
-      // Simulate a delay
+     
       await new Promise(resolve => setTimeout(resolve, 2000));
-      setLoader(false); // Set loader to false after fetching data
+      setLoader(false); 
     };
 
     fetchData();
@@ -85,6 +86,7 @@ function App() {
                 <Route path="/pay" element={<Checkout />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/facilities" element={<Facilities />} />
+                <Route path="/how-to-get-there" element={<Direction />}/>
               </>
             );
           })()}

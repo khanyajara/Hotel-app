@@ -5,10 +5,16 @@ import Star from "./Star.png";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../redux/dbSlice";
 import { useNavigate } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShare, faShareSquare } from '@fortawesome/free-solid-svg-icons';
+
+
 
 const RoomsPage = () => {
     const { data, error, loading } = useSelector((state) => state.data || {});
     const [likedRooms, setLikedRooms] = useState([]);
+    const [selectedRoomType, setSelectedRoomType] = useState('All');
+    const [searchInput, setSearchInput] = useState(''); // New state for search input
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -18,7 +24,7 @@ const RoomsPage = () => {
 
     const home = () => navigate("/Home");
     const room = () => navigate("/Rooms");
-    const Booking = () => navigate("/Booking");
+    const Booking = () => navigate("/booking");
     const viewroom = (room) => navigate("/view", { state: room });
 
     const toggleLike = (room) => {
@@ -32,9 +38,30 @@ const RoomsPage = () => {
     };
 
     const shareRoom = (room) => {
-       
-        alert(`Sharing room: ${room.title}`);
+        const url = `https://yourwebsite.com/rooms/${room.id}`;
+        const text = `Check out this room: ${room.title}`;
+    
+        const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        const twitterShareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+        const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+    
+        
+        window.open(facebookShareUrl, '_blank');
+        window.open(twitterShareUrl, '_blank');
+        window.open(linkedInShareUrl, '_blank');
     };
+    
+   
+    
+    
+    
+    
+    
+    const filteredRooms = data.filter(room => {
+        const matchesType = selectedRoomType === 'All' || room.roomType === selectedRoomType;
+        const matchesSearch = room.title.toLowerCase().includes(searchInput.toLowerCase());
+        return matchesType && matchesSearch;
+    });
 
     return (
         <div className="rooms-page">
@@ -51,21 +78,28 @@ const RoomsPage = () => {
             <div className="Search-DivContents">
                 <div className="Search-Container">
                     <div className="Search-Input">
-                        <input type="text" placeholder="Search for rooms" className="Search" />
+                        <input
+                            type="text"
+                            placeholder="Search for rooms"
+                            className="Search"
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)} // Update search input
+                        />
                     </div>
                 </div>
                 <div className="search-content"><h3>Recommended:</h3></div>
                 <div className="Search-RecommendedBtns">
-                    <button className="Search-btns">Suites</button>
-                    <button className="Search-btns">Double/Twin</button>
-                    <button className="Search-btns">Economy Suites</button>
+                    <button className="Search-btns" onClick={() => setSelectedRoomType('All')}>All</button>
+                    <button className="Search-btns" onClick={() => setSelectedRoomType('Suites')}>Suites</button>
+                    <button className="Search-btns" onClick={() => setSelectedRoomType('Deluxe')}>Double/Twin</button>
+                    <button className="Search-btns" onClick={() => setSelectedRoomType('Commercial')}>Economy Suites</button>
                 </div>
             </div>
 
             <div>
                 <h1>Rooms</h1>
                 <div className="Rooms-Sections">
-                    {data.map((roomData, index) => (
+                    {filteredRooms.map((roomData, index) => (
                         <div className="Rooms-info" key={index}>
                             <div className="Img-div">
                                 <img src={roomData.roomImage} className="Room-Img" alt={roomData.title} />
@@ -86,7 +120,10 @@ const RoomsPage = () => {
                                     <button className="Room-Btn" onClick={() => toggleLike(roomData)}>
                                         {likedRooms.includes(roomData) ? "❌" : "❤"}
                                     </button>
-                                    <button className="Room-Btn" onClick={() => shareRoom(roomData)}>Share</button>
+                                    <button className="Room-Btn" onClick={() => shareRoom(roomData)}>
+                                        <FontAwesomeIcon icon={faShareSquare} />
+                                     
+                                        </button>
                                 </div>
                             </div>
                             <div className="ratings">

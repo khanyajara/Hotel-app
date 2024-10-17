@@ -81,10 +81,10 @@ export const fetchData = () => async (dispatch) => {
     }
 };
 
-export const fetchBookings = () => async (dispatch) => {
+export const fetchBookings = (uid) => async (dispatch) => {
     dispatch(setLoading());
     try {
-        const querySnapshot = await getDocs(collection(db, "Bookings"));
+        const querySnapshot = await getDocs(collection(db,"users",uid , "Bookings"));
         const data = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
@@ -95,13 +95,13 @@ export const fetchBookings = () => async (dispatch) => {
     }
 };
 
-export const addBookings = (bookingData) => async (dispatch) => {
+export const addBookings = (uid,bookingData) => async (dispatch) => {
     dispatch(setLoading());
     try {
-        const docRef = await addDoc(collection(db, "Bookings"), bookingData);
+        const docRef = await addDoc(collection(db,"users",uid, "Bookings"), bookingData);
         console.log("Document written with ID: ", docRef.id);
         
-        // Update the state locally with the new booking
+        
         dispatch(addBookingSuccess({ id: docRef.id, ...bookingData }));
     } catch (error) {
         dispatch(setError(error.message));
@@ -117,20 +117,5 @@ export const addRooms = (Roomsdata) => async (dispatch)=>{
         } catch (error) {
             dispatch(setError(error.message));
             
-    }
-};
-export const fetchUser = (uid) => async (dispatch) => {
-    dispatch(setLoading());
-    try {
-        const userDoc = doc(db, "users", uid);
-        const userSnapshot = await getDoc(userDoc);
-        if (userSnapshot.exists()) {
-            const data = { id: userSnapshot.id, ...userSnapshot.data() };
-            dispatch(setData([data]));
-        } else {
-            dispatch(setError("User not found"));
-        }
-    } catch (error) {
-        dispatch(setError(error.message));
     }
 };

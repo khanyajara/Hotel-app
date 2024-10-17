@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import "./addroom.css";
+import { logout } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addRooms } from '../redux/dbSlice'; // Import the addRooms action
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboardList, faBookOpen } from '@fortawesome/free-solid-svg-icons';
+import { faClipboardList, faBookOpen, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 const AddRoom = () => {
     const dispatch = useDispatch();
@@ -59,6 +60,11 @@ const AddRoom = () => {
         navigate('/home');
     };
 
+    const Logout = () => {
+        dispatch(logout());
+        navigate('*'); 
+      };
+
     return (
         <div className="container">
             <div className="container-1">
@@ -72,6 +78,10 @@ const AddRoom = () => {
                             <div onClick={goToHome}className="navvy-1">
                                 <FontAwesomeIcon icon={faBookOpen} size="2x" />
                                 Add Room
+                            </div>
+                            <div onClick={Logout}className="navvy-1">
+                                <FontAwesomeIcon icon={faSignOut} size="2x" />
+                                Admin logout
                             </div>
                         </div>
                     </div>

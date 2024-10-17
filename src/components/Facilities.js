@@ -78,27 +78,32 @@ const Facilities = () => {
       <div className="App">
         <h2 style={{ textAlign: 'center' }}>Our Guest's </h2>
         <div className="container">
-          <div className="mySlides" style={{ display: 'block' }}>
-            <div className="numbertext">{slideIndex + 1} / {slides.length}</div>
-            <img src={slides[slideIndex]} className="slides-imgs" alt={`Slide ${slideIndex + 1}`} />
-          </div>
-          <a className="prev" onClick={() => plusSlides(-1)}>❮</a>
-          <a className="next" onClick={() => plusSlides(1)}>❯</a>
-          <div className="caption-container">
-            <p>{`Slide ${slideIndex + 1} of ${slides.length}`}</p>
-          </div>
-          <div className="row">
-            {thumbnails.map((thumb, index) => (
-              <div key={index} className="column">
-                <img
-                  className={`demo cursor ${slideIndex === index ? 'active' : ''}`}
-                  src={thumb}
-                  style={{ width: '100%' }}
-                  onClick={() => currentSlide(index)}
-                  alt={`Thumbnail ${index + 1}`}
-                />
-              </div>
-            ))}
+          <div>
+            <div className="mySlides" style={{ display: 'block' }}>
+              <div className="numbertext">{slideIndex + 1} / {slides.length}</div>
+              <img src={slides[slideIndex]} className="slides-imgs" alt={`Slide ${slideIndex + 1}`} />
+            </div>
+           
+            <div className="caption-container">
+              <p>{`Slide ${slideIndex + 1} of ${slides.length}`}</p>
+            </div>
+             <div  className='NEXT-PREV'>
+              <a className="prev" onClick={() => plusSlides(-1)}>❮</a>
+              <a className="next" onClick={() => plusSlides(1)}>❯</a>
+            </div>
+            <div className="row">
+              {thumbnails.map((thumb, index) => (
+                <div key={index} className="column">
+                  <img
+                    className={`demo cursor ${slideIndex === index ? 'active' : ''}`}
+                    src={thumb}
+                    style={{ width: '100%' }}
+                    onClick={() => currentSlide(index)}
+                    alt={`Thumbnail ${index + 1}`}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

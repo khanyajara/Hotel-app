@@ -6,12 +6,12 @@
   justify-content: center;
   align-items: center;
   border-color: black;
-  padding: 3%;
-  margin: 3%;
-  width: 95%;
+  padding: 5%;
+ 
+  width: 100%;
   height: auto;
  
-  margin-top: 5%;
+  
   
   margin-bottom: 8%;
   gap: -5rem;
@@ -23,18 +23,18 @@
   border-radius: 15px;
 }
 
-
-
-
-
-
-
-
   .topNavBar{
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
     gap: 2rem;
     justify-content: center;
+  }
+
+  .Profile{
+    background-color: #f8fbfc;
+    border-radius: 15px;
+    width: 200px;
   }
 
   .iconss-btn{
@@ -132,6 +132,26 @@
     box-shadow: 0 13px 8px 0 rgba(0,0.5,0,0.2);
   }
 
+  .intro{
+   
+    display: flex;
+    flex-direction: column;
+    
+    height: 40vh;
+    font-size: large;
+  }
+
+  .HEADING{
+    display: flex;
+   
+    width: 50%;
+    justify-content: center;
+  }
+
+  .HEAD_FONT{
+    font-size: x-large;
+  }
+
   .Facilities{
    padding-left:9% ;
    padding-right: 9%;
@@ -166,7 +186,7 @@
   .experience{
     justify-content: center;
     float: left;
-    font-size: x-large;
+    font-size: x-larger;
     width: 150%;
   }
 
@@ -176,8 +196,9 @@
   }
 
   .lobby-Img{
-    height: 75%;
+    height: 105%;
     width: 75%;
+    margin-top: -200px;
   }
 
   .experience0{
@@ -192,8 +213,8 @@
     flex-direction: column;
     border-color: black;
     padding: 3%;
-    margin: 3%;
-    width: 15%;
+    margin: 2%;
+    width: 25%;
     height: 15%;
     
     
@@ -205,6 +226,13 @@
     box-shadow: 0 3px  rgba(0,0,0,0.2);
     background-color: #ffffff;
     border-radius: 3%;
+  }
+
+  .DOA{
+    background-color: #ebf3f3;
+    font-size: x-large;
+    border: 2px solid;
+    border-color: rgb(0, 0, 0);
   }
   
   .row7 {
@@ -310,6 +338,20 @@
   font-size: large;
 }  
 
+
+
+.Facilities-container-0{
+  width: 100%;
+  margin-top: -190px;
+}
+
+.facilities-container{
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+ 
+}
+
   .facilities-container:after {
     content: "";
     display: table;
@@ -317,15 +359,23 @@
     
   }
   .Footer{
-     width: 100%;
+     width: 110%;
      height: auto;
-     background-color: black;
+     margin-left: -83px;
+     background-color: rgb(0, 0, 0);
      color: #ffffff;
      display: flex;
      justify-content: space-around;
+     gap:5rem ;
      align-items: center;
      text-align: start;
      border-radius: 1em;
+
+  }
+
+  .INFO_FOOTER{
+    color: #ffffff;
+    
   }
  
   .footer-info{
@@ -333,20 +383,30 @@
     width: 30%;
     display: flex;
     flex-direction: column;
-    gap: -2rem;
+     gap:2rem ;
+    color: #000000;
    
     
     
   }
+  
+  .footer-left{
+      display: flex;
+      gap: 2rem;
+      flex-direction: row-reverse;
+      margin-left: 5px;
+    }
 
   .footer-nav{
     display: flex;
     flex-flow: row wrap;
     justify-content: baseline;
-    
+    color: #000000;
     height: 5vh;
     gap: 1rem;
     width: 25%;
+    margin-top: -280px;
+    margin-left: 5px;
     
     
   }
@@ -365,6 +425,7 @@
     flex-direction: column;
     align-items: center;
     width: 45%;
+    margin-top: -150px;
   }
 
  .Subscribe-form {
@@ -383,6 +444,7 @@
     background-color: transparent;
     display:flex;
     flex-direction:column;
+    color: #ffffff;
   }
   
   input[type=text]  {
