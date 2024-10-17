@@ -24,13 +24,19 @@ const LoginGuest = () => {
                 navigate("/home");
             })
             .catch((err) => {
+                console.log(err);
                 
             });
     };
     
     
 
-   
+   useEffect(()=>{
+    if(user){
+        navigate("/home");
+        }
+
+   })
 
     return (
         <div className="login-container">

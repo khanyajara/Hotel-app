@@ -17,6 +17,7 @@ import Clients from "./components/clientsBookings";
 import AddRoom from './components/AddRoom';
 import { Audio } from 'react-loader-spinner'
 import Direction from './components/direction';
+import Reservation from './components/addReservation'
 
 
 const LoaderComponent = () => {
@@ -73,6 +74,7 @@ function App() {
               <>
                 <Route path="/home" element={<AddRoom />} />
                 <Route path="/clients" element={<Clients />} />
+                <Route path="/Reserve" element={<Reservation />} />
               </>
             ) : (
               <>

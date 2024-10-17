@@ -30,6 +30,15 @@ const HomePage=()=>{
     const navigate= useNavigate();
     const dispatch = useDispatch();
     const [isProfileVisible, setIsProfileVisible] = useState(false);
+    const user = useSelector((state) => state.auth.user || {});
+    const [formData, setFormData] = useState({
+        FullName: user?.fullName || '',
+        Email: user?.email || '',
+        Phone: user?.phone || '',
+        Gender: user?.gender || '',
+        Age: user?.age || '',
+        Message: user?.message || '',
+      });
 
     
    
@@ -69,7 +78,6 @@ const exitToHome = () => {
 
 
 
-const user = useSelector((state) => state.auth.user); 
 
 
 
@@ -78,9 +86,22 @@ const user = useSelector((state) => state.auth.user);
 
 
 
+  useEffect(()=>{
+ dispatch(getProfile());
+ console.log(user);
+    },[dispatch])
 
-  const handleLogout = async  () => {
-     await dispatch(logout)
+ 
+
+  
+
+
+
+
+
+
+  const handleLogout =   () => {
+     dispatch(logout)
     navigate('*'); 
   };
 
@@ -109,8 +130,8 @@ const user = useSelector((state) => state.auth.user);
                         </h2>
                         {isProfileVisible && (
                           <div className="profile-dropdown">
-                <h2>Welcome, {user?.firstName} {user?.lastName}</h2>
-                <p>{user?.email}   </p>
+                <h2>Welcome, {user.firstName} {user.lastName}</h2>
+                <p>{user.email}   </p>
                 <button onClick={handleLogout}>Logout</button>
                 <button onClick={() => setIsProfileVisible(false)}>Exit</button>
                           </div>

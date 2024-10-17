@@ -46,7 +46,7 @@ export const signUp = ({ email, password, firstName, lastName }) => async (dispa
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     await addDoc(collection(db, 'users'), {
-      uid: userCredential.user.uid,
+      
       firstName,
       lastName,
       email,
@@ -59,16 +59,23 @@ export const signUp = ({ email, password, firstName, lastName }) => async (dispa
 };
 
 
-export const signIn = ({ email, password,}) => async (dispatch) => {
+export const signIn = ({ email, password, firstName, lastName}) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+    const user = await signInWithEmailAndPassword(auth, email, password);
+    const userDoc = await getDoc(doc(db, "users", user.user.uid));
     
     
     
     if (userDoc.exists()) {
-      dispatch(setUser({ ...userCredential.user, ...userDoc.data() }));
+      const userData = {
+        firstName,
+         lastName,
+      email,
+      password
+      };
+      dispatch(setUser({ ...user.user, ...userDoc.data(), ...userData,firstName, lastName,email }));
+      localStorage.setItem('user', JSON.stringify({ ...user.user, ...userDoc.data() }));
     } else {
       dispatch(setError('User data not found.'));
     }
@@ -83,17 +90,18 @@ export const signIn = ({ email, password,}) => async (dispatch) => {
 export const getProfile = (uid) => async (dispatch) => {
   dispatch(setLoading());
   try {
-    const userDoc = await getDoc(doc(db, 'users', uid ));
+    const userDoc = await getDoc(doc(db, 'users', uid));
+    
     if (userDoc.exists()) {
-      dispatch(setUser({ id: userDoc.id, ...userDoc.data() }));
+      const userData = userDoc.data();
+      dispatch(setUser({ ...userData, uid }));
     } else {
-      dispatch(setError('User data not found.'));
+      dispatch(setError('User not found'));
     }
   } catch (error) {
     dispatch(setError(error.message));
   }
 };
-
 
 export const logout = () => async (dispatch) => {
   dispatch(setLoading());
@@ -116,9 +124,9 @@ export const resetPassword = ({ email }) => async (dispatch) => {
 };
 
 export const fetchUser = (uid) => async (dispatch) => {
-  dispatch(setLoading());
+  dispatch(setLoading()); 
   try {
-    const querySnapshot = await getDocs(collection(db, "users", uid, ));
+    const querySnapshot = await getDocs(collection(db, "users", uid));
     const data = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -127,6 +135,6 @@ export const fetchUser = (uid) => async (dispatch) => {
   } catch (error) {
     dispatch(setError(error.message));
   }
-};
+}
 
 export default authSlice.reducer;

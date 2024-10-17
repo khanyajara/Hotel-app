@@ -60,7 +60,6 @@ const AddRoom = () => {
         navigate('/home');
     };
 
-    
     const reserveRoom = ()=>{
         navigate('/Reserve')
     }
@@ -97,10 +96,10 @@ const AddRoom = () => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="add-container">
-                    <h2>Add New Room</h2>
+                    <h2>Book Room for Client</h2>
 
                     <label>
-                        Title:
+                        Client-Name
                         <input type="text"
                          value={title}
                           onChange={(e) => setTitle(e.target.value)} 
@@ -110,8 +109,10 @@ const AddRoom = () => {
                     </label>
 
                     <label>
-                        Descriptions:
-                        <textarea value={descriptions}
+                        Email
+                        <textarea
+                        type="text" 
+                        value={descriptions}
                          onChange={(e) => setDescriptions(e.target.value)} 
                          required 
                          className='input-tag'
@@ -121,7 +122,7 @@ const AddRoom = () => {
                       <br/>
                       <br/>
                     <label>
-                        Room Image URL:
+                        PhoneNumber
                         <input type="text"
                          value={roomImage} 
                          onChange={(e) => setRoomImage(e.target.value)} 

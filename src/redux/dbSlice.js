@@ -81,10 +81,10 @@ export const fetchData = () => async (dispatch) => {
     }
 };
 
-export const fetchBookings = (uid) => async (dispatch) => {
+export const fetchBookings = () => async (dispatch) => {
     dispatch(setLoading());
     try {
-        const querySnapshot = await getDocs(collection(db,"users",uid , "Bookings"));
+        const querySnapshot = await getDocs(collection(db,  "Bookings"));
         const data = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
