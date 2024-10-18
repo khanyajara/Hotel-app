@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './checkout.css';
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
@@ -7,8 +7,10 @@ import { faArrowAltCircleLeft, faStar } from "@fortawesome/free-solid-svg-icons"
 import logo from "../h-removebg-preview.png";
 import line from "./Line 20.png";
 import image from "./hotel room.jpg";
-import { useDispatch } from "react-redux";
-import { addBookings, addBookingSuccess } from "../redux/dbSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addBookings, addBookingToFirestore } from "../redux/dbSlice";
+import { auth } from "../firebase/config";
+import { getProfile } from '../redux/authSlice';
 
 const PaymentSection = ({ totalPrice, onCurrencyChange, currency, isPending, onCreateOrder, onApproveOrder }) => (
     <div className='paypal-container'>
@@ -68,6 +70,9 @@ const Checkout = () => {
     const location = useLocation();
     const dispatch = useDispatch();
 
+ 
+    const storedUser = localStorage.getItem('currentUser');
+    const user = useSelector((state) => state.auth.user) || (storedUser ? JSON.parse(storedUser) : {});
     const { room, arrivalDate, departureDate, guests, RoomName, pricePerNight, totalPrice } = location.state || {};
 
     const onCurrencyChange = ({ target: { value } }) => {
@@ -106,18 +111,27 @@ const Checkout = () => {
                 paid: true,
             };
 
-            dispatch(addBookings(bookingData));
-            dispatch(addBookingSuccess());
-            navigate("/home");
-        } catch (error) {
-            console.error("Payment approval failed:", error);
-            alert("There was an error processing your payment. Please try again.");
+            if (user?.uid) {
+                await addBookingToFirestore(auth.currentUser.uid, bookingData);
+                dispatch(addBookings(user.uid, bookingData));
+                alert("Booking successful!");
+            } else {
+                alert("You need to be logged in to make a booking. Redirecting to login...");
+                navigate("/login");
+            }
+        } catch (err) {
+            console.error("Payment approval error: ", err);
+            alert("An error occurred during the payment approval. Please try again.");
         }
     };
 
     const navigateHome = () => {
         navigate("/Home");
     };
+
+    useEffect(() => {
+        dispatch(getProfile());
+    }, [dispatch]);
 
     return (
         <div className="checkout">

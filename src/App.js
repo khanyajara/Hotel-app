@@ -17,7 +17,9 @@ import Clients from "./components/clientsBookings";
 import AddRoom from './components/AddRoom';
 import { Audio } from 'react-loader-spinner'
 import Direction from './components/direction';
-import Reservation from './components/addReservation'
+import Reservation from './components/addReservation';
+import Review from "./components/hotel-reviews"
+import Profile from './components/userProfile';
 
 
 const LoaderComponent = () => {
@@ -89,6 +91,8 @@ function App() {
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/facilities" element={<Facilities />} />
                 <Route path="/how-to-get-there" element={<Direction />}/>
+                <Route path="/Leave-review" element={<Review />} />
+                <Route path="/user-info" element={<Profile />} />
               </>
             );
           })()}

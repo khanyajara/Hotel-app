@@ -20,7 +20,8 @@ const LoginGuest = () => {
     const Login = (e) => {
         e.preventDefault();
         dispatch(signIn({ email, password }))
-            .then(() => {
+            .then((userData) => {
+                localStorage.setItem('currentUser', JSON.stringify(userData));
                 navigate("/home");
             })
             .catch((err) => {
