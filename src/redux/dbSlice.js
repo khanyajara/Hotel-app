@@ -64,14 +64,16 @@ const roomSlice = createSlice({
                 state.likedRooms[userId].splice(index, 1); // Unliking
             }
         },
-        setReviewsData(state, action) {
+       
+        addReviewSuccess(state, action) {
             state.reviews = action.payload; 
             state.loading = false;
         },
-        addReviewSuccess(state, action) {
-            state.reviews.push(action.payload); 
+
+        setReviewsData(state, action) {
+            state.reviews = action.payload
             state.loading = false;
-        },
+        }
     },
 });
 
@@ -80,6 +82,7 @@ export const {
     setData, 
     setError, 
     setBookings,
+    setReviews,
     setReviewsData,
     addReviewSuccess,
     reserveRoom, 
@@ -248,37 +251,37 @@ export const addBookingToFirestore = (uid, roomId, bookingData) => async (dispat
     }
 };
 
-export const fetchUserReviews = (uid) => async (dispatch) => {
+
+export const addReview = (reviewsData)=> async (dispatch)=>{
     dispatch(setLoading());
-    try {
-        const querySnapshot = await getDocs(collection(db,  "Reviews"));
-        const reviewsData = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-        dispatch(setReviewsData(reviewsData));
-    } catch (error) {
-        dispatch(setError(error.message));
+    try{
+        const reviewRef = await addDoc(collection(db, "Reviews"), {
+            ...reviewsData
+            });
+            dispatch(setReviews({reviewsData}));
+            }
+            catch(error){
+                console.error("Error adding review:", error);
+                dispatch(setError(error.message));
+
     }
 };
 
-export const addUserReview = (uid, reviewData) => async (dispatch) => {
-    dispatch(setLoading());
-    dispatch(setLoading());
-    const auth = getAuth();
-    const currentUser = auth.currentUser;
+export const FetchReviews=()=> async (dispatch)=>{
+    try{
+        const reviewsRef = collection(db, "Reviews");
+        const reviewsSnapshot = await getDocs(reviewsRef);
+        const reviews = reviewsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc
+            .data() }));
+            dispatch(setReviewsData({reviews}));
+            }
+            catch(error){
+                console.error("Error fetching reviews:", error)
+                
 
-    if (!currentUser) {
-        console.error("User is not authenticated");
-        return;
-    }
 
-    try {
-        const docRef = await addDoc(collection(db,  "Reviews"), reviewData);
-        dispatch(addReviewSuccess({ id: docRef.id,
-             ...reviewData }));
-    } catch (error) {
-        dispatch(setError(error.message));
+
     }
-};
+}
+
 

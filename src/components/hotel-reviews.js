@@ -1,31 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserReview, fetchUserReviews } from '../redux/dbSlice'; 
+import { addReview, FetchReviews } from '../redux/dbSlice'; 
 import './hotel-review.css';
+import { getAuth } from 'firebase/auth';
 
-const HotelReview = ({ uid }) => {
+const HotelReview = () => {
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.db?.reviews) || []; 
   const [name, setName] = useState('');
   const [text, setText] = useState('');
   const [rating, setRating] = useState(0); 
+  const [error, setError] = useState(null); 
+  const auth = getAuth();
+  const currentUserId = auth.currentUser ? auth.currentUser.uid : null;
 
-  useEffect(() => {
-    dispatch(fetchUserReviews(uid)); 
-  }, [dispatch, uid]); 
+  useEffect(()=>{
+    dispatch(FetchReviews());
+    }, [dispatch])
+  
 
-  console.log(reviews)
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name && text && rating) {
       const newReview = { name, text, rating, createdAt: new Date() };
-      dispatch(addUserReview(uid, newReview)); 
+      dispatch(addReview(currentUserId, newReview))
+        .catch((err) => setError(err.message)); 
       setName('');
       setText('');
       setRating(0);
     }
   };
+
 
   return (
     <div>
@@ -62,13 +70,14 @@ const HotelReview = ({ uid }) => {
             ))}
           </div>
           <button type="submit">Submit</button>
+          {error && <p className="error">{error}</p>} {/* Display error */}
         </form>
       </div>
 
       <div className="comments">
-        <h3>Comments</h3>
+        <h3>Reviews</h3>
         {reviews.length === 0 ? (
-          <p>No comments yet.</p>
+          <p>No reviews yet.</p>
         ) : (
           reviews.map((review) => (
             <div className="comment-card" key={review.id}>
