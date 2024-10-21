@@ -25,6 +25,7 @@ import {auth} from "../firebase/config"
 const HomePage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [isOpen, setIsOpen]= useState(false)
     const [isProfileVisible, setIsProfileVisible] = useState(false);
     const user = useSelector((state) => state.auth.user || {});
     const {bookings} = useSelector((state) => state.db || []);
@@ -45,6 +46,11 @@ const HomePage = () => {
     useEffect(() => {
         console.log(bookings);
     }, [bookings]);
+
+
+    const dropdown= ()=>{
+        setIsOpen(!isOpen)
+    }
     
     
     const home = () => {
@@ -87,6 +93,12 @@ const HomePage = () => {
         navigate("/how-to-get-there");
     };
 
+
+
+    const roomfilter = () => {
+       navigate("/Rooms") 
+    }
+
     return (
         <div className="row3">
             <div className="topNavBar">
@@ -104,12 +116,11 @@ const HomePage = () => {
                     </h2>
                     {isProfileVisible && (
                         <div className="profile-dropdown">
-                            <h2>Welcome, {user.firstName} {user.lastName}</h2>
+                            <h2>Welcome, {user.firstName}<br/> {user.lastName}</h2>
                             <p>{user.email}</p>
                             <p>{user.phoneNumber}</p>
-                            <button onClick={handleLogout}>Logout</button>
-                            <button onClick={() => setIsProfileVisible(false)}>Exit</button>
-                            <button onClick={Profile} >View Profile</button>
+                            <button onClick={handleLogout} className="Pro-btn">Logout</button><br/>
+                            <button onClick={Profile} className="Pro-btn">View Profile</button>
                         </div>
                     )}
                 </div>
@@ -135,6 +146,13 @@ const HomePage = () => {
                    escape into nature’s grandeur.</p>
                 <button className="Home-btn" onClick={room}>Book Now</button>
             </div>
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
 
             <div className="Facilities-Activities">
                 <div>
@@ -211,24 +229,30 @@ const HomePage = () => {
                 <h1 className="heading-for-facilities">_____________________<h2 className="heading-color">See Room Types</h2>_____________________________</h1>
             </div>
             <div className="row8">
-                <div>
-                    <h2>Deluxe</h2>
-                    <p>____________________________________________</p>
-                    <h2 className="heading-color">Deluxe</h2>
-                    <p className="heading-color">____________________________________________</p>
-                    <ul>
-                        <li>Comfort</li>
-                        <li>Luxury Amenities</li>
-                        <li>Spacious Rooms</li>
-                        <li>Beautiful Views</li>
-                    </ul>
-                    <p className="heading-color">____________________________________________</p>
-                    <h2>Single</h2>
-                </div>
-                <div className="Room-Imgdiv">
-                    <img src={RoomImg} className="roomImg" alt="Room" />
-                </div>
+            <div>
+                <h2 onClick={dropdown} style={{ cursor: 'pointer' }}>
+                    Deluxe
+                </h2>
+                {isOpen && (
+                    <>
+                        <p>____________________________________________</p>
+                        <h2 className="heading-color">Deluxe</h2>
+                        <p className="heading-color">____________________________________________</p>
+                        <ul>
+                            <li> <button onClick={roomfilter} className="room-BTNS">Comfort</button></li>
+                            <li> <button onClick={roomfilter} className="room-BTNS">Luxury Amenities</button></li>
+                            <li> <button onClick={roomfilter} className="room-BTNS">Spacious Rooms</button></li>
+                            <li> <button onClick={roomfilter} className="room-BTNS">Beautiful Views</button></li>
+                        </ul>
+                        <p className="heading-color">____________________________________________</p>
+                    </>
+                )}
+                
             </div>
+            <div className="Room-Imgdiv">
+                <img src={RoomImg} className="roomImg" alt="Room" />
+            </div>
+        </div>
 
             <div className="Facilities-container-0">
                 <div>
@@ -293,10 +317,12 @@ const HomePage = () => {
                 <div className="footer-nav">
                     <a href=""> Home</a>
                     <a href=""> About</a>
-                    <a onClick={blog}> Blog</a>
+                    <a onClick={blog}> Write a review</a>
                     <a href=""> Gallery</a>
                     <a onClick={goToHowToGetThere}> How To Get There</a>
-                </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.0900654461657!2d24.73093097639823!3d-28.716854270992684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9b1abe56fe08b7%3A0x5dcb1f20b34a7b21!2sTyala%20St%2C%20Galeshewe%2C%20Kimberley%2C%208345!5e0!3m2!1sen!2sza!4v1729516063469!5m2!1sen!2sza" width="600" height="450"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                 </div>
+                <br/>
                 <div className="footer-subscribe">
                     <form className="Subscribe-form">
                         <div className="container-apl">
@@ -308,7 +334,11 @@ const HomePage = () => {
                         </div>
                         <div className="container-apl">
                             <input type="submit" value="Subscribe" />
+                            
                         </div>
+                        <br/>
+                        
+                      
                     </form>
                 </div>
             </div>

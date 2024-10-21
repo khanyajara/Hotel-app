@@ -1,9 +1,8 @@
-import { async } from '@firebase/util';
 import { createSlice } from '@reduxjs/toolkit';
-import { getDocs, collection, addDoc, doc, setDoc } from 'firebase/firestore';
+import { getDocs, collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
-import {auth} from "../firebase/config"
 import { getAuth } from 'firebase/auth';
+import { async } from '@firebase/util';
 
 const initialState = {
     data: [],
@@ -11,7 +10,8 @@ const initialState = {
     error: null,
     reservedRoom: null,
     bookings: [],
-    likedRooms: {},
+    likedRooms: [],
+    reviews: [],
 };
 
 const roomSlice = createSlice({
@@ -48,19 +48,29 @@ const roomSlice = createSlice({
             state.bookings = action.payload;
             state.loading = false;
         },
-
         setBookings(state, action) {
             state.bookings = action.payload;
             state.loading = false;
-          },
+        },
         setLikedRooms(state, action) {
             const { userId, roomId } = action.payload;
             if (!state.likedRooms[userId]) {
                 state.likedRooms[userId] = [];
             }
-            state.likedRooms[userId] = state.likedRooms[userId].includes(roomId)
-                ? state.likedRooms[userId].filter(id => id !== roomId) // Unliking
-                : [...state.likedRooms[userId], roomId]; // Liking
+            const index = state.likedRooms[userId].indexOf(roomId);
+            if (index === -1) {
+                state.likedRooms[userId].push(roomId); // Liking
+            } else {
+                state.likedRooms[userId].splice(index, 1); // Unliking
+            }
+        },
+        setReviewsData(state, action) {
+            state.reviews = action.payload; 
+            state.loading = false;
+        },
+        addReviewSuccess(state, action) {
+            state.reviews.push(action.payload); 
+            state.loading = false;
         },
     },
 });
@@ -70,6 +80,8 @@ export const {
     setData, 
     setError, 
     setBookings,
+    setReviewsData,
+    addReviewSuccess,
     reserveRoom, 
     clearReservation, 
     addBookingSuccess, 
@@ -86,6 +98,7 @@ export const selectBookingsData = (state) => state.room.bookings;
 export const selectLikedRooms = (state, userId) => state.room.likedRooms[userId] || []; // Selector for liked rooms by user
 
 export default roomSlice.reducer;
+
 
 export const fetchData = () => async (dispatch) => {
     dispatch(setLoading());
@@ -149,18 +162,19 @@ export const fetchClientBookings = (email) => async (dispatch) => {
     }
 };
 
-export const userLikedRooms = (roomData) => async (dispatch) => {
+export const userLikedRooms = (uid) => async (dispatch) => {
     dispatch(setLoading());
-    try {
-        const querySnapshot = await getDocs(collection(db, "Rooms", roomData.id, "LikedRooms"));
-        const data = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
+   try {
+    const querySnapshot = await getDocs(collection(db, "users", uid, "LikedRooms"));
+    const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
         }));
         dispatch(setLikedRooms(data));
-    } catch (error) {
-        console.log(error);
-    }
+
+   } catch (error) {
+    dispatch(setError(error.message));
+   }
 };
 
 export const addLikedRoom = (uid, userId, roomData) => async (dispatch) => {
@@ -168,14 +182,10 @@ export const addLikedRoom = (uid, userId, roomData) => async (dispatch) => {
     const auth = getAuth();
     const currentUser = auth.currentUser;
 
-
-
     if (!currentUser) {
         console.error("User is not authenticated");
-        return; // Exit if user is not authenticated
+        return;
     }
-
-    const uid = currentUser.uid; // Get the current user's UID
 
     dispatch(setLoading());
     try {
@@ -184,12 +194,11 @@ export const addLikedRoom = (uid, userId, roomData) => async (dispatch) => {
             ...roomData 
         });
         
-        
-        dispatch(setLikedRooms({ userId, uid, docId: likedRoomRef.id }));
+        dispatch(setLikedRooms({ userId, roomId: likedRoomRef.id }));
     } catch (error) {
         console.error("Error adding liked room:", error);
     }
-};;
+};
 
 export const addReservations = (uid, bookingData) => async (dispatch) => {
     dispatch(setLoading());
@@ -201,13 +210,10 @@ export const addReservations = (uid, bookingData) => async (dispatch) => {
     }
 };
 
-
 export const FetchUserBookings = (uid) => async (dispatch) => {
-
-    console.log(auth)
     dispatch(setLoading());
     try {
-        const querySnapshot = await getDocs(collection(auth, "users", uid, "Bookings"));
+        const querySnapshot = await getDocs(collection(db, "users", uid, "Bookings"));
         const bookingsData = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
@@ -227,11 +233,9 @@ export const addBookingToFirestore = (uid, roomId, bookingData) => async (dispat
         return; 
     }
 
-    const uid = currentUser.uid; 
-
     dispatch(setLoading());
     try {
-        const bookingRef = await addDoc(collection(db, "users", uid, "UserBookings"), {
+        const bookingRef = await addDoc(collection(db, "users", uid, "Bookings"), {
             roomId,
             ...bookingData 
         });
@@ -239,9 +243,42 @@ export const addBookingToFirestore = (uid, roomId, bookingData) => async (dispat
         dispatch(setBookings({ roomId, uid, docId: bookingRef.id }));
     } catch (error) {
         console.error("Error adding booking:", error);
-        
     } finally {
         dispatch(setLoading(false));
+    }
+};
+
+export const fetchUserReviews = (uid) => async (dispatch) => {
+    dispatch(setLoading());
+    try {
+        const querySnapshot = await getDocs(collection(db,  "Reviews"));
+        const reviewsData = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        dispatch(setReviewsData(reviewsData));
+    } catch (error) {
+        dispatch(setError(error.message));
+    }
+};
+
+export const addUserReview = (uid, reviewData) => async (dispatch) => {
+    dispatch(setLoading());
+    dispatch(setLoading());
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+        console.error("User is not authenticated");
+        return;
+    }
+
+    try {
+        const docRef = await addDoc(collection(db,  "Reviews"), reviewData);
+        dispatch(addReviewSuccess({ id: docRef.id,
+             ...reviewData }));
+    } catch (error) {
+        dispatch(setError(error.message));
     }
 };
 
