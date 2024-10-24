@@ -1,97 +1,114 @@
-.Auth-containter{
-
-justify-content: center;
- 
-}
-
-.auth-card{
-    flex: 50%;
-    padding: 10px;
-    height: 75%;
-    width: 75%;
-    justify-content: center;
-    
-}
+/* Base styles for all devices */
 body {
-    box-sizing: border-box;
-    justify-content: center;
-   height: 110%;
- width:100% ;
- background-color: lightgray;
-    
-    
-  }
-  
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
+  background-color: lightgray;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.auth-card {
+  padding: 10px;
+  height: auto; /* Set to auto for responsiveness */
+  width: 90%; /* Default width for smaller screens */
+}
+
+.row {
+  display: flex;
+  flex-direction: column; /* Stack on smaller screens */
+  padding: 3%;
+  margin: 3%;
+  width: 90%; /* Default width */
+  box-shadow: 0 4px 8px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  border-radius: 1%;
+}
+
+.img {
+  width: 100%;
+  height: auto; /* Adjust for responsiveness */
+  border-radius: 1%;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  height: auto;
+  width: 60%; /* Adjust for responsiveness */
+  margin-top: 8%;
+}
+
+.input {
+  width: 100%;
+  height: 45px;
+  border-radius: 2px;
+  margin-top: 2%;
+}
+
+.inputform {
+  justify-content: flex-start;
+}
+
+.submit {
+  color: white;
+  background-color: #01BEA0;
+  width: 100%; /* Full width on smaller screens */
+  height: 45px;
+  border-radius: 10px;
+  margin-top: 1%;
+  border: none;
+  box-shadow: 0 7px 8px 0 rgba(0, 0.5, 0, 0.2);
+}
+
+/* Media Queries for Responsive Design */
+@media (min-width: 768px) {
   .row {
-    display: flex;
-    
-    flex-direction: row;
-    border-color: black;
-    padding: 3%;
-    margin: 3%;
-    width: 65%;
-    height: 35%;
-    margin-top: 5%;
-    margin-left: 12%;
-    margin-bottom: 8%;
-    gap: -5rem;
-    border: black;
-
-   
-    box-shadow: 0 4px 8px 8px rgba(0,0,0,0.2);
-    background-color: #ffffff;
-    border-radius: 1%;
-  }
-  
-  
-  .column {
-    flex: 50%;
-    padding: 10px;
-    height: 300px; 
+      flex-direction: row; /* Side by side on tablets and larger */
+      width: 80%; /* Adjust width for larger screens */
   }
 
-  .img{
-    width: 105%;
-    height: 95vh;
-   justify-content: center;
-   border-radius: 1%;
-   margin-top: -8%;
+  .auth-card {
+      width: 70%; /* Adjust width for tablets */
   }
 
-  .form{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .logo{
-    height: 65%;
-    width: 55%;
-    margin-top: 8%;
-    justify-content: center;
-  }
-  .input{
-    justify-content: center;
-    width: 100%;
-    height: 45px;
-    justify-content: space-between;
-    border-radius: 2px;
-    margin-top: 2%;
-   
-    
+  .img {
+      height: 75vh; /* Maintain height for tablets */
   }
 
-  .inputform{
-    justify-content: flex-start;
+  .logo {
+      width: 40%; /* Adjust logo size for tablets */
   }
-  .submit{
-    color: white;
-    background-color:#01BEA0 ;
-    width: 20%;
-    height: 45px;
-    border-radius: 10.33px;
-    margin-top: 1%;
-    border: none;
-    box-shadow: 0 7px 8px 0 rgba(0,0.5,0,0.2);
 
+  .submit {
+      width: 30%; /* Adjust button width for tablets */
   }
+}
+
+@media (min-width: 1024px) {
+  .auth-card {
+      width: 60%; /* Wider for desktop */
+  }
+
+  .img {
+      height: 90vh; /* Adjust height for desktop */
+  }
+
+  .logo {
+      width: 30%; /* Logo size for desktop */
+  }
+
+  .submit {
+      width: 25%; /* Button width for desktop */
+  }
+}

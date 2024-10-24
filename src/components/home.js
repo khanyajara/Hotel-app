@@ -200,7 +200,7 @@ const HomePage = () => {
                 </div>
             </div>
 
-            <div className="row7">
+            {/* <div className="row7">
                 <div className="row0">
                     <label htmlFor="DOA">Date Of Arrival</label>
                     <input type="datetime-local" id="DOA" className="DOA" />
@@ -223,7 +223,7 @@ const HomePage = () => {
                     </select>
                 </div>
                 <div><button className="check-btn">Check Availability</button></div>
-            </div>
+            </div> */}
 
             <div>
                 <h1 className="heading-for-facilities">_____________________<h2 className="heading-color">See Room Types</h2>_____________________________</h1>

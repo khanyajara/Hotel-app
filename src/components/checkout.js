@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addBookings, addBookingToFirestore } from "../redux/dbSlice";
 import { auth } from "../firebase/config";
 import { getProfile } from '../redux/authSlice';
+import emailjs from 'emailjs-com';
 
 const PaymentSection = ({ totalPrice, onCurrencyChange, currency, isPending, onCreateOrder, onApproveOrder }) => (
     <div className='paypal-container'>
@@ -66,14 +67,22 @@ const RoomDetails = ({ roomName, pricePerNight, guests, totalPrice }) => (
 const Checkout = () => {
     const [{ options, isPending }, paypalDispatch] = usePayPalScriptReducer();
     const [currency, setCurrency] = useState(options?.currency || 'USD');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
 
- 
     const storedUser = localStorage.getItem('currentUser');
     const user = useSelector((state) => state.auth.user) || (storedUser ? JSON.parse(storedUser) : {});
+    
+    // Destructure with fallback to avoid runtime errors
     const { room, arrivalDate, departureDate, guests, RoomName, pricePerNight, totalPrice } = location.state || {};
+    
+    // Validate totalPrice
+    if (typeof totalPrice !== 'number') {
+        console.error("Invalid totalPrice");
+        return <p>Error: Invalid booking details.</p>;
+    }
 
     const onCurrencyChange = ({ target: { value } }) => {
         setCurrency(value);
@@ -114,6 +123,7 @@ const Checkout = () => {
             if (user?.uid) {
                 await addBookingToFirestore(auth.currentUser.uid, bookingData);
                 dispatch(addBookings(user.uid, bookingData));
+                
                 alert("Booking successful!");
             } else {
                 alert("You need to be logged in to make a booking. Redirecting to login...");
@@ -129,9 +139,7 @@ const Checkout = () => {
         navigate("/Home");
     };
 
-    useEffect(() => {
-        dispatch(getProfile());
-    }, [dispatch]);
+   
 
     return (
         <div className="checkout">
