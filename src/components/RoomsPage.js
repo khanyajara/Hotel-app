@@ -58,18 +58,28 @@ const RoomsPage = () => {
     
     const shareRoom = (room) => {
         const url = `https://yourwebsite.com/rooms/${room.id}`;
-        const text = `Check out this room: ${room.title}`;
+        const text = `Check out this room: ${room.title} ${url}`;
         
-        const emailLink = `mailto:?subject=${encodeURIComponent(room.title)}&body=${encodeURIComponent(url)}`;
-        const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(room.title + ' ' + url)}`;
-        const facebookLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-        const instagramLink = `https://www.instagram.com/?url=${encodeURIComponent(url)}`;
-
-        window.open(emailLink, '_blank');
-        window.open(whatsappLink, '_blank');
-        window.open(facebookLink, '_blank');
-        window.open(instagramLink, '_blank');
+        const platforms = {
+            Email: `mailto:?subject=${encodeURIComponent(room.title)}&body=${encodeURIComponent(url)}`,
+            WhatsApp: `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`,
+            Facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+        };
+    
+       
+        const sharePopup = window.open('', '_blank', 'width=400,height=300');
+        sharePopup.document.write(`
+            <div style="font-family: Arial, sans-serif; padding: 20px;">
+                <h2>Share this room</h2>
+                ${Object.keys(platforms).map(platform => 
+                    `<a href="${platforms[platform]}" target="_blank" style="display: block; margin: 5px 0;">Share on ${platform}</a>`
+                ).join('')}
+                <button onclick="window.close()" style="margin-top: 10px;">Close</button>
+            </div>
+        `);
+        sharePopup.document.close();
     };
+    
 
     const filteredRooms = data.filter(room => {
         const matchesType = selectedRoomType === 'All' || room.roomType === selectedRoomType;
