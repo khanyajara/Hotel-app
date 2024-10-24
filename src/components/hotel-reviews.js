@@ -2,38 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addReview, FetchReviews } from '../redux/dbSlice'; 
 import './hotel-review.css';
-import { getAuth } from 'firebase/auth';
+
+const ReviewCard = ({ review }) => (
+  <div className="comment-card">
+    <h4>{review.name} - {review.rating} ★</h4>
+    <p>{review.text}</p>
+  </div>
+);
 
 const HotelReview = () => {
   const dispatch = useDispatch();
-  const reviews = useSelector((state) => state.db?.reviews) || []; 
+  
   const [name, setName] = useState('');
   const [text, setText] = useState('');
   const [rating, setRating] = useState(0); 
-  const [error, setError] = useState(null); 
-  const auth = getAuth();
-  const currentUserId = auth.currentUser ? auth.currentUser.uid : null;
+  const error = useSelector((state) => state.db?.error); 
+  const {reviews} = useSelector((state) => state.data) || []; 
+  console.log(reviews)
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(FetchReviews());
-    }, [dispatch])
-  
+  }, [dispatch]);
 
-
-
-
-  const handleSubmit = (e) => {
+  const postReview = (e) => {
     e.preventDefault();
-    if (name && text && rating) {
-      const newReview = { name, text, rating, createdAt: new Date() };
-      dispatch(addReview(currentUserId, newReview))
-        .catch((err) => setError(err.message)); 
+    if (name.trim() && text.trim() && rating > 0) {
+      dispatch(addReview({ name, text, rating }));
       setName('');
       setText('');
       setRating(0);
+    } else {
+      console.error('Please fill in all fields correctly');
     }
   };
-
 
   return (
     <div>
@@ -43,19 +44,21 @@ const HotelReview = () => {
 
       <div className="form-container">
         <h3>Leave a Comment</h3>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={postReview}>
           <input
             type="text"
             placeholder="Your Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            aria-label="Your Name"
           />
           <textarea
             placeholder="Your Comment"
             value={text}
             onChange={(e) => setText(e.target.value)}
             required
+            aria-label="Your Comment"
           />
           <div className="rating">
             <span>Rating: </span>
@@ -70,22 +73,15 @@ const HotelReview = () => {
             ))}
           </div>
           <button type="submit">Submit</button>
-          {error && <p className="error">{error}</p>} {/* Display error */}
+          {error && <p className="error">{error}</p>} 
         </form>
       </div>
 
       <div className="comments">
         <h3>Reviews</h3>
-        {reviews.length === 0 ? (
-          <p>No reviews yet.</p>
-        ) : (
-          reviews.map((review) => (
-            <div className="comment-card" key={review.id}>
-              <h4>{review.name} - {review.rating} ★</h4>
-              <p>{review.text}</p>
-            </div>
-          ))
-        )}
+        {reviews.map((review) => (
+          <ReviewCard key={review.id} review={review} />
+        ))}
       </div>
     </div>
   );

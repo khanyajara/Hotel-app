@@ -1,77 +1,70 @@
 import React, { useState, useEffect } from "react";
 import "./RoomsPage.css";
-import {auth} from "../firebase/config"
+import { auth } from "../firebase/config";
 import Star from "./Star.png";
-import logo from "../h-removebg-preview.png"
+import logo from "../h-removebg-preview.png";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData, addLikedRoom, FetchUserBookings } from "../redux/dbSlice";
-import { getProfile } from "../redux/authSlice";
+import { fetchData, FetchUserBookings, addFavorite, getUserFavorites } from "../redux/dbSlice";
+import { getProfile, fetchUser } from "../redux/authSlice";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareSquare } from '@fortawesome/free-solid-svg-icons';
 
 const RoomsPage = () => {
     const { data, error, loading } = useSelector((state) => state.data || {});
-    const user = useSelector((state) => state.auth.user || {});
-    const [likedRooms, setLikedRooms] = useState([]);
-    const [selectedRoomType, setSelectedRoomType] = useState('All');
-    const [searchInput, setSearchInput] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        dispatch(fetchData());
-    }, [dispatch]);
+    
+    const [user, setUser] = useState(null);
+    const [selectedRoomType, setSelectedRoomType] = useState('All');
+    const [likedRooms, setLikedRooms] = useState([]);
+    const [searchInput, setSearchInput] = useState('');
 
     useEffect(() => {
-        dispatch(getProfile());
+        
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        if (storedUser) {
+            setUser(storedUser);
+            dispatch(fetchUser());
+        }
+        dispatch(fetchData());
+        dispatch(getUserFavorites());
     }, [dispatch]);
+
     useEffect(() => {
         if (user?.uid) {
-            dispatch(FetchUserBookings(auth.currentUser));
-           
+            dispatch(FetchUserBookings(user.uid));
         }
     }, [dispatch, user]);
-
-
-    console.log(auth.currentUser)
-
 
     const blog = () => {
         navigate("/Leave-review");
     };
 
     const navigateTo = (path) => () => navigate(path);
-    
+
     const toggleLike = (roomData) => {
-        if (likedRooms.includes(roomData.id)) {
-            setLikedRooms(likedRooms.filter((id) => id !== roomData.id));
-            dispatch(addLikedRoom(roomData.id, false));
-            } else {
-                setLikedRooms([...likedRooms, roomData.id]);
-                dispatch(addLikedRoom(roomData.id, true));
-                }
-
-    };
-
-   
-
+        const isLiked = likedRooms.includes(roomData.id);
     
+        if (isLiked) {
+            setLikedRooms(likedRooms.filter((id) => id !== roomData.id));
+            dispatch(addFavorite(user.uid, roomData.id, false));
+        } else {
+            setLikedRooms([...likedRooms, roomData.id]);
+            dispatch(addFavorite(user.uid, roomData.id, true)); 
+        }
+    };
     
     const shareRoom = (room) => {
         const url = `https://yourwebsite.com/rooms/${room.id}`;
         const text = `Check out this room: ${room.title}`;
         
-        // Email link
         const emailLink = `mailto:?subject=${encodeURIComponent(room.title)}&body=${encodeURIComponent(url)}`;
-        // WhatsApp link
         const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(room.title + ' ' + url)}`;
-        // Facebook link
         const facebookLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-        // Instagram link
         const instagramLink = `https://www.instagram.com/?url=${encodeURIComponent(url)}`;
 
-        // Open share links in new tab (optional)
         window.open(emailLink, '_blank');
         window.open(whatsappLink, '_blank');
         window.open(facebookLink, '_blank');
@@ -119,6 +112,8 @@ const RoomsPage = () => {
 
             <div>
                 <h1>Rooms</h1>
+                {loading && <p>Loading...</p>}
+                {error && <p>Error fetching rooms: {error}</p>}
                 <div className="Rooms-Sections">
                     {filteredRooms.map((roomData) => (
                         <div className="Rooms-info" key={roomData.id}>
@@ -161,7 +156,7 @@ const RoomsPage = () => {
             <div>
                 <h2>Liked Rooms</h2>
                 <div className="Rooms-Sections">
-                    {likedRooms.map((roomId) => {
+                    {Array.isArray(likedRooms) && likedRooms.map((roomId) => {
                         const roomData = data.find(room => room.id === roomId);
                         return roomData ? (
                             <div className="Rooms-info" key={roomId}>

@@ -48,10 +48,10 @@ table th {
 }
 
 .card {
-    border: 1px solid #ddd;
+    border: 1px solid #929292;
     border-radius: 5px;
     padding: 10px;
-    width: calc(33% - 10px);
+    width: calc(83% - 10px);
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;

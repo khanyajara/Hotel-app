@@ -1,102 +1,98 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './userProfile.css';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { userLikedRooms, FetchUserBookings } from '../redux/dbSlice'; 
 import { fetchUser } from '../redux/authSlice';
+import { getUserFavorites, FetchUserBookings } from '../redux/dbSlice';
 
 const UserProfile = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const user = useSelector((state) => state.auth.user || {});
-    const likedRooms = user.likedRooms || [];
-    const bookings = useSelector((state) => state.auth.bookings || []);
+    const bookings = useSelector((state) => state.data.bookings || []);
+    const favorites = useSelector((state) => state.data.favorites || []);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (user.id) {
-            dispatch(fetchUser(user.id));   
-            dispatch(userLikedRooms(user.id)); 
-            dispatch(FetchUserBookings(user.id)); 
-          
+        if (user.uid) {
+            const fetchData = async () => {
+                await dispatch(fetchUser(user.uid));
+                await dispatch(getUserFavorites(user.uid)); 
+                await dispatch(FetchUserBookings(user.uid));
+                setLoading(false);
+            };
+            fetchData();
+        } else {
+            setLoading(false);
         }
-    }, [dispatch, user.id]);
-    console.log(bookings)
+    }, [dispatch, user.uid]);
 
-    
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="container">
-            <div>
-                <h1>User Profile</h1>
-            </div>
-
-            <div>
-                <section className="user-info">
-                    <h2>User Information</h2>
-                    <p><strong>Name:</strong> {user.firstName || 'Guest'}</p>
-                    <p><strong>Last:</strong>{user.lastName || "null"}</p>
-                    <p><strong>Email:</strong> {user?.email || 'Not provided'}</p>
-                </section>
-            </div>
-
-            <div>
-                <section className="user-bookings">
-                    <h2>User Bookings</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Transaction ID</th>
-                                <th>Arrival Date</th>
-                                <th>Departure Date</th>
-                                <th>Guests</th>
-                                <th>Paid</th>
-                                <th>Room</th>
-                                <th>Price per Night</th>
-                                <th>Total Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {bookings.length > 0 ? (
-                                bookings.map(booking => (
-                                    <tr key={booking.transactionId}>
-                                        <td>{booking.transactionId}</td>
-                                        <td>{new Date(booking.arrivalDate).toLocaleString()}</td>
-                                        <td>{new Date(booking.departureDate).toLocaleString()}</td>
-                                        <td>{booking.guests}</td>
-                                        <td>{booking.paid ? "Yes" : "No"}</td>
-                                        <td>{booking.room}</td>
-                                        <td>${booking.pricePerNight}</td>
-                                        <td>${booking.totalPrice}</td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan="8">No bookings found</td>
+            <h1>User Profile</h1>
+            <section className="user-info">
+                <h2>User Information</h2>
+                <p><strong>Name:</strong> {user?.firstName || 'Guest'}</p>
+                <p><strong>Last:</strong> {user?.lastName || "Not provided"}</p>
+                <p><strong>Email:</strong> {user?.email || 'Not provided'}</p>
+            </section>
+            <section className="user-bookings">
+                <h2>User Bookings</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Arrival Date</th>
+                            <th>Departure Date</th>
+                            <th>Guests</th>
+                            <th>Paid</th>
+                            <th>Room</th>
+                            <th>Price per Night</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {bookings.length > 0 ? (
+                            bookings.map(booking => (
+                                <tr key={booking.transactionId}>
+                                    <td>{booking.transactionId}</td>
+                                    <td>{new Date(booking.arrivalDate).toLocaleDateString()}</td>
+                                    <td>{new Date(booking.departureDate).toLocaleDateString()}</td>
+                                    <td>{booking.guests}</td>
+                                    <td>{booking.paid ? "Yes" : "No"}</td>
+                                    <td>{booking.room || "Room Name Unavailable"}</td>
+                                    <td>${booking.pricePerNight}</td>
+                                    <td>${booking.totalPrice}</td>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </section>
-            </div>
-
-            <div>
-                <section className="liked-rooms">
-                    <h2>Liked Rooms</h2>
-                    <div className="room-cards">
-                        {Array.isArray(likedRooms) && likedRooms.length > 0 ? (
-                            likedRooms.map(room => (
-                                <div key={room.id} className="card">
-                                    <h3>{room.name}</h3>
-                                    <p>Price: {room.price}</p>
-                                </div>
                             ))
                         ) : (
-                            <p>No liked rooms found</p>
+                            <tr>
+                                <td colSpan="8">No bookings found</td>
+                            </tr>
                         )}
-                    </div>
-                </section>
-            </div>
+                    </tbody>
+                </table>
+            </section>
+            <section className="user-favorites">
+                <h2>User Favorites</h2>
+                <div className="favorite-rooms">
+                    {favorites.length > 0 ? (
+                        favorites.map(favorite => (
+                            <div key={favorite.id} className="card">
+                                <p>Room ID: {favorite.roomId}</p>
+                                <p>Favorite: {favorite.isFavorite ? "Yes" : "No"}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No favorite rooms found</p>
+                    )}
+                </div>
+            </section>
         </div>
     );
 };

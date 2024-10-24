@@ -3,6 +3,20 @@ import { getDocs, collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { getAuth } from 'firebase/auth';
 import { async } from '@firebase/util';
+import { Timestamp } from 'firebase/firestore';
+
+const convertTimestamps = (data) => {
+    return Object.keys(data).reduce((acc, key) => {
+        if (data[key] instanceof Timestamp) {
+            acc[key] = data[key].toDate(); 
+        } else if (typeof data[key] === 'object' && data[key] !== null) {
+            acc[key] = convertTimestamps(data[key]); 
+        } else {
+            acc[key] = data[key];
+        }
+        return acc;
+    }, {});
+};
 
 const initialState = {
     data: [],
@@ -53,16 +67,8 @@ const roomSlice = createSlice({
             state.loading = false;
         },
         setLikedRooms(state, action) {
-            const { userId, roomId } = action.payload;
-            if (!state.likedRooms[userId]) {
-                state.likedRooms[userId] = [];
-            }
-            const index = state.likedRooms[userId].indexOf(roomId);
-            if (index === -1) {
-                state.likedRooms[userId].push(roomId); // Liking
-            } else {
-                state.likedRooms[userId].splice(index, 1); // Unliking
-            }
+           state.likedRooms = action.payload;
+
         },
        
         addReviewSuccess(state, action) {
@@ -73,7 +79,15 @@ const roomSlice = createSlice({
         setReviewsData(state, action) {
             state.reviews = action.payload
             state.loading = false;
-        }
+        },
+        addFavoriteToState(state, action) {
+            state.favorites.push(action.payload);
+            state.loading = false;
+          },
+          setFavorites(state, action) {
+            state.favorites = action.payload; // Set the favorites to the payload
+        },
+        
     },
 });
 
@@ -90,7 +104,9 @@ export const {
     addBookingSuccess, 
     addRoomSuccess,
     setLikedRooms,
-    setBookingData 
+    setBookingData ,
+    addFavoriteToState,
+    setFavorites
 } = roomSlice.actions;
 
 export const selectReservedRoom = (state) => state.room.reservedRoom;
@@ -151,10 +167,10 @@ export const addRooms = (Roomsdata) => async (dispatch) => {
     }
 };
 
-export const fetchClientBookings = (email) => async (dispatch) => {
+export const fetchClientBookings = (uid) => async (dispatch) => {
     dispatch(setLoading());
     try {
-        const querySnapshot = await getDocs(collection(db, "Bookings", email, "ClientBooks"));
+        const querySnapshot = await getDocs(collection(db, "Bookings", uid, "ClientBooks"));
         const data = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
@@ -180,28 +196,20 @@ export const userLikedRooms = (uid) => async (dispatch) => {
    }
 };
 
-export const addLikedRoom = (uid, userId, roomData) => async (dispatch) => {
-    dispatch(setLoading());
-    const auth = getAuth();
-    const currentUser = auth.currentUser;
 
-    if (!currentUser) {
-        console.error("User is not authenticated");
-        return;
-    }
 
+export const addLikedRoom = (uid, roomId) => async (dispatch) => {
     dispatch(setLoading());
     try {
-        const likedRoomRef = await addDoc(collection(db, "users", uid, "LikedRooms"), {
-            userId,
-            ...roomData 
-        });
-        
-        dispatch(setLikedRooms({ userId, roomId: likedRoomRef.id }));
+        await addDoc(collection(db, "users", uid, "LikedRooms"), { roomId });
+
+       
+        dispatch(addFavoriteToState({ roomId }));
     } catch (error) {
-        console.error("Error adding liked room:", error);
+        dispatch(setError(error.message));
     }
 };
+  
 
 export const addReservations = (uid, bookingData) => async (dispatch) => {
     dispatch(setLoading());
@@ -231,10 +239,7 @@ export const addBookingToFirestore = (uid, roomId, bookingData) => async (dispat
     const auth = getAuth();
     const currentUser = auth.currentUser;
 
-    if (!currentUser) {
-        console.error("User is not authenticated");
-        return; 
-    }
+   
 
     dispatch(setLoading());
     try {
@@ -251,37 +256,94 @@ export const addBookingToFirestore = (uid, roomId, bookingData) => async (dispat
     }
 };
 
-
-export const addReview = (reviewsData)=> async (dispatch)=>{
+export const addReview = (reviewsData) => async (dispatch) => {
     dispatch(setLoading());
-    try{
-        const reviewRef = await addDoc(collection(db, "Reviews"), {
-            ...reviewsData
-            });
-            dispatch(setReviews({reviewsData}));
-            }
-            catch(error){
-                console.error("Error adding review:", error);
-                dispatch(setError(error.message));
-
+    try {
+        const reviewRef = await addDoc(collection(db, "Reviews"), reviewsData);
+        const convertedData = convertTimestamps({
+            id: reviewRef.id,
+            ...reviewsData,
+        });
+        dispatch(addReviewSuccess(convertedData));
+    } catch (error) {
+        console.error("Error adding review:", error);
+        dispatch(setError(error.message));
     }
 };
 
-export const FetchReviews=()=> async (dispatch)=>{
-    try{
-        const reviewsRef = collection(db, "Reviews");
-        const reviewsSnapshot = await getDocs(reviewsRef);
-        const reviews = reviewsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc
-            .data() }));
-            dispatch(setReviewsData({reviews}));
-            }
-            catch(error){
-                console.error("Error fetching reviews:", error)
-                
+export const FetchReviews = () => async (dispatch) => {
+    dispatch(setLoading());
+    try {
+        const reviewsCollection = collection(db, "Reviews");
+        const reviewSnapshot = await getDocs(reviewsCollection);
+        const reviewsList = reviewSnapshot.docs.map(doc => {
+            const data = doc.data();
+            return {
+                id: doc.id,
+                ...convertTimestamps(data), // Convert timestamps here
+            };
+        });
 
-
-
+        dispatch(setReviewsData(reviewsList)); 
+    } catch (error) {
+        console.error("Error fetching reviews:", error);
+        dispatch(setError(error.message));
     }
 }
 
+export const getFavorites = (uid) => async (dispatch) => {
+    dispatch(setLoading());
+    try {
+      const globalQuerySnapshot = await getDocs(collection(db, "Favorites"));
+      const globalFavorites = globalQuerySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      const userQuerySnapshot = await getDocs(collection(db, "users", uid, "favorites"));
+      const userFavorites = userQuerySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      const combinedFavorites = [...globalFavorites, ...userFavorites];
+      dispatch(setFavorites(combinedFavorites));
+    } catch (error) {
+      dispatch(setError(error.message));
+    }
+  };
+ 
+  export const getUserFavorites = (uid) => async (dispatch) => {
+    dispatch(setLoading());
+    try {
+      const querySnapshot = await getDocs(collection(db, "users", uid, "favorites"));
+      const userFavorites = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      dispatch(setFavorites(userFavorites));
+    } catch (error) {
+      dispatch(setError(error.message));
+    }
+  };
 
+  export const addFavorite = (uid,roomId, Roomsdata,isFavorite) => async (dispatch) => {
+    dispatch(setLoading());
+    const favoriteData = {
+        roomId,
+        isFavorite,
+        Roomsdata
+    };
+
+    try {
+      const globalDocRef = await addDoc(collection(db, "Favorites"), favoriteData);
+      console.log("Favorite added to global collection with ID: ", globalDocRef.id);
+      const userDocRef = await addDoc(collection(db, "users", uid, "favorites"), favoriteData);
+      console.log("Favorite added to user's collection with ID: ", userDocRef.id);
+      dispatch(addFavoriteToState({
+        globalId: globalDocRef.id,
+        userId: userDocRef.id,
+        ...favoriteData
+      }));
+    } catch (error) {
+      dispatch(setError(error.message));
+    }
+  };
