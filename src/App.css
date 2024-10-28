@@ -1,77 +1,134 @@
-
-
-
-
-
-
-
-
-
 .App {
   text-align: center;
-  
 }
 
-button{ 
+button { 
   cursor: pointer;
-  
 }
 
-a{
+a {
   color: black;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2.5rem; /* Adjust font size as needed */
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
+
 h2 {
   font-size: 2rem;
   font-weight: 600;
   line-height: 1.3;
   margin-bottom: 0.9rem;
 }
+
 h3 {
   font-size: 1.75rem;
   font-weight: 600;
   line-height: 1.3;
   margin-bottom: 0.8rem;
 }
+
 h4 {
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.3;
   margin-bottom: 0.7rem;
 }
+
 h5 {
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.4;
   margin-bottom: 0.6rem;
 }
+
 h6 {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.4;
   margin-bottom: 0.5rem;
 }
+
 p {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
   margin-bottom: 1.5rem;
-
-  
 }
 
-
-
-
-.loader{
+/* Loader styles */
+.loader {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  h1 {
+    font-size: 2.2rem; /* Slightly smaller for medium screens */
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+  }
+
+  h6 {
+    font-size: 0.9rem;
+  }
+
+  p {
+    font-size: 0.95rem; /* Slightly smaller paragraph text */
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem; /* Smaller for small screens */
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 0.8rem;
+  }
+
+  p {
+    font-size: 0.9rem; /* Adjust paragraph size for small screens */
+    margin-bottom: 1rem; /* Adjust bottom margin */
+  }
+
+  .loader {
+    min-height: 80vh; /* Reduce height for smaller screens */
+  }
 }

@@ -1,11 +1,11 @@
 body {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Allow wrapping */
   justify-content: center;
   align-items: center;
   border-color: black;
-  width: 100%;
+  width: 50%;
   height: auto;
   gap: -5rem;
   border: black;
@@ -89,12 +89,7 @@ body {
   border-radius: 1rem;
 }
 
-.columns3 {
-  float: left;
-  height: 50%;
-  width: 100%;
-}
-
+.columns3,
 .columns2 {
   float: left;
   height: 50%;
@@ -394,7 +389,6 @@ a:hover {
   width: 100%;
   align-items: center;
   justify-content: start;
-  background-color: transparent;
 }
 
 .container-apl {
@@ -431,127 +425,197 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  opacity: 0.8;
-  cursor: pointer;
+  background-color: #fff;
+  color: #01BEA0;
 }
 
-/* Responsive adjustments */
-@media (max-width: 1200px) {
+/* Media Queries for Responsiveness */
+
+/* Small Devices (Mobile) */
+@media only screen and (max-width: 600px) {
+
   body {
-    flex-direction: column; /* Keep the column layout */
-    padding: 0 2%; /* Add some padding for better spacing */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center;
+    align-items: center;
+    border-color: black;
+    width: 50%;
+    height: auto;
+    gap: -5rem;
+    border: black;
+    background-color: #ffffff;
   }
-
   .topNavBar {
-    flex-direction: column; /* Stack items vertically */
-    gap: 1rem; /* Adjust gap */
+    flex-direction: column; /* Stack elements vertically */
+  }
+  .Img0, .Img {
+    max-height: 10rem; /* Adjust max height for smaller screens */
   }
 
-  .Profile {
-    width: 80%; /* Adjust width for medium devices */
-    max-width: 180px; /* Keep max width */
+  .Img1 {
+    max-height: 5rem; /* Adjust max height for smaller images */
+  }
+
+
+  .logo1 {
+    width: 80%; /* Adjust logo size */
   }
 
   .img-container {
-    flex-direction: column; /* Stack images vertically */
-    gap: 1rem; /* Adjust gap */
+    flex-direction: row; /* Stack images vertically */
+    width: 50%;
+    /* Full width */
   }
 
-  .Home-btn,
-  .check-btn,
-  .room-BTNS {
-    width: 90%; /* Full width for buttons */
-    margin: 0 auto; /* Center buttons */
+  .Home-btn {
+    width: 100%; /* Full width */
   }
 
-  .row0,
-  .row7,
-  .row8 {
-    width: 90%; /* Adjust width */
-    margin: 0 auto; /* Center rows */
+  .first-row {
+    width: 100%; /* Full width */
+    padding: 5px; /* Adjust padding */
+  }.Footer {
+    width: 110%;
+    height: auto;
+    margin-left: -83px;
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-around;
+    gap: 5rem;
+    align-items: center;
+    text-align: start;
+    border-radius: 1em;
   }
 
-  .Footer {
-    flex-direction: column; /* Stack footer items */
-    align-items: center; /* Center items */
-    gap: 2rem; /* Add gap between footer items */
-  }
-
-  .footer-info,
   .footer-nav {
+    flex-direction: column; /* Stack footer links */
     width: 100%; /* Full width */
-    text-align: center; /* Center text */
+  }
+
+  .footer-subscribe {
+    width: 100%; /* Full width */
+  }
+
+  .row8 {
+    flex-direction: column; /* Stack items vertically */
   }
 }
 
-@media (max-width: 768px) {
-  body {
-    padding: 0 1%; /* Reduce padding */
-  }
-
+/* Medium Devices (Tablets) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
   .topNavBar {
-    gap: 0.5rem; /* Reduce gap */
-  }
-
-  .Profile {
-    width: 90%; /* Wider for smaller screens */
-  }
-
-  .img-container {
-    gap: 0.5rem; /* Reduce gap */
-  }
-
-  .Home-btn,
-  .check-btn,
-  .room-BTNS {
-    font-size: medium; /* Slightly adjust font size */
-  }
-
-  .experience,
-  .experience0 {
-    font-size: large; /* Adjust font size */
-    width: 100%; /* Full width */
+    flex-direction: row; /* Align items in a row */
+    justify-content: space-around; /* Space items evenly */
   }
 
   .logo1 {
     width: 70%; /* Adjust logo size */
   }
 
-  .footer-subscribe {
-    width: 100%; /* Full width */
-    margin-top: 0; /* Reset margin */
+  .img-container {
+    flex-direction: row; /* Align images in a row */
+    width: 90%; /* Adjust width */
+  }
+  .Img0, .Img {
+    max-height: 25rem; /* Adjust max height for medium screens */
   }
 
-  .Facilities {
-    padding: 5% 2%; /* Adjust padding */
+  .Img1 {
+    max-height: 12rem; /* Adjust max height for smaller images */
+  }
+
+  .Home-btn {
+    width: 50%; /* Half width */
+  }
+
+  .first-row {
+    width: 45%; /* Adjust width */
+  }
+
+  .footer-nav {
+    width: 80%; /* Adjust footer links width */
+  }
+
+  .footer-subscribe {
+    width: 90%; /* Adjust width */
   }
 }
 
-@media (max-width: 480px) {
-  body {
-    padding: 0; /* Remove padding */
+/* Large Devices (Desktops) */
+@media only screen and (min-width: 1025px) {
+  .topNavBar {
+    flex-direction: row; /* Keep items in a row */
   }
 
-  .Home-btn,
-  .check-btn,
-  .room-BTNS {
-    width: 100%; /* Full width for buttons */
-    font-size: small; /* Smaller font size */
+  .logo1 {
+    width: 60%; /* Adjust logo size */
   }
 
-  .experience,
-  .experience0 {
-    font-size: large; /* Adjust font size */
-    width: 100%; /* Full width */
+  .img-container {
+    width: 80%; /* Adjust width */
+  }
+
+  .Home-btn {
+    width: 30%; /* Adjust button size */
+  }
+
+  .first-row {
+    width: 30%; /* Adjust width */
+  }
+
+  .footer-nav {
+    width: 70%; /* Adjust footer links width */
   }
 
   .footer-subscribe {
-    width: 100%; /* Full width */
-    margin-top: 0; /* Reset margin */
+    width: 70%; /* Adjust width */
+  }
+  .Img0, .Img {
+    max-height: 30.2rem; /* Retain original size for larger screens */
   }
 
-  input[type="text"],
-  input[type="submit"] {
-    width: 100%; /* Full width for input fields */
+  .Img1 {
+    max-height: 15rem; /* Retain original size for smaller images */
+  }
+}
+.menu-btn {
+  display: none; /* Hidden on larger screens */
+  background-color: transparent;
+  border: none;
+  color: grey;
+  font-size: 2rem;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .menu-btn {
+      display: block; /* Shown on smaller screens */
+  }
+  .nav-items {
+      display: none; /* Hidden by default */
+      flex-direction: column; /* Stack items vertically */
+      position: absolute;
+      top: 5rem;
+      right: 1rem;
+      background-color: white; /* Adjust background as needed */
+      padding: 1rem;
+      border: 1px solid goldenrod;
+      border-radius: 5px;
+      z-index: 1000;
+  }
+  .nav-items.active {
+      display: flex; /* Show when active */
   }
 }

@@ -19,50 +19,44 @@ import { getProfile, logout } from "../redux/authSlice";
 import { FetchUserBookings } from "../redux/dbSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import {auth} from "../firebase/config"
-
+import { auth } from "../firebase/config";
 
 const HomePage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [isOpen, setIsOpen]= useState(false)
+    const [isOpen, setIsOpen] = useState(false);
     const [isProfileVisible, setIsProfileVisible] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const user = useSelector((state) => state.auth.user || {});
-    const {bookings} = useSelector((state) => state.db || []);
+    const { bookings } = useSelector((state) => state.db || []);
 
     useEffect(() => {
         dispatch(getProfile());
     }, [dispatch]);
+
     useEffect(() => {
         if (user?.uid) {
             dispatch(FetchUserBookings(auth.currentUser));
-           
         }
     }, [dispatch, user]);
 
+    console.log(auth.currentUser);
 
-    console.log(auth.currentUser)
-    
     useEffect(() => {
         console.log(bookings);
     }, [bookings]);
 
+    const dropdown = () => {
+        setIsOpen(!isOpen);
+    };
 
-    const dropdown= ()=>{
-        setIsOpen(!isOpen)
-    }
-    
-    
     const home = () => {
         navigate("/Home");
     };
 
     const room = () => {
-
-        navigate("/Rooms", { state: {    firstName: user.firstName, lastName: user.lastName, uid: user.uid } });
+        navigate("/Rooms", { state: { firstName: user.firstName, lastName: user.lastName, uid: user.uid } });
     };
-    
-         
 
     const Booking = () => {
         navigate("/Booking");
@@ -81,9 +75,9 @@ const HomePage = () => {
         navigate('*');
     };
 
-    const Profile=()=>{
+    const Profile = () => {
         navigate("/user-info");
-    }
+    };
 
     const blog = () => {
         navigate("/Leave-review");
@@ -93,21 +87,26 @@ const HomePage = () => {
         navigate("/how-to-get-there");
     };
 
-
-
     const roomfilter = () => {
-       navigate("/Rooms") 
-    }
+        navigate("/Rooms");
+    };
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen); // Toggle hamburger menu
+    };
 
     return (
         <div className="row3">
-            <div className="topNavBar">
-                <h2><a onClick={home} className="NavBar">Home</a></h2>
-                <h2><a onClick={room} className="NavBar">Rooms</a></h2>
-                <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
-                <img src={logo} className="logo1" alt="Logo" />
-                <h2><a onClick={Gallery} className="NavBar">Gallery</a></h2>
-                <h2><a onClick={goToHowToGetThere} className="NavBar">How To Get There</a></h2>
+             <div className="topNavBar">
+                <button className="menu-btn" onClick={toggleMenu}>
+                    ☰
+                </button>
+                <div className={`nav-items ${isMenuOpen ? "active" : ""}`}>
+                    <h2><a onClick={home} className="NavBar">Home</a></h2>
+                    <h2><a onClick={room} className="NavBar">Rooms</a></h2>
+                    <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
+                    <h2><a onClick={Gallery} className="NavBar">Gallery</a></h2>
+                    <h2><a onClick={goToHowToGetThere} className="NavBar">How To Get There</a></h2>
+                </div>
                 <div className="Profile">
                     <h2>
                         <button className="iconss-btn" aria-label="User Profile" onClick={() => setIsProfileVisible(!isProfileVisible)}>
@@ -116,10 +115,10 @@ const HomePage = () => {
                     </h2>
                     {isProfileVisible && (
                         <div className="profile-dropdown">
-                            <h2>Welcome, {user.firstName}<br/> {user.lastName}</h2>
+                            <h2>Welcome, {user.firstName}<br /> {user.lastName}</h2>
                             <p>{user.email}</p>
                             <p>{user.phoneNumber}</p>
-                            <button onClick={handleLogout} className="Pro-btn">Logout</button><br/>
+                            <button onClick={handleLogout} className="Pro-btn">Logout</button><br />
                             <button onClick={Profile} className="Pro-btn">View Profile</button>
                         </div>
                     )}
@@ -138,21 +137,21 @@ const HomePage = () => {
                     <h2>Welcome to <h2 className="heading-color">Forrest Hills Hotel</h2>, a piece of paradise set in the heart of Kimberley</h2>
                 </div>
                 <p className="HEAD_FONT">Nestled amid a lush, verdant landscape, the Forrest Hills Hotel offers an unparalleled five-star retreat where 
-                   nature and luxury converge. The hotel features elegantly appointed suites with private balconies overlooking 
-                   serene, rolling hills. Guests can indulge in world-class dining at the Forest Grill, unwind at the tranquil spa 
-                   with treatments inspired by natural elements, and explore extensive gardens and hiking trails.
-                   With personalized service, a stunning infinity pool, and exclusive access to pristine 
-                   forest trails, the Forrest Hills Hotel ensures an unforgettable 
-                   escape into nature’s grandeur.</p>
+                    nature and luxury converge. The hotel features elegantly appointed suites with private balconies overlooking 
+                    serene, rolling hills. Guests can indulge in world-class dining at the Forest Grill, unwind at the tranquil spa 
+                    with treatments inspired by natural elements, and explore extensive gardens and hiking trails.
+                    With personalized service, a stunning infinity pool, and exclusive access to pristine 
+                    forest trails, the Forrest Hills Hotel ensures an unforgettable 
+                    escape into nature’s grandeur.</p>
                 <button className="Home-btn" onClick={room}>Book Now</button>
             </div>
 
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
 
             <div className="Facilities-Activities">
                 <div>
@@ -200,96 +199,50 @@ const HomePage = () => {
                 </div>
             </div>
 
-            {/* <div className="row7">
-                <div className="row0">
-                    <label htmlFor="DOA">Date Of Arrival</label>
-                    <input type="datetime-local" id="DOA" className="DOA" />
-                </div>
-                <div className="row0">
-                    <label htmlFor="DOD">Date Of Departure</label>
-                    <input type="datetime-local" id="DOD" className="DOA" />
-                </div>
-                <div className="row0">
-                    <label htmlFor="Guests">No. Guests</label>
-                    <select id="Guests" name="Guests" className="DOA">
-                        <option value="0"></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                    </select>
-                </div>
-                <div><button className="check-btn">Check Availability</button></div>
-            </div> */}
-
             <div>
                 <h1 className="heading-for-facilities">_____________________<h2 className="heading-color">See Room Types</h2>_____________________________</h1>
             </div>
             <div className="row8">
-            <div>
-                <h2 onClick={dropdown} style={{ cursor: 'pointer' }}>
-                    Deluxe
-                </h2>
-                {isOpen && (
-                    <>
-                        <p>____________________________________________</p>
-                        <h2 className="heading-color">Deluxe</h2>
-                        <p className="heading-color">____________________________________________</p>
-                        <ul>
-                            <li> <button onClick={roomfilter} className="room-BTNS">Comfort</button></li>
-                            <li> <button onClick={roomfilter} className="room-BTNS">Luxury Amenities</button></li>
-                            <li> <button onClick={roomfilter} className="room-BTNS">Spacious Rooms</button></li>
-                            <li> <button onClick={roomfilter} className="room-BTNS">Beautiful Views</button></li>
-                        </ul>
-                        <p className="heading-color">____________________________________________</p>
-                    </>
-                )}
-                
-            </div>
-            <div className="Room-Imgdiv">
-                <img src={RoomImg} className="roomImg" alt="Room" />
-            </div>
-        </div>
-
-            <div className="Facilities-container-0">
                 <div>
-                    <h1 className="heading-for-facilities">_______________<h2 className="heading-color">Our Facilities Include</h2>_________________________</h1>
+                    <h2 onClick={dropdown} style={{ cursor: 'pointer' }}>
+                        Deluxe
+                    </h2>
+                    {isOpen && (
+                        <>
+                            <p>____________________________________________</p>
+                            <h2 className="heading-color">Deluxe</h2>
+                            <p className="heading-color">____________________________________________</p>
+                            <p className="text">The Deluxe Room offers a spacious, elegant retreat with a king-sized bed, luxurious amenities, and stunning views.</p>
+                        </>
+                    )}
                 </div>
-                <div className="facilities-container">
-                    <div className="first-row">
-                        <h3>Leisure and Relaxation</h3>
-                        <ul className="list">
-                            <li>Swimming</li>
-                            <li>Spa and Wellness Center</li>
-                            <li>Fitness Center</li>
-                        </ul>
-                    </div>
-                    <div className="first-row">
-                        <h3>Entertainment</h3>
-                        <ul className="list">
-                            <li>Game Rooms</li>
-                            <li>In-house Movie Screening</li>
-                            <li>Kid's Play Area</li>
-                            <li>Business Center</li>
-                            <li>Library</li>
-                        </ul>
-                    </div>
-                    <div className="first-row">
-                        <h3>Dining and Socializing</h3>
-                        <ul className="list">
-                            <li>Restaurants and Bars</li>
-                            <li>Rooftop Lounges</li>
-                            <li>Room Service</li>
-                            <li>Event Spaces</li>
-                        </ul>
-                    </div>
+                <div>
+                    <h2 onClick={dropdown} style={{ cursor: 'pointer' }}>
+                        Luxury Suite
+                    </h2>
+                    {isOpen && (
+                        <>
+                            <p>____________________________________________</p>
+                            <h2 className="heading-color">Luxury Suite</h2>
+                            <p className="heading-color">____________________________________________</p>
+                            <p className="text">The Luxury Suite features a separate living area, plush furnishings, and exclusive access to the concierge lounge.</p>
+                        </>
+                    )}
+                </div>
+                <div>
+                    <h2 onClick={dropdown} style={{ cursor: 'pointer' }}>
+                        Presidential Suite
+                    </h2>
+                    {isOpen && (
+                        <>
+                            <p>____________________________________________</p>
+                            <h2 className="heading-color">Presidential Suite</h2>
+                            <p className="heading-color">____________________________________________</p>
+                            <p className="text">The Presidential Suite provides an opulent experience with a private terrace, gourmet kitchen, and personalized service.</p>
+                        </>
+                    )}
                 </div>
             </div>
-
-            <br />
             <br />
             <br />
             <br />

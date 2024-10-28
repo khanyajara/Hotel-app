@@ -1,136 +1,177 @@
-.card-0{
+body {
     display: flex;
- 
     flex-direction: column;
-    border-color: black;
-    padding: 5%;
-    
     width: 100%;
     height: auto;
-   
-   
-    margin-bottom: 8%;
-    gap: -5rem;
-    border: black;
-
-   
-    box-shadow: 0 4px 8px 8px rgba(0,0,0,0.2);
     background-color: #ffffff;
-    border-radius: 15px;
 }
 
-.card-1{
+.card-1 {
     box-shadow: 0 4px 8px 8px rgba(0,0,0,0.2);
     width: 100%;
     height: auto;
     background-color: #c9c9c9;
     border-radius: 15px;
-    
+    margin-bottom: 20px;
 }
 
-.card-btn{
- width: 100%;
- 
- display: flex;
- justify-content: end;
-}
-
-.card-1-0{
-    border-radius: 100%;
+.card-btn {
+    width: 100%;
     display: flex;
-    align-items: end;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.card-1-0 {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
     width: 45px;
     height: 45px;
     border: none;
     background-color: transparent;
     cursor: pointer;
     justify-content: center;
-    align-items: center;
-    
 }
 
-.Info-deck{
+.Info-deck {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px; /* For better spacing between columns */
+    padding: 20px;
+}
+
+.Info-deck-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 48%;
+    padding: 10px;
+}
+
+.booking-div {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    height: 5vh;
+    margin-top: 10px;
+}
+
+.booking-btn {
+    width: 25%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    width: 100%;
+    background-color: #3BCBBF;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 6px 8px 6px rgba(0, 5, 0, 0.2);
+    color: #ffffff;
+    font-size: large;
+    cursor: pointer;
 }
 
-.Info-deck-1{
+.info-deck-right {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
-   width: 50%; 
-    
+    width: 48%;
+    height: auto;
+    padding: 10px;
 }
 
-.booking-div{
-width: 100%;
-display: flex;
-
-justify-content: end;
-height: 5vh;
-}
-
-.booking-btn{
-width: 25%;
-height: 5vh;
-display: flex;
-justify-content: center;
-align-items: center;
-background-color: #3BCBBF;
-border-radius: 15px;
-border: none;
-box-shadow: 0 6px 8px 6px rgba(0,5,0,0.2);
-color: #ffffff;
-font-size: large;
-cursor: pointer;
-
-
-}
-
-.info-deck-right{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    height: 45vh;
-}
-
-
-.Price{
+.Price {
     display: flex;
     width: 100%;
-    
     justify-content: baseline;
-  
 }
 
-.icons-div{
-   
-   width: 90%;
-   display: flex;
-   justify-content: center;
+.icons-div {
+    width: 90%;
+    display: flex;
+    justify-content: center;
 }
 
-.icons-section{
- 
-  display: flex;
-  flex-wrap: wrap;
-  width: 80%;
-  height: 100%;
-  gap: 3rem;
-  
-  justify-content: center;
-  align-items: center;
-
-
+.icons-section {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
 }
 
-.Icons{
-     width: 13%;
-     height: 30%;
-    
+.Icons {
+    width: 15%;
+    height: auto;
+}
 
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    .Info-deck {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .Info-deck-1,
+    .info-deck-right {
+        width: 100%;
+    }
+
+    .booking-btn {
+        width: 40%;
+        font-size: medium;
+    }
+
+    .Icons {
+        width: 18%;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .Info-deck {
+        flex-direction: column;
+    }
+
+    .Info-deck-1,
+    .info-deck-right {
+        width: 100%;
+    }
+
+    .booking-btn {
+        width: 60%;
+        font-size: medium;
+    }
+
+    .Icons {
+        width: 22%;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .Info-deck {
+        flex-direction: column;
+    }
+
+    .Info-deck-1,
+    .info-deck-right {
+        width: 100%;
+    }
+
+    .booking-btn {
+        width: 80%;
+        font-size: small;
+    }
+
+    .Icons {
+        width: 28%;
+        height: auto;
+    }
 }
