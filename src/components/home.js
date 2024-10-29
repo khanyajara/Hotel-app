@@ -104,6 +104,7 @@ const HomePage = () => {
                     <h2><a onClick={home} className="NavBar">Home</a></h2>
                     <h2><a onClick={room} className="NavBar">Rooms</a></h2>
                     <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
+                    <img src={logo} className="logo1" alt="Logo" />
                     <h2><a onClick={Gallery} className="NavBar">Gallery</a></h2>
                     <h2><a onClick={goToHowToGetThere} className="NavBar">How To Get There</a></h2>
                 </div>

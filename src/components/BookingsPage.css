@@ -1,134 +1,168 @@
-.left-deck{
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    background-color: #3BCBBF;
-    width: 100%;
-}
-.lining{
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: grey;
-
+.left-deck {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  background-color: #3BCBBF;
+  width: 100%;
 }
 
-
-
-
-
-.right-deck{
-    background-color: #ffffff;
-    width: 70%;
-    height: auto;
-    border: 1px solid;
-    border-radius: 15px;
+.lining {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
 }
 
-.calender-row{
-    display: flex;
-    width: 100%;
-    
-    justify-content: space-around;
+.Info-deck {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; 
 
 }
-.row10{
-    display: flex;
-    flex-direction: column;
-    border-color: black;
-    padding: 3%;
-    margin: 3%;
-    width: 60%;
-    height: 15%;
-    
-    
-    
-    gap: -6rem;
-    border: none;
 
-   
-    box-shadow: 0 3px  rgba(0,0,0,0.2);
-    background-color: #ffffff;
-    border-radius: 3%;
-  }
+.card-21 {
+  box-shadow: 0 4px 8px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: auto;
+  background-color: #c9c9c9;
+  border-radius: 15px;
+}
 
-  .input-box{
-    display: flex;
-    justify-content: center;
-    border: 1px solid rgb(151, 150, 150);
-    
-    border-radius: 5px;
-    width: 105%;
-    height: 4vh;
-    font-size: large;
-    font: 1.4em sans-serif;
-    gap: 3rem;
+.right-deck {
+  background-color: #ffffff;
+  width: 50%;
+  height: auto;
+  border: 1px solid;
+  border-radius: 15px;
+  margin: 1rem; /* Add margin for spacing */
+}
 
-  }
-  .guest-div{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: 7vh;
-  }
-  .guest{
-    width: 100%;
-    
+.calender-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  flex-wrap: wrap; /* Allow wrapping */
+}
 
-  }
-  .input-row{
-    display: flex;
-    justify-content: center;
-    border: 1px solid rgb(151, 150, 150);
-    
-    border-radius: 5px;
-    width: 100%;
-    height: 5vh;
-    
-  }
-  .total{
-   display: flex;
-   justify-content: space-around;
-   width: 100%;
-   height: auto;
-   
-   
-  }
+.row10 {
+  display: flex;
+  flex-direction: column;
+  padding: 3%;
+  margin: 1rem; /* Reduced margin for smaller devices */
+  width: calc(50% - 2rem); /* Responsive width */
+  height: auto; /* Let height adjust based on content */
+  gap: 0.5rem; /* Adjust gap */
+  border: none;
+  box-shadow: 0 3px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  border-radius: 3%;
+}
 
-  .reserve-div{
-     
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-      margin-left: 5%;
-      height: 5vh;
-  }
-  .icons{
-    width: 500px;
-  }
+.input-box {
+  display: flex;
+  justify-content: center;
+  border: 1px solid rgb(151, 150, 150);
+  border-radius: 5px;
+  width: 100%; /* Full width */
+  height: 4vh;
+  font-size: large;
+  font: 1.4em sans-serif;
+  gap: 3rem;
+}
 
-  .reserve-btn{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 30%;
-      height: 5vh;
-      background-color: #3BCBBF;
-      font-size: larger;
-      font: bolder;
-      border-radius: 12px;
-      border: 1px solid black;
-      cursor: pointer;
-      color: #ffffff;
-      box-shadow: 2px 2px black;
+.guest-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Let height adjust based on content */
+}
 
-  }
+.guest {
+  width: 100%;
+}
 
-  input[type=date] {
-    width: 100%;
-    height: 5vh;
-  
-    border: 1px solid black;
-    box-sizing: border-box;
+.input-row {
+  display: flex;
+  justify-content: center;
+  border: 1px solid rgb(151, 150, 150);
+  border-radius: 5px;
+  width: 100%; /* Full width */
+  height: 5vh;
+}
+
+.total {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+}
+
+.reserve-div {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-left: 5%;
+  height: 5vh;
+}
+
+.icons {
+  width: 100%; /* Responsive width */
+}
+
+.reserve-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 5vh;
+  background-color: #3BCBBF;
+  font-size: larger;
+  font-weight: bold; /* Changed to font-weight */
+  border-radius: 12px;
+  border: 1px solid black;
+  cursor: pointer;
+  color: #ffffff;
+  box-shadow: 2px 2px black;
+}
+
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%; /* Full width */
+  height: 5vh;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 1200px) {
+  .right-deck {
+      width: 80%;
   }
+  .row10 {
+      width: calc(100% - 2rem); /* Full width on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .Info-deck {
+      flex-direction: column; /* Stack on smaller screens */
+  }
+  .right-deck,
+  .left-deck {
+      width: 100%; /* Full width */
+  }
+  .reserve-btn {
+      width: 100%; /* Full width button */
+      margin-top: 10px; /* Spacing for buttons */
+  }
+}
+
+@media (max-width: 480px) {
+  .reserve-btn {
+      font-size: 1em; /* Smaller font size for mobile */
+  }
+  .input-box {
+      font-size: 1em; /* Adjust input size */
+  }
+}

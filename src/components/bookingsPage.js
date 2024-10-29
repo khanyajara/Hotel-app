@@ -78,7 +78,7 @@ const BookingPage = () => {
                 <h2><a href="#" className="NavBar">How To Get There</a></h2>
                 
             </div>
-            <div className="card-1">
+            <div className="card-21">
                 <div className="card-btn">
                     <button className="card-1-0" onClick={viewroom}><img src={cancel} alt="Cancel" /></button>
                 </div>
@@ -111,7 +111,7 @@ const BookingPage = () => {
                                     onChange={(e) => setArrivalDate(e.target.value)}
                                 />
                             </div>
-                            <img src={line2} alt="Line" />
+                           
                             <div className="row10">
                                 <label htmlFor="DOD">Date Of Departure</label>
                                 <input
@@ -137,11 +137,11 @@ const BookingPage = () => {
                                 ))}
                             </select>
                         </div>
-                        <img src={line} alt="Line" />
+                       
                         <div className="price">
                             <h4>R{booking.price}  </h4>
                         </div>
-                        <img src={line} alt="Line" />
+                        
                         <div className="total">
                             <h4>Total </h4>
                             <h4>Total: R{totalPrice.toFixed(2)}</h4>

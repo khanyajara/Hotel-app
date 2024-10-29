@@ -111,7 +111,7 @@ body {
     height: auto;
 }
 
-/* Media Queries for Responsiveness */
+
 @media (max-width: 1200px) {
     .Info-deck {
         flex-direction: column;

@@ -15,7 +15,7 @@ const RoomsPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [selectedRoomType, setSelectedRoomType] = useState('All');
     const [likedRooms, setLikedRooms] = useState([]);
@@ -55,6 +55,40 @@ const RoomsPage = () => {
             dispatch(addFavorite(user.uid, roomData.id, true)); 
         }
     };
+    const home = () => {
+        navigate("/Home");
+    };
+
+    const room = () => {
+        navigate("/Rooms", { state: { firstName: user.firstName, lastName: user.lastName, uid: user.uid } });
+    };
+
+    const Booking = () => {
+        navigate("/Booking");
+    };
+
+    const Gallery = () => {
+        navigate("/gallery");
+    };
+
+    const Facilities = () => {
+        navigate("/facilities");
+    };
+
+   
+    const Profile = () => {
+        navigate("/user-info");
+    };
+
+    
+
+    const goToHowToGetThere = () => {
+        navigate("/how-to-get-there");
+    };
+
+    const roomfilter = () => {
+        navigate("/Rooms");
+    };
     
     const shareRoom = (room) => {
         const url = `https://yourwebsite.com/rooms/${room.id}`;
@@ -87,16 +121,25 @@ const RoomsPage = () => {
         return matchesType && matchesSearch;
     });
 
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen); // Toggle hamburger menu
+    };
+
     return (
         <div className="rooms-page">
-            <div className="topNavBar">
-                <h2><a onClick={navigateTo("/Home")} className="NavBar">Home</a></h2>
-                <h2><a onClick={navigateTo("/Rooms")} className="NavBar">Rooms</a></h2>
-                <h2><a onClick={navigateTo("/booking")} className="NavBar">Booking</a></h2>
-                <img src={logo} className="logo1" alt="Logo" />
-                <h2><a href="#" className="NavBar">Facilities</a></h2>
-                <h2><a href="#" className="NavBar">Gallery</a></h2>
-                <h2><a href="#" className="NavBar">How To Get There</a></h2>
+           <div className="topNavBar">
+                <button className="menu-btn" onClick={toggleMenu}>
+                    ☰
+                </button>
+                <div className={`nav-items ${isMenuOpen ? "active" : ""}`}>
+                    <h2><a onClick={home} className="NavBar">Home</a></h2>
+                    <h2><a onClick={room} className="NavBar">Rooms</a></h2>
+                    <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
+                    <img src={logo} className="logo1" alt="Logo" />
+                    <h2><a onClick={Gallery} className="NavBar">Gallery</a></h2>
+                    <h2><a onClick={goToHowToGetThere} className="NavBar">How To Get There</a></h2>
+                </div>
             </div>
 
             <div className="Search-DivContents">
