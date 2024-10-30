@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth';
 import { auth, db } from '../firebase/config';
-import { collection, addDoc, getDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, getDoc, doc, setDoc } from 'firebase/firestore';
 
 const initialState = {
     user: null,
@@ -110,5 +110,17 @@ export const fetchUser = (uid) => async (dispatch) => {
         dispatch(setError(error.message));
     }
 };
+export const addOrEditUser = (uid, userData) => async (dispatch) => {
+    dispatch(setLoading());
+    try {
+        await setDoc(doc(db, "users", uid), userData, { merge: true });
+        dispatch(setUser({ uid, ...userData }));
+    } catch (error) {
+        dispatch(setError(error.message));
+    }
+};
+
+
+
 
 export default authSlice.reducer;
