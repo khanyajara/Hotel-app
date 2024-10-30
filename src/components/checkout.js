@@ -65,29 +65,37 @@ const RoomDetails = ({ roomName, pricePerNight, guests, totalPrice }) => (
 );
 
 const Checkout = () => {
-    const [{ options, isPending }, paypalDispatch] = usePayPalScriptReducer();
-    const [currency, setCurrency] = useState(options?.currency || 'USD');
+    const [{ options = {}, isPending }, paypalDispatch] = usePayPalScriptReducer();
+    const [currency, setCurrency] = useState(options.currency || 'USD');
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const storedUser = localStorage.getItem('currentUser');
-    const user = useSelector((state) => state.auth.user) || (storedUser ? JSON.parse(storedUser) : {});
 
-    // Destructure with fallback to avoid runtime errors
+    // Safely retrieve user data from localStorage
+    const storedUser = localStorage.getItem('currentUser');
+    let user;
+    try {
+        user = storedUser ? JSON.parse(storedUser) : {};
+    } catch (error) {
+        console.error("Failed to parse user data from localStorage:", error);
+        user = {};
+    }
+
+    // Destructure location.state with default values to avoid runtime errors
     const {
-        room = '',                  // Default value if room is undefined
-        arrivalDate = '',          // Default value if arrivalDate is undefined
-        departureDate = '',       // Default value if departureDate is undefined
-        guests = 0,               // Default value if guests is undefined
-        RoomName = 'Unknown Room', // Default room name
-        pricePerNight = 0,        // Default price per night
-        totalPrice = 0,           // Default total price
+        room = '',
+        arrivalDate = '',
+        departureDate = '',
+        guests = 0,
+        RoomName = 'Unknown Room',
+        pricePerNight = 0,
+        totalPrice = 0,
     } = location.state || {};
 
     // Validate totalPrice
     if (typeof totalPrice !== 'number') {
-        console.error("Invalid totalPrice", totalPrice);
+        console.error("Invalid totalPrice:", totalPrice);
         return <p>Error: Invalid booking details.</p>;
     }
 
@@ -104,10 +112,8 @@ const Checkout = () => {
 
     const onCreateOrder = (data, actions) => {
         return actions.order.create({
-            purchase_units: [{ amount: { value: totalPrice.toString() } }], // Ensure totalPrice is converted to string
+            purchase_units: [{ amount: { value: totalPrice.toString() } }],
         });
-    }; const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen); // Toggle hamburger menu
     };
 
     const onApproveOrder = async (data, actions) => {
@@ -144,6 +150,10 @@ const Checkout = () => {
         }
     };
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
     const navigateHome = () => {
         navigate("/Home");
     };
@@ -152,7 +162,6 @@ const Checkout = () => {
         navigate("/Home");
     };
 
-   
     const Booking = () => {
         navigate("/Booking");
     };
@@ -164,9 +173,6 @@ const Checkout = () => {
     const Facilities = () => {
         navigate("/facilities");
     };
-
-    
-    
 
     const Profile = () => {
         navigate("/user-info");
@@ -192,9 +198,9 @@ const Checkout = () => {
                 </button>
                 <div className={`nav-items ${isMenuOpen ? "active" : ""}`}>
                     <h2><a onClick={home} className="NavBar">Home</a></h2>
-                    <h2><a onClick={room} className="NavBar">Rooms</a></h2>
+                    <h2><a onClick={roomfilter} className="NavBar">Rooms</a></h2>
                     <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
-                    <img src={logo} className="logo1" alt="Logo" />
+                    <img src={logo} className="NAVBar" alt="Logo" />
                     <h2><a onClick={Gallery} className="NavBar">Gallery</a></h2>
                     <h2><a onClick={goToHowToGetThere} className="NavBar">How To Get There</a></h2>
                 </div>

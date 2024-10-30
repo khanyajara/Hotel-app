@@ -48,13 +48,13 @@ const navigate= useNavigate
              <div className="topNavBar">
             
 
-            <h2><a onClick={home} className="NavBar">Home</a></h2>
-            <h2><a onClick={room} className="NavBar">Rooms</a></h2>
-            <h2><a onClick={Booking} className="NavBar">Booking</a></h2>
-                <img src={logo}  className="logo1"/>
-                <h2><a href="" className="NavBar">Facilities</a></h2>
-                <h2><a onClick={Gallery} className="NavBar">Gallery</a></h2>
-                <h2><a href="" className="NavBar">How To Get There</a></h2>
+            <h4><a onClick={home} className="NavBar">Home</a></h4>
+            <h4><a onClick={room} className="NavBar">Rooms</a></h4>
+            <h4><a onClick={Booking} className="NavBar">Booking</a></h4>
+                <img src={logo}  className="NAVBar"/>
+                <h4><a href="" className="NavBar">Facilities</a></h4>
+                <h4><a onClick={Gallery} className="NavBar">Gallery</a></h4>
+                <h4><a href="" className="NavBar">How To Get There</a></h4>
             </div>
             <div className="grid">
             <div  className="img-blocks">

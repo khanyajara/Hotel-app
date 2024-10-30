@@ -23,6 +23,8 @@ const RoomContent = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const room = location.state;
+    const [isProfileVisible, setIsProfileVisible] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const home = () => navigate("/Home");
     const roomPage = () => navigate("/Rooms");
@@ -30,16 +32,53 @@ const RoomContent = () => {
         navigate("/Booking", {state: booking});}
     const gallery = () => navigate("/gallery");
 
+    const Booking = () => {
+        navigate("/Booking");
+    };
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen); 
+    };
+
+   
+
+    const Gallery = () => {
+        navigate("/gallery");
+    };
+
+    const Facilities = () => {
+        navigate("/facilities");
+    };
+
+   
+    const Profile = () => {
+        navigate("/user-info");
+    };
+
+    
+
+    const goToHowToGetThere = () => {
+        navigate("/how-to-get-there");
+    };
+
+    const roomfilter = () => {
+        navigate("/Rooms");
+    };
+    
+
     return (
         <div className="card-0">
-            <div className="topNavBar">
-                <h2><a onClick={home} className="NavBar">Home</a></h2>
-                <h2><a onClick={roomPage} className="NavBar">Rooms</a></h2>
-                <h2><a onClick={booking} className="NavBar">Booking</a></h2>
-                <img src={logo} className="logo1" alt="Logo" />
-                <h2><a href="" className="NavBar">Facilities</a></h2>
-                <h2><a onClick={gallery} className="NavBar">Gallery</a></h2>
-                <h2><a href="" className="NavBar">How To Get There</a></h2>
+           <div className="topNavBar">
+                <button className="menu-btn" onClick={toggleMenu}>
+                    ☰
+                </button>
+                <div className={`nav-items ${isMenuOpen ? "active" : ""}`}>
+                    <h4><a onClick={home} className="NavBar">Home</a></h4>
+                    <h4><a onClick={room} className="NavBar">Rooms</a></h4>
+                    <h4><a onClick={Facilities} className="NavBar">Facilities</a></h4>
+                    <img src={logo} className="NAVBar" alt="Logo" />
+                    <h4><a onClick={Gallery} className="NavBar">Gallery</a></h4>
+                    <h4><a onClick={goToHowToGetThere} className="NavBar">How To Get There</a></h4>
+                </div>
             </div>
             <div className="card-1">
                 <div className="card-btn">
@@ -74,7 +113,7 @@ const RoomContent = () => {
                             <button className="booking-btn" onClick={()=>booking(room)}>BOOK NOW</button>
                         </div>
                     </div>
-                    <img src={line2} alt="Line" />
+                    
                     <div className="info-deck-right">
                         <div className="Price">
                             <h2>R.{room.price}</h2>

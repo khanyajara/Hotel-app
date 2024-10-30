@@ -104,7 +104,7 @@ const HomePage = () => {
                     <h2><a onClick={home} className="NavBar">Home</a></h2>
                     <h2><a onClick={room} className="NavBar">Rooms</a></h2>
                     <h2><a onClick={Facilities} className="NavBar">Facilities</a></h2>
-                    <img src={logo} className="logo1" alt="Logo" />
+                    <img src={logo} className="NAVBar" alt="Logo" />
                     <h2><a onClick={Gallery} className="NavBar">Gallery</a></h2>
                     <h2><a onClick={goToHowToGetThere} className="NavBar">How To Get There</a></h2>
                 </div>
@@ -131,7 +131,7 @@ const HomePage = () => {
                     <img src={HomeRoomImage} className="Img1" alt="Home Room" />
                     <img src={PoolImage} className="Img1" alt="Pool Area" />
                 </div>
-                <div className="columns3"><img src={Lobby} className="Img" alt="Lobby" /></div>
+                <div className="columns3"><img src={Lobby} className="Img0" alt="Lobby" /></div>
             </div>
             <div className="intro">
                 <div className="HEADING">
@@ -168,7 +168,7 @@ const HomePage = () => {
                     <img src={Soccer} className="Facilities" alt="Soccer" />
                 </div>
             </div>
-            <div>
+            <div className="Facilities-Activities">
                 <h1 className="heading-for-facilities">_______________________<h2 className="heading-color">An Experience</h2>__________________</h1>
             </div>
             <div className="row4">
@@ -200,8 +200,8 @@ const HomePage = () => {
                 </div>
             </div>
 
-            <div>
-                <h1 className="heading-for-facilities">_____________________<h2 className="heading-color">See Room Types</h2>_____________________________</h1>
+            <div className="Facilities-Activities">
+                <h1 className="heading-for-facilities">_______________<h2 className="heading-color">See Room Types</h2>_____________________</h1>
             </div>
             <div className="row8">
                 <div>
@@ -254,12 +254,12 @@ const HomePage = () => {
             <div className="Footer">
                 <div className="footer-info">
                     <div className="footer-left">
-                        <div>
+                        <div className="cass">
                             <h2 className="INFO_FOOTER">Contact Info</h2>
                             <p className="INFO_FOOTER">Call: +27 76 490 2903</p>
                             <p className="INFO_FOOTER">Email: Info@foresthills.com</p>
                         </div>
-                        <div>
+                        <div className="cass">
                             <h2 className="INFO_FOOTER">Address</h2>
                             <p className="INFO_FOOTER">7835</p>
                             <p className="INFO_FOOTER">Moshe Kantani Ave</p>
