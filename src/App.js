@@ -20,6 +20,8 @@ import Direction from './components/direction';
 import Reservation from './components/addReservation';
 import Review from "./components/hotel-reviews"
 import Profile from './components/userProfile';
+import Terms from "./components/termsandconditions"
+import PrivacyPolicy from './components/userpolicy';
 
 
 const LoaderComponent = () => {
@@ -93,6 +95,8 @@ function App() {
                 <Route path="/how-to-get-there" element={<Direction />}/>
                 <Route path="/Leave-review" element={<Review />} />
                 <Route path="/user-info" element={<Profile />} />
+                <Route path="/Terms" element={<Terms />} />
+                <Route path="/policy" element={<PrivacyPolicy />} />
               </>
             );
           })()}

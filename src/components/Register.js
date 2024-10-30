@@ -82,6 +82,13 @@ const Register= ()=>{
                             placeholder="Password"
                             onChange={(e)=> setPassword(e.target.value)}
                             />
+                            <div >
+                                <label className="terms" >
+                                           <input type="checkbox" className="checkbox"  required />
+                                           
+                                           <Link to="/Terms" target="_blank" rel="noopener noreferrer"> <p>Terms and Conditions</p></Link>
+                                               </label>
+                            </div>
                             <div>
                                 <button className="submit" type="submit">
                                     Create Account

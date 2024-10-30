@@ -31,10 +31,14 @@ const UserProfile = () => {
     if (loading) {
         return <div>Loading...</div>;
     }
+    const policy=()=>{
+        navigate('/policy')
+    }
 
     return (
         <div className="container">
             <h1>User Profile</h1>
+            <h5 onClick={policy}>Our data policy</h5>
             <section className="user-info">
                 <h2>User Information</h2>
                 <p><strong>Name:</strong> {user?.firstName || 'Guest'}</p>
